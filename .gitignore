@@ -12,3 +12,13 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
+
+Content/Assets/*
+!Content/Assets/Font
+!Content/Assets/ReadMe.txt
+
+.vs
+Saved/*
+Binaries/*
+DerivedDataCache/*
+Intermediate/*
