@@ -28,7 +28,7 @@ RTS 장르 게임을 개발합니다.
 
 ## 개발 환경
 - Windows 11 (64bits)
-- Unreal Engine 5.3.2
+- Unreal Engine 5.4.2
 - Visual Studio 2022
 - Git
 - GitHub
