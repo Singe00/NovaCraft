@@ -91,8 +91,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FUnitStatus_Spawn GetUnitStatus_Spawn() const { return this->UnitStatus_Spawn; }
 
-	UFUNCTION(BlueprintCallable)
-	void GetSingleUnitSelectedInformation(FUnitStatus_Defense DefenseInformation);
 
 // Setter
 public:
