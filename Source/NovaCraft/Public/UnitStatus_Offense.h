@@ -13,10 +13,11 @@ public:
 
 	FUnitStatus_Offense()
 		: fUnitCanAttack(true)
-		, fAttackSpeed(2.0f)
 		, fGroundAttackEnabled(true)
 		, fGroundWeaponName("Ground Attack")
 		, fGroundAttackDamage(2.0f)
+		, fGroundAttackSpeed(1.0f)
+		, fGroundAttackTimes(1)
 		, fGroundAttackRange(100.0f)
 		, fGroundOffenseType(E_OffenseType::Normal)
 		, fGroundAttackUpgradeIncreaseRate()
@@ -24,6 +25,8 @@ public:
 		, fAirAttackEnabled(true)
 		, fAirWeaponName("Air Attack")
 		, fAirAttackDamage(4.0f)
+		, fAirAttackSpeed(1.0f)
+		, fAirAttackTimes(1)
 		, fAirAttackRange(200.0f)
 		, fAirOffenseType(E_OffenseType::Normal)
 		, fAirAttackUpgradeIncreaseRate(2.0f)
@@ -34,10 +37,6 @@ public:
 	// Can Attack (공격 가능 여부)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool fUnitCanAttack;
-
-	// Attack Speed (공격 속도)
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float fAttackSpeed;
 
 	// Ground Status (지상 공격 능력치)
 
@@ -52,6 +51,14 @@ public:
 	// Attack Damage Ground (지상 대상 공격력)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fGroundAttackDamage;
+
+	// Attack Speed (지상 공격 속도)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float fGroundAttackSpeed;
+
+	// Attack Speed (지상 공격 횟수)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int fGroundAttackTimes;
 
 	// Ground Attack Range (지상 공격 사거리)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -83,6 +90,14 @@ public:
 	// Attack Damage Ground (공중 대상 공격력)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fAirAttackDamage;
+
+	// Attack Speed (공중 공격 속도)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float fAirAttackSpeed;
+
+	// Attack Speed (공중 공격 횟수)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int fAirAttackTimes;
 
 	// Air Attack Range (공중 공격 사거리)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

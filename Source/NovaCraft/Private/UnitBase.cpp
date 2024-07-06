@@ -41,6 +41,18 @@ void AUnitBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AUnitBase::GetSingleUnitSelectedInformation(
+	FUnitStatus_Defense& OutUnitStatus_Defense,
+	FUnitStatus_Offense& OutUnitStatus_Offense,
+	FUnitStatus_Utility& OutUnitStatus_Utility,
+	FUnitStatus_Extra& OutUnitStatus_Extra) const
+{
+	OutUnitStatus_Defense = UnitStatus_Defense;
+	OutUnitStatus_Offense = UnitStatus_Offense;
+	OutUnitStatus_Utility = UnitStatus_Utility;
+	OutUnitStatus_Extra = UnitStatus_Extra;
+}
+
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus)
 {
 	SetDefenseStatus(NewDefenseStatus);
