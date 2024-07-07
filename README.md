@@ -1,4 +1,4 @@
-# Prject NovaCraft
+# Project NovaCraft
 <br/>
 메인 이미지
 
@@ -7,7 +7,14 @@
 
 ## 프로젝트 소개
 GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
-RTS 장르 게임을 개발합니다.
+
+멀티플레이 RTS 장르 게임을 개발합니다.
+
+- 게임명 : NovaCraft
+- 장르 : RTS(Real-Time Strategy)
+- 플랫폼 : Windows Desktop
+- 개발 인원 : 5인
+- 개발 기간 : 2024.06.25(화) ~ 2024.09.30(월) 예상
 
 <br/>
 
@@ -38,13 +45,15 @@ RTS 장르 게임을 개발합니다.
 ## 개발 기술 및 브랜치 전략
 
 > 개발
-  <p>Blueprint 개발  : 사용한 개발 내용 및 기술 작성</p>
+  <p>Blueprint 개발  : 로직, 사운드, 이펙트, 애니메이션 상세 작업 진행</p>
   
-  <p>C++ 개발   : 사용한 개발 내용 및 기술 작성</p>
+  <p>C++ 개발   : 베이스 클래스 및 Enum, Structure 구현</p>
   <br/>
   
 > 브랜치 전략
-  브랜치 전략 내용 작성
+- 개인 개발 브랜치 생성
+- 개인 작업 디렉토리 내에서만 수정
+- 주간 팀 회의 시 작업 보고 및 코드 리뷰 후 병합
 
   <br/>
   
@@ -52,20 +61,18 @@ RTS 장르 게임을 개발합니다.
 
 ## 프로젝트 구조
 
+
 ## 역할 분담
-- 김남현 : Client Develope / [Github]()
-- 라종태 : Client Develope / [Github]()
-- 양명훈 : Client Develope / [Github]()
-- 조시완 : Client Develope, Git 관리 / [Github](https://github.com/Singe00)
+- 조시완 : 팀장, Client Develope, Git 관리 / [Github](https://github.com/Singe00)
+- 백재현 : 부팀장, Client Develope / [Github]()
+- 백민성 : Client Develope / [Github]()
+- 정호용 : Client Develope / [Github]()
+
 
 ## 개발 기간 및 작업 관리
 
 ### 간트차트 확인
 - 『[PGG_Gantt.xlsx](https://github.com/Singe00/ProjectGG/files/15227384/PGG_Gantt.xlsx)』 파일 참조
-
-
-## 기술
-추후 내용 추가
 
 ## 기록
 
@@ -86,3 +93,7 @@ RTS 장르 게임을 개발합니다.
 - 2024.06.25(화)<br/>
   언리얼 프로젝트, Github, Git 연동 완료<br/>
 
+## 에셋
+### 모델링
+### 이미지
+### 사운드
