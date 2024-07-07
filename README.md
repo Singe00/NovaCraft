@@ -72,7 +72,7 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 ## 개발 기간 및 작업 관리
 
 ### 간트차트 확인
-- 『[PGG_Gantt.xlsx](https://github.com/Singe00/ProjectGG/files/15227384/PGG_Gantt.xlsx)』 파일 참조
+- 『[NovaCraft Gantt.xlsx](https://github.com/user-attachments/files/16118383/NovaCraft.Gantt.xlsx)』 파일 참조
 
 ## 기록
 
