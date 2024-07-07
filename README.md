@@ -88,6 +88,13 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 - 회의 결론 : 인게임, 유닛, 건물, UI 등의 기능과 상세 내용을 정리
 - 자세한 내용은 repository에 첨부된 『[인게임 개발 파트 설계](https://www.canva.com/design/DAGJm21AxXk/zGuZKcOxCjTdh1tVZLZ6Ig/view?utm_content=DAGJm21AxXk&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
 
+#### 3. 개발 파트 분배 회의✔
+- 회의 날짜/시간 : 2023.07.08(월) / 09:30 ~ 10:30
+- 회의 내용 : 팀 프로젝트 개발 파트를 분배 및 조정
+- 회의 결론 : 회의 예정
+- 자세한 내용은 repository에 첨부된 『[개발 파트 분배]()』 파일 참조
+
+
 
 ## 이슈
 - 2024.06.25(화)<br/>
