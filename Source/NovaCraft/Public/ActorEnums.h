@@ -7,6 +7,17 @@
 #include "ActorEnums.generated.h"
 
 UENUM(BlueprintType)
+enum class E_UnitState : uint8
+{
+	Stop UMETA(DisplayName = "Stop"),
+	Move UMETA(DisplayName = "Move"),
+	Hold UMETA(DisplayName = "Hold"),
+	Patrol UMETA(DisplayName = "Patrol"),
+	Attack UMETA(DisplayName = "Attack"),
+	Follow UMETA(DisplayName = "Follow"),
+};
+
+UENUM(BlueprintType)
 enum class E_DefenseType : uint8
 {
 	None UMETA(DisplayName = "None"),
