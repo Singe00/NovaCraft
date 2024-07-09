@@ -34,7 +34,7 @@ protected:
 	};
 
 
-public:
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -91,7 +91,7 @@ protected:
 	FUnitStatus_Spawn UnitStatus_Spawn;
 
 
-	// Getter
+// Getter
 public:
 	UFUNCTION(BlueprintCallable)
 	FName GetUnitDataTableRowName() const { return this->DataTableRowName; }
@@ -141,7 +141,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	bool GetUnitCanAirAttack() const { return this->UnitStatus_Offense.fAirAttackEnabled; }
-
 // Setter
 public:
 	UFUNCTION(BlueprintCallable)

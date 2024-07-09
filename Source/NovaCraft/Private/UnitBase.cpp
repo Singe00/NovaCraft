@@ -130,7 +130,6 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 	{
 		return false;
 	}
-
 	return true;
 }
 
