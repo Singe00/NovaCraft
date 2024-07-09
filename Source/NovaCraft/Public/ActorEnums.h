@@ -47,6 +47,13 @@ enum class E_RaceType : uint8
 	RaceC UMETA(DisplayName = "RaceC"),
 };
 
+UENUM(BlueprintType)
+enum class E_UnitType : uint8
+{
+	Ground UMETA(DisplayName = "Ground"),
+	Air UMETA(DisplayName = "Air"),
+};
+
 UCLASS()
 class NOVACRAFT_API AActorEnums : public AActor
 {
@@ -56,12 +63,5 @@ public:
 	// Sets default values for this actor's properties
 	AActorEnums();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 };
