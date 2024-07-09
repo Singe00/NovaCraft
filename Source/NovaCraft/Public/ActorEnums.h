@@ -15,6 +15,7 @@ enum class E_UnitState : uint8
 	Patrol UMETA(DisplayName = "Patrol"),
 	Attack UMETA(DisplayName = "Attack"),
 	Follow UMETA(DisplayName = "Follow"),
+	Dead UMETA(DisplayName = "Dead"),
 };
 
 UENUM(BlueprintType)
@@ -52,6 +53,14 @@ enum class E_UnitType : uint8
 {
 	Ground UMETA(DisplayName = "Ground"),
 	Air UMETA(DisplayName = "Air"),
+};
+
+UENUM(BlueprintType)
+enum class E_AISense : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Sight UMETA(DisplayName = "Sight"),
+	Damage UMETA(DisplayName = "Damage"),
 };
 
 UCLASS()
