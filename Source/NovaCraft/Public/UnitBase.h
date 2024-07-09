@@ -24,6 +24,16 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	const float DamageMatrix[5][5] = {
+		// None,     Small,    Medium,   Large,    Building
+		{1.0f,      1.0f,     1.0f,     1.0f,     1.0f},    // None
+		{1.0f,      1.0f,     1.0f,     1.0f,     1.0f},    // Normal
+		{1.0f,      1.0f,     0.75f,     1.25f,    2.0f},    // Explosive
+		{1.0f,      1.5f,    0.75f,     0.5f,     0.5f},   // Concussive
+		{1.0f,      1.0f,     1.0f,     1.0f,     1.0f}     // Spell
+	};
+
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -36,10 +46,20 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UDecalComponent* SelectedDecal;
 
-	// All Common Status Under Here
+	// Attack Montage (공격 애니메이션)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
+	TArray<class UAnimMontage*> AttackMontages;
+
+	// Attack Montage (사망 애니메이션)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
+	TArray<class UAnimMontage*> DeadMontages;
+
+	// Attack Montage (스킬 애니메이션)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
+	TArray<class UAnimMontage*> SkillMontages;
 
 	// Manage Value
-public:
+public: // All Common Status Under Here
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	FName DataTableRowName;
 
@@ -98,6 +118,29 @@ public:
 		FUnitStatus_Utility& OutUnitStatus_Utility,
 		FUnitStatus_Extra& OutUnitStatus_Extra) const;
 
+	UFUNCTION(BlueprintCallable)
+	E_UnitType GetUnitType() const { return this->UnitStatus_Defense.fUnitType; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	void GetGroundAttackStatus(
+		float& OutDamage,
+		int& OutAttackTimes,
+		E_OffenseType& OutOffenseType) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	void GetAirAttackStatus(
+		float& OutDamage,
+		int& OutAttackTimes,
+		E_OffenseType& OutOffenseType) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	bool GetUnitCanAttack() const { return this->UnitStatus_Offense.fUnitCanAttack; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	bool GetUnitCanGroundAttack() const { return this->UnitStatus_Offense.fGroundAttackEnabled; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	bool GetUnitCanAirAttack() const { return this->UnitStatus_Offense.fAirAttackEnabled; }
 // Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -122,5 +165,9 @@ public:
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+	UFUNCTION(BlueprintCallable)
+	float CalculateDamage(float Damage, int AttackTimes, E_OffenseType OffenseType);
 
+	UFUNCTION(BlueprintCallable)
+	bool CustomTakeDamage(float Damage);
 };
