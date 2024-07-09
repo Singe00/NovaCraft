@@ -19,6 +19,7 @@ public:
 		, fDefenseType(E_DefenseType::Small)
 		, fDefenseUpgradeIncreaseRate(1.0f)
 		, fDefenseImage(nullptr)
+		, fUnitType(E_UnitType::Ground)
 	{};
 
 public:
@@ -46,7 +47,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fDefenseUpgradeIncreaseRate;
 
-	// Defense Image
+	// Defense Image (방어구 이미지)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* fDefenseImage;
+
+	// MoveType (이동
+	E_UnitType fUnitType;
 };
