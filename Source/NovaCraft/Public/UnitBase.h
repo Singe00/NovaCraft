@@ -46,6 +46,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UDecalComponent* SelectedDecal;
 
+public: // Anims
 	// Attack Montage (공격 애니메이션)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
 	TArray<class UAnimMontage*> AttackMontages;
@@ -69,6 +70,8 @@ public: // All Common Status Under Here
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	FLinearColor TeamColor;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	bool isDead = false;
 protected:
 	// Defence Status
 	UPROPERTY(VisibleAnywhere, Category = "Unit Manage|Unit Status|Defense Status")
@@ -141,6 +144,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	bool GetUnitCanAirAttack() const { return this->UnitStatus_Offense.fAirAttackEnabled; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetUnitGroundAttackRange() const { return this->UnitStatus_Offense.fGroundAttackRange; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetUnitAirAttackRange() const { return this->UnitStatus_Offense.fAirAttackRange; }
 // Setter
 public:
 	UFUNCTION(BlueprintCallable)
