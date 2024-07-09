@@ -34,7 +34,7 @@ protected:
 	};
 
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -91,7 +91,7 @@ protected:
 	FUnitStatus_Spawn UnitStatus_Spawn;
 
 
-// Getter
+	// Getter
 public:
 	UFUNCTION(BlueprintCallable)
 	FName GetUnitDataTableRowName() const { return this->DataTableRowName; }
@@ -132,6 +132,16 @@ public:
 		float& OutDamage,
 		int& OutAttackTimes,
 		E_OffenseType& OutOffenseType) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	bool GetUnitCanAttack() const { return this->UnitStatus_Offense.fUnitCanAttack; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	bool GetUnitCanGroundAttack() const { return this->UnitStatus_Offense.fGroundAttackEnabled; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	bool GetUnitCanAirAttack() const { return this->UnitStatus_Offense.fAirAttackEnabled; }
+
 // Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -158,4 +168,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	float CalculateDamage(float Damage, int AttackTimes, E_OffenseType OffenseType);
+
+	UFUNCTION(BlueprintCallable)
+	bool CustomTakeDamage(float Damage);
 };
