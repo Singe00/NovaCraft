@@ -53,6 +53,20 @@ void AUnitBase::GetSingleUnitSelectedInformation(
 	OutUnitStatus_Extra = UnitStatus_Extra;
 }
 
+void AUnitBase::GetGroundAttackStatus(float& OutDamage, int& OutAttackTimes, E_OffenseType& OutOffenseType) const
+{
+	OutDamage = UnitStatus_Offense.fGroundAttackDamage;
+	OutAttackTimes = UnitStatus_Offense.fGroundAttackTimes;
+	OutOffenseType = UnitStatus_Offense.fGroundOffenseType;
+}
+
+void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_OffenseType& OutOffenseType) const
+{
+	OutDamage = UnitStatus_Offense.fAirAttackDamage;
+	OutAttackTimes = UnitStatus_Offense.fAirAttackTimes;
+	OutOffenseType = UnitStatus_Offense.fAirOffenseType;
+}
+
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus)
 {
 	SetDefenseStatus(NewDefenseStatus);
@@ -93,6 +107,30 @@ void AUnitBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetim
 
 	DOREPLIFETIME(AUnitBase, TeamNumber);
 	DOREPLIFETIME(AUnitBase, TeamColor);
+}
+
+float AUnitBase::CalculateDamage(float Damage, int AttackTimes, E_OffenseType OffenseType)
+{
+	float damageMultiplier = DamageMatrix[static_cast<int>(OffenseType)][static_cast<int>(UnitStatus_Defense.fDefenseType)];
+	float finalDamage = ((((Damage/ AttackTimes) * damageMultiplier) - UnitStatus_Defense.fDefense) * AttackTimes);
+
+	if (finalDamage < 0.5)
+	{
+		finalDamage = 0.5;
+	}
+
+	return finalDamage;
+}
+
+bool AUnitBase::CustomTakeDamage(float Damage)
+{
+	UnitStatus_Defense.fCurrentHealth -= Damage;
+
+	if (UnitStatus_Defense.fCurrentHealth <= 0)
+	{
+		return false;
+	}
+	return true;
 }
 
 
