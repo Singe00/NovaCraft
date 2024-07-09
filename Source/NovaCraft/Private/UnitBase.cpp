@@ -122,5 +122,16 @@ float AUnitBase::CalculateDamage(float Damage, int AttackTimes, E_OffenseType Of
 	return finalDamage;
 }
 
+bool AUnitBase::CustomTakeDamage(float Damage)
+{
+	UnitStatus_Defense.fCurrentHealth -= Damage;
+
+	if (UnitStatus_Defense.fCurrentHealth <= 0)
+	{
+		return false;
+	}
+	return true;
+}
+
 
 
