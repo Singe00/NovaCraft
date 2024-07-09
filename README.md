@@ -60,6 +60,7 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 <br/>
 
 ## 프로젝트 구조
+![NovaCraft_Diagram](https://github.com/Singe00/NovaCraft/assets/103260185/ac830a1a-b793-432f-97ee-14fcb4ac7025)
 
 
 ## 역할 분담
