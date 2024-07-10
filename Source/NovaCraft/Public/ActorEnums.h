@@ -15,6 +15,7 @@ enum class E_UnitState : uint8
 	Patrol UMETA(DisplayName = "Patrol"),
 	Attack UMETA(DisplayName = "Attack"),
 	Follow UMETA(DisplayName = "Follow"),
+	Marching UMETA(DisplayName = "Marching"),
 	Dead UMETA(DisplayName = "Dead"),
 };
 
