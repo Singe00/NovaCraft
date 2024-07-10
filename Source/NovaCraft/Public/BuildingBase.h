@@ -44,17 +44,17 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
 	FName DataTableRowName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	int TeamNumber;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	FLinearColor TeamColor;
 
 
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
 	TArray<AActor*> SpawnUnits;
 
-	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
+	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
 
 
