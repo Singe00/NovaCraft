@@ -64,14 +64,18 @@ public: // All Common Status Under Here
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	FName DataTableRowName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	int TeamNumber;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	FLinearColor TeamColor;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	bool isDead = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	bool isSelected = false;
+
 protected:
 	// Defence Status
 	UPROPERTY(VisibleAnywhere, Category = "Unit Manage|Unit Status|Defense Status")
