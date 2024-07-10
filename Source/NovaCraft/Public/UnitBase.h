@@ -154,6 +154,13 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	float GetUnitAirAttackRange() const { return this->UnitStatus_Offense.fAirAttackRange; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetUnitGroundAttackSpeed() const { return this->UnitStatus_Offense.fGroundAttackSpeed; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetUnitAirAttackSpeed() const { return this->UnitStatus_Offense.fAirAttackSpeed; }
+
 // Setter
 public:
 	UFUNCTION(BlueprintCallable)
