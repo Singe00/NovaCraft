@@ -14,6 +14,8 @@ public:
 		: fBuildingSpawnTime(5.0f)
 		, fBuildingRequireSpawnGold(50.0f)
 		, fBuildingRequireSpawnGas(50.0f)
+		, fBuildingSpawnGridRow(2)
+		, fBuildingSpawnGridCol(2)
 	{};
 
 public:
@@ -28,5 +30,13 @@ public:
 	// Spawn Resource 2 (생산 시 요구 자원2 - 가스)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fBuildingRequireSpawnGas;
+
+	// Spawn Grid Row(생산 Grid 행값)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int fBuildingSpawnGridRow;
+
+	// Spawn Grid Col(생산 Grid 행값)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int fBuildingSpawnGridCol;
 
 };

@@ -37,13 +37,20 @@ void ABuildingBase::Tick(float DeltaTime)
 
 }
 
-void ABuildingBase::InitStatus(FBuildingStatus_Defense NewDefenseStatus, FBuildingStatus_Offense NewOffenseStatus, FBuildingStatus_Utility NewUtilityStatus, FBuildingStatus_Extra NewExtraStatus, FBuildingStatus_Spawn NewSpawnStatus)
+void ABuildingBase::GetBuildSpawnGridValue(int& RowValue, int& ColValue) const
+{
+	RowValue = BuildingStatus_Spawn.fBuildingSpawnGridRow;
+	ColValue = BuildingStatus_Spawn.fBuildingSpawnGridCol;
+}
+
+void ABuildingBase::InitStatus(FBuildingStatus_Defense NewDefenseStatus, FBuildingStatus_Offense NewOffenseStatus, FBuildingStatus_Utility NewUtilityStatus, FBuildingStatus_Extra NewExtraStatus, FBuildingStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);
 	SetOffenseStatus(NewOffenseStatus);
 	SetUtilityStatus(NewUtilityStatus);
 	SetExtraStatus(NewExtraStatus);
 	SetSpawnStatus(NewSpawnStatus);
+	SetBuildingActionPatterns(NewObjectActionPattern);
 }
 
 void ABuildingBase::SetDefenseStatus(FBuildingStatus_Defense NewDefenseStatus)
@@ -69,6 +76,11 @@ void ABuildingBase::SetExtraStatus(FBuildingStatus_Extra NewExtraStatus)
 void ABuildingBase::SetSpawnStatus(FBuildingStatus_Spawn NewSpawnStatus)
 {
 	this->BuildingStatus_Spawn = NewSpawnStatus;
+}
+
+void ABuildingBase::SetBuildingActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern)
+{
+	this->ActionPattern = NewObjectActionPattern;
 }
 
 void ABuildingBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
