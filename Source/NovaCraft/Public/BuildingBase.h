@@ -9,6 +9,7 @@
 #include "BuildingStatus_Utility.h"
 #include "BuildingStatus_Extra.h"
 #include "BuildingStatus_Spawn.h"
+#include "ObjectActionPattern.h"
 #include "BuildingBase.generated.h"
 
 UCLASS()
@@ -52,12 +53,13 @@ public:
 
 
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
-	TArray<AActor*> SpawnUnits;
+	TArray<AActor*> CanSpawnObjects;
 
 	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
 
-
+	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
+	TArray<FObjectActionPattern> ActionPattern;
 
 protected:
 	// Defence Status
@@ -100,10 +102,21 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FBuildingStatus_Spawn GetBuildingStatus_Spawn() const { return this->BuildingStatus_Spawn; }
 
+	UFUNCTION(BlueprintCallable, Category = "Building Manage")
+	void GetBuildSpawnGridValue(
+		int& RowValue,
+		int& ColValue) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Building Manage")
+	TArray<FObjectActionPattern> GetBuildingActionPatterns() const { return this->ActionPattern; }
+
+	UFUNCTION(BlueprintCallable, Category = "Building Manage")
+	TArray <AActor*> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
-	void InitStatus(FBuildingStatus_Defense NewDefenseStatus, FBuildingStatus_Offense NewOffenseStatus, FBuildingStatus_Utility NewUtilityStatus, FBuildingStatus_Extra NewExtraStatus, FBuildingStatus_Spawn NewSpawnStatus);
+	void InitStatus(FBuildingStatus_Defense NewDefenseStatus, FBuildingStatus_Offense NewOffenseStatus, FBuildingStatus_Utility NewUtilityStatus, FBuildingStatus_Extra NewExtraStatus, FBuildingStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern);
 
 	UFUNCTION(BlueprintCallable)
 	void SetDefenseStatus(FBuildingStatus_Defense NewDefenseStatus);
@@ -119,6 +132,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetSpawnStatus(FBuildingStatus_Spawn NewSpawnStatus);
+
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	void SetBuildingActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern);
 
 	// Function
 public:

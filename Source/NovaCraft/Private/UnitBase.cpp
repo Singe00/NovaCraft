@@ -67,13 +67,14 @@ void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_Offe
 	OutOffenseType = UnitStatus_Offense.fAirOffenseType;
 }
 
-void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus)
+void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);
 	SetOffenseStatus(NewOffenseStatus);
 	SetUtilityStatus(NewUtilityStatus);
 	SetExtraStatus(NewExtraStatus);
 	SetSpawnStatus(NewSpawnStatus);
+	SetUnitActionPatterns(NewObjectActionPattern);
 }
 
 void AUnitBase::SetDefenseStatus(FUnitStatus_Defense NewDefenseStatus)
@@ -99,6 +100,11 @@ void AUnitBase::SetExtraStatus(FUnitStatus_Extra NewExtraStatus)
 void AUnitBase::SetSpawnStatus(FUnitStatus_Spawn NewSpawnStatus)
 {
 	this->UnitStatus_Spawn = NewSpawnStatus;
+}
+
+void AUnitBase::SetUnitActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern)
+{
+	this->ActionPattern = NewObjectActionPattern;
 }
 
 void AUnitBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
