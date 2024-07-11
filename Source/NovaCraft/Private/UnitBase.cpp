@@ -67,6 +67,7 @@ void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_Offe
 	OutOffenseType = UnitStatus_Offense.fAirOffenseType;
 }
 
+
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);
