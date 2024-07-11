@@ -16,6 +16,7 @@ public:
 		, fUnitName("Test Unit")
 		, fKilledEnemyCount(0)
 		, fUnit2DImage(nullptr)
+		, fUnitPriority(1)
 	{};
 
 public:
@@ -34,4 +35,8 @@ public:
 	// Unit Image (유닛 이미지)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* fUnit2DImage;
+
+	// Unit Priority (유닛 우선순위)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int fUnitPriority;
 };
