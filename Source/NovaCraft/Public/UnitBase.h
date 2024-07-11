@@ -9,6 +9,7 @@
 #include "UnitStatus_Utility.h"
 #include "UnitStatus_Extra.h"
 #include "UnitStatus_Spawn.h"
+#include "ObjectActionPattern.h"
 #include "UnitBase.generated.h"
 
 UCLASS()
@@ -75,6 +76,9 @@ public: // All Common Status Under Here
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	bool isSelected = false;
+
+	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	TArray<FObjectActionPattern> ActionPattern;
 
 protected:
 	// Defence Status
@@ -161,10 +165,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	float GetUnitAirAttackSpeed() const { return this->UnitStatus_Offense.fAirAttackSpeed; }
 
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	int GetUnitPriority() const { return this->UnitStatus_Extra.fUnitPriority; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	TArray<FObjectActionPattern> GetUnitActionPatterns() const { return this->ActionPattern; }
+
 // Setter
 public:
 	UFUNCTION(BlueprintCallable)
-	void InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus);
+	void InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern);
 
 	UFUNCTION(BlueprintCallable)
 	void SetDefenseStatus(FUnitStatus_Defense NewDefenseStatus);
@@ -180,6 +190,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetSpawnStatus(FUnitStatus_Spawn NewSpawnStatus);
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	void SetUnitActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern);
 
 	// Function
 public:
