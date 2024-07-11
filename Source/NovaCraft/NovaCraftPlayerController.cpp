@@ -20,6 +20,8 @@ ANovaCraftPlayerController::ANovaCraftPlayerController()
 	DefaultMouseCursor = EMouseCursor::Default;
 	CachedDestination = FVector::ZeroVector;
 	FollowTime = 0.f;
+
+
 }
 
 void ANovaCraftPlayerController::BeginPlay()
