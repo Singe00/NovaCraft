@@ -133,6 +133,8 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 {
 	UnitStatus_Defense.fCurrentHealth -= Damage;
 
+	HpBarUpdate.Broadcast(UnitStatus_Defense.fCurrentHealth, UnitStatus_Defense.fMaxHealth);
+
 	if (UnitStatus_Defense.fCurrentHealth <= 0)
 	{
 		return false;
