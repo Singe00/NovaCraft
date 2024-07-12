@@ -67,6 +67,7 @@ void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_Offe
 	OutOffenseType = UnitStatus_Offense.fAirOffenseType;
 }
 
+
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);
@@ -131,6 +132,8 @@ float AUnitBase::CalculateDamage(float Damage, int AttackTimes, E_OffenseType Of
 bool AUnitBase::CustomTakeDamage(float Damage)
 {
 	UnitStatus_Defense.fCurrentHealth -= Damage;
+
+	HpBarUpdate.Broadcast(UnitStatus_Defense.fCurrentHealth, UnitStatus_Defense.fMaxHealth);
 
 	if (UnitStatus_Defense.fCurrentHealth <= 0)
 	{
