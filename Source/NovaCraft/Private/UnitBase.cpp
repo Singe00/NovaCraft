@@ -3,6 +3,7 @@
 
 #include "UnitBase.h"
 #include "Components/DecalComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -137,6 +138,15 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 
 	if (UnitStatus_Defense.fCurrentHealth <= 0)
 	{
+		this->isDead = true;
+
+		GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+
+		OnUnitDead.Broadcast(this);
+
+
 		return false;
 	}
 	return true;

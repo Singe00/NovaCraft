@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
+#include "Public/UnitBase.h"
 #include "NovaCraftPlayerController.generated.h"
 
 /** Forward declaration to improve compiling times */
@@ -25,6 +26,10 @@ public:
 
 	void SetUnitSquad(TArray<AActor*> NewUnitSquad) { this->Units = NewUnitSquad; }
 
+	void RemoveUnit(AActor* DeadUnit)
+	{
+		Units.Remove(DeadUnit);
+	}
 };
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -92,8 +97,10 @@ public:
 	//Setter
 public:
 	UFUNCTION(BlueprintCallable)
-	void SetUnitSquad(TArray<AActor*>  NewSquad, int SquadIndex) { this->UnitSquadArray[SquadIndex].SetUnitSquad(NewSquad); }
+	void SetUnitSquad(TArray<AActor*>  NewSquad, int SquadIndex);
 
+	UFUNCTION(BlueprintCallable)
+	void RemoveUnitFromSquad(AUnitBase* DeadUnit);
 };
 
 
