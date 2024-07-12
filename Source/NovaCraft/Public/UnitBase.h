@@ -12,6 +12,9 @@
 #include "ObjectActionPattern.h"
 #include "UnitBase.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHpBarUpdate, float, CurrentHp, float, MaxHp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUnitDead, AUnitBase*, DeadUnit);
+
 UCLASS()
 class NOVACRAFT_API AUnitBase : public ACharacter
 {
@@ -42,9 +45,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+public:
+	// Delegate to broadcast damage events
+	UPROPERTY(BlueprintAssignable)
+	FHpBarUpdate HpBarUpdate;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnUnitDead OnUnitDead;
+
 	//Components
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 	class UDecalComponent* SelectedDecal;
 
 public: // Anims
@@ -170,6 +181,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	TArray<FObjectActionPattern> GetUnitActionPatterns() const { return this->ActionPattern; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	UTexture2D* GetUnit2DImage() const { return this->UnitStatus_Extra.fUnit2DImage; }
 
 // Setter
 public:
