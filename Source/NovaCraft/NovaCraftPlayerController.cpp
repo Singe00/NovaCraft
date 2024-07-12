@@ -20,6 +20,8 @@ ANovaCraftPlayerController::ANovaCraftPlayerController()
 	DefaultMouseCursor = EMouseCursor::Default;
 	CachedDestination = FVector::ZeroVector;
 	FollowTime = 0.f;
+
+	UnitSquadArray.SetNum(10);
 }
 
 void ANovaCraftPlayerController::BeginPlay()
@@ -123,3 +125,34 @@ void ANovaCraftPlayerController::OnTouchReleased()
 	bIsTouch = false;
 	OnSetDestinationReleased();
 }
+
+void ANovaCraftPlayerController::SetUnitSquad(TArray<AActor*> NewSquad, int SquadIndex)
+{
+	if (UnitSquadArray.IsValidIndex(SquadIndex))
+	{
+		this->UnitSquadArray[SquadIndex].SetUnitSquad(NewSquad);
+
+		for (AActor* Unit : UnitSquadArray[SquadIndex].GetUnitSquad())
+		{
+			AUnitBase* MyUnit = Cast<AUnitBase>(Unit);
+			
+			if (MyUnit)
+			{
+				MyUnit->OnUnitDead.AddDynamic(this, &ANovaCraftPlayerController::RemoveUnitFromSquad);
+			}
+		}
+	}
+	
+}
+
+void ANovaCraftPlayerController::RemoveUnitFromSquad(AUnitBase* DeadUnit)
+{
+	AActor* Unit = Cast<AActor>(DeadUnit);
+
+	for (FUnitSquad& Squad : UnitSquadArray)
+	{
+		Squad.RemoveUnit(Unit);
+	}
+}
+
+

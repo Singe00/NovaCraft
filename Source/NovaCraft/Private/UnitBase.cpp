@@ -3,6 +3,7 @@
 
 #include "UnitBase.h"
 #include "Components/DecalComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -66,6 +67,7 @@ void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_Offe
 	OutAttackTimes = UnitStatus_Offense.fAirAttackTimes;
 	OutOffenseType = UnitStatus_Offense.fAirOffenseType;
 }
+
 
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
@@ -132,8 +134,19 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 {
 	UnitStatus_Defense.fCurrentHealth -= Damage;
 
+	HpBarUpdate.Broadcast(UnitStatus_Defense.fCurrentHealth, UnitStatus_Defense.fMaxHealth);
+
 	if (UnitStatus_Defense.fCurrentHealth <= 0)
 	{
+		this->isDead = true;
+
+		GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+
+		OnUnitDead.Broadcast(this);
+
+
 		return false;
 	}
 	return true;

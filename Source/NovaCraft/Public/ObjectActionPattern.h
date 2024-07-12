@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
+#include "InputCoreTypes.h"
 #include "ObjectActionPattern.generated.h"
 
 USTRUCT(BlueprintType)
@@ -28,4 +29,8 @@ public:
 	// Pattern Image (패턴 이미지)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* fPatternImage;
+
+	// Pattern Image (입력 키값)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FKey fInputKeyValue;
 };

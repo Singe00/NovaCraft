@@ -5,12 +5,32 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
+#include "Public/UnitBase.h"
 #include "NovaCraftPlayerController.generated.h"
 
 /** Forward declaration to improve compiling times */
 class UNiagaraSystem;
 class UInputMappingContext;
 class UInputAction;
+
+USTRUCT()
+struct FUnitSquad
+{
+	GENERATED_BODY()
+private:
+	TArray<AActor*> Units;
+
+public:
+
+	TArray<AActor*> GetUnitSquad() const { return this->Units; }
+
+	void SetUnitSquad(TArray<AActor*> NewUnitSquad) { this->Units = NewUnitSquad; }
+
+	void RemoveUnit(AActor* DeadUnit)
+	{
+		Units.Remove(DeadUnit);
+	}
+};
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -61,8 +81,26 @@ protected:
 private:
 	FVector CachedDestination;
 
+	UPROPERTY(VisibleAnywhere, Category = "Unit Squad")
+	TArray<FUnitSquad> UnitSquadArray;
+
 	bool bIsTouch; // Is it a touch device
 	float FollowTime; // For how long it has been pressed
+
+	//Getter
+public:
+
+	UFUNCTION(BlueprintCallable)
+	TArray<AActor*>  GetUnitSquad(int SquadIndex) const { return this->UnitSquadArray[SquadIndex].GetUnitSquad(); }
+
+
+	//Setter
+public:
+	UFUNCTION(BlueprintCallable)
+	void SetUnitSquad(TArray<AActor*>  NewSquad, int SquadIndex);
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveUnitFromSquad(AUnitBase* DeadUnit);
 };
 
 
