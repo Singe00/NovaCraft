@@ -12,6 +12,8 @@
 #include "ObjectActionPattern.h"
 #include "UnitBase.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHpBarUpdate, float, CurrentHp, float, MaxHp);
+
 UCLASS()
 class NOVACRAFT_API AUnitBase : public ACharacter
 {
@@ -41,6 +43,11 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+public:
+	// Delegate to broadcast damage events
+	UPROPERTY(BlueprintAssignable)
+	FHpBarUpdate HpBarUpdate;
 
 	//Components
 public:
