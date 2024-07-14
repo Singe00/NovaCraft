@@ -14,6 +14,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHpBarUpdate, float, CurrentHp, float, MaxHp);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUnitDead, AUnitBase*, DeadUnit);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUnitDamaged, AUnitBase*, DamagedUnit);
 
 UCLASS()
 class NOVACRAFT_API AUnitBase : public ACharacter
@@ -52,6 +53,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FOnUnitDead OnUnitDead;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnUnitDamaged OnUnitDamaged;
 
 	//Components
 public:

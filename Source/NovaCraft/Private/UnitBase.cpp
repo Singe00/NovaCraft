@@ -149,6 +149,11 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 
 		return false;
 	}
+	else
+	{
+		OnUnitDamaged.Broadcast(this);
+	}
+
 	return true;
 }
 
