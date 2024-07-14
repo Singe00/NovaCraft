@@ -113,6 +113,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Building Manage")
 	TArray <AActor*> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
 
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	int GetBuildingPriority() const { return this->BuildingStatus_Extra.fBuildingPriority; }
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
