@@ -140,7 +140,7 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 	{
 		this->isDead = true;
 
-		GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 
