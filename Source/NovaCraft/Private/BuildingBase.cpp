@@ -128,10 +128,3 @@ bool ABuildingBase::CustomTakeDamageBuilding(float Damage)
 
 	return true;
 }
-
-void ABuildingBase::SpawnUnit(int SpawnIndex)
-{
-	AUnitBase* Unit = Cast<AUnitBase>(CanSpawnObjects[SpawnIndex]);
-
-
-}
