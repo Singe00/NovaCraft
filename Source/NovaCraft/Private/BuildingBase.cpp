@@ -3,6 +3,7 @@
 
 #include "BuildingBase.h"
 #include "Components/DecalComponent.h"
+#include "UnitBase.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -89,4 +90,48 @@ void ABuildingBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 
 	DOREPLIFETIME(ABuildingBase, TeamNumber);
 	DOREPLIFETIME(ABuildingBase, TeamColor);
+}
+
+float ABuildingBase::CalculateDamageBuilding(float Damage, int AttackTimes, E_OffenseType OffenseType)
+{
+	float damageMultiplier = DamageMatrix[static_cast<int>(OffenseType)][static_cast<int>(E_DefenseType::Building)];
+	float finalDamage = ((((Damage / AttackTimes) * damageMultiplier) - BuildingStatus_Defense.fBuildingDefense) * AttackTimes);
+
+	if (finalDamage < 0.5)
+	{
+		finalDamage = 0.5;
+	}
+
+	return finalDamage;
+}
+
+bool ABuildingBase::CustomTakeDamageBuilding(float Damage)
+{
+	BuildingStatus_Defense.fBuildingCurrentHealth -= Damage;
+
+	BuildingHpBarUpdate.Broadcast(BuildingStatus_Defense.fBuildingCurrentHealth, BuildingStatus_Defense.fBuildingMaxHealth);
+
+	if (BuildingStatus_Defense.fBuildingCurrentHealth <= 0)
+	{
+		this->isDead = true;
+
+
+		OnBuildingDead.Broadcast(this);
+
+
+		return false;
+	}
+	else
+	{
+		OnBuildingDamaged.Broadcast(this);
+	}
+
+	return true;
+}
+
+void ABuildingBase::SpawnUnit(int SpawnIndex)
+{
+	AUnitBase* Unit = Cast<AUnitBase>(CanSpawnObjects[SpawnIndex]);
+
+
 }

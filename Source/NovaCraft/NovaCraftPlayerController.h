@@ -6,6 +6,7 @@
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
 #include "Public/UnitBase.h"
+#include "Public/BuildingBase.h"
 #include "NovaCraftPlayerController.generated.h"
 
 /** Forward declaration to improve compiling times */
@@ -87,13 +88,18 @@ private:
 	bool bIsTouch; // Is it a touch device
 	float FollowTime; // For how long it has been pressed
 
+
+	UPROPERTY(VisibleAnywhere, Category = "Unit Squad")
+	TArray<bool> UnitSquadObjectDivide;
+
 	//Getter
 public:
 
 	UFUNCTION(BlueprintCallable)
 	TArray<AActor*>  GetUnitSquad(int SquadIndex) const { return this->UnitSquadArray[SquadIndex].GetUnitSquad(); }
 
-
+	UFUNCTION(BlueprintCallable)
+	bool GetUnitSquadObjectDivideByIndex(int SquadIndex) const { return this->UnitSquadObjectDivide[SquadIndex]; }
 	//Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -101,6 +107,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveUnitFromSquad(AUnitBase* DeadUnit);
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveBuildingFromSquad(ABuildingBase* DeadBuilding);
+
+	UFUNCTION(BlueprintCallable)
+	void SetUnitSquadObjectDivideByIndex(int NewSquadIndex, bool NewBool) { this->UnitSquadObjectDivide[NewSquadIndex] = NewBool; }
 };
 
 
