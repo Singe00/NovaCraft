@@ -20,10 +20,18 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 
 ## 팀원 구성
 
-|<img src="https://avatars.githubusercontent.com/u/103260185?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/167147483?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/87008914?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/167861990?v=4" width="150" height="150"/>|
+### Team
+|<img src="https://avatars.githubusercontent.com/u/103260185?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/110752012?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/173750469?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/95664246?v=4" width="150" height="150"/>|
 |:-:|:-:|:-:|:-:|
-|조시완<br/>[@Singe00](https://github.com/Singe00)|김남현<br/>[@countlet](https://github.com/countlet)|양명훈<br/>[@mon-world](https://github.com/mon-world)|라종태<br/>[@fwkhdxo](https://github.com/fwkhdxo)|
+|조시완<br/>[@Singe00](https://github.com/Singe00)|백재현<br/>[@bbaekjae](https://github.com/bbaekjae)|정호용<br/>[@TR99990](https://github.com/TR99990)|백민성<br/>[@minmonth](https://github.com/minmonth)|
 
+### 역할 분담
+- 조시완 : 팀장, Git 관리, Client Develope (베이스 클래스 설계 및 구축, 플레이어 컨트롤 시스템 개발)
+- 백재현 : 부팀장, Client Develope (단축키 컨트롤 시스템 연동 및 개발)
+- 백민성 : Client Develope (인게임 시스템 개발 - Grid 시스템, 전장의 안개)
+- 정호용 : Client Develope (건물 빌딩 시스템, 유닛 생성 및 업그레이드 시스템 개발)
+- 강동우 : 게임 기획 (게임 기획 및 레벨 디자인 설계)
+- 공통   : 유닛 설계 및 개발, 레벨 디자인
 
 <br/>
 
@@ -60,14 +68,9 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 <br/>
 
 ## 프로젝트 구조
+
+## 베이스 클래스 설계
 ![NovaCraft_Diagram](https://github.com/Singe00/NovaCraft/assets/103260185/ac830a1a-b793-432f-97ee-14fcb4ac7025)
-
-
-## 역할 분담
-- 조시완 : 팀장, Client Develope, Git 관리 / [Github](https://github.com/Singe00)
-- 백재현 : 부팀장, Client Develope / [Github]()
-- 백민성 : Client Develope / [Github]()
-- 정호용 : Client Develope / [Github]()
 
 
 ## 개발 기간 및 작업 관리

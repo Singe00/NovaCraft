@@ -17,6 +17,7 @@ public:
 		, fBuildingName("Test Building")
 		, fBuildingKilledEnemyCount(0)
 		, fBuilding2DImage(nullptr)
+		, fBuildingPriority(1)
 	{};
 
 public:
@@ -35,4 +36,8 @@ public:
 	// Building Image (유닛 이미지)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* fBuilding2DImage;
+
+	// Unit Priority (건물 우선순위)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int fBuildingPriority;
 };

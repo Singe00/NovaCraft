@@ -12,6 +12,10 @@
 #include "ObjectActionPattern.h"
 #include "BuildingBase.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBuildingHpBarUpdate, float, CurrentHp, float, MaxHp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDead, ABuildingBase*, BuildingDestroy);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDamaged, ABuildingBase*, DamagedBuilding);
+
 UCLASS()
 class NOVACRAFT_API ABuildingBase : public AActor
 {
@@ -25,10 +29,27 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	const float DamageMatrix[5][5] = {
+		// None,     Small,    Medium,   Large,    Building
+		{1.0f,      1.0f,     1.0f,     1.0f,     1.0f},    // None
+		{1.0f,      1.0f,     1.0f,     1.0f,     1.0f},    // Normal
+		{1.0f,      1.0f,     0.75f,     1.25f,    2.0f},    // Explosive
+		{1.0f,      1.5f,    0.75f,     0.5f,     0.5f},   // Concussive
+		{1.0f,      1.0f,     1.0f,     1.0f,     1.0f}     // Spell
+	};
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(BlueprintAssignable)
+	FBuildingHpBarUpdate BuildingHpBarUpdate;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnBuildingDamaged OnBuildingDamaged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnBuildingDead OnBuildingDead;
 
 	//Components
 public:
@@ -53,13 +74,24 @@ public:
 
 
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
-	TArray<AActor*> CanSpawnObjects;
+	TArray<TSubclassOf<AUnitBase>> CanSpawnObjects;
 
 	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
 
+	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
+	AActor* RallyActor;
+
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
 	TArray<FObjectActionPattern> ActionPattern;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
+	bool isDead = false;
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
+	bool isProducting = false;
+
 
 protected:
 	// Defence Status
@@ -111,8 +143,16 @@ public:
 	TArray<FObjectActionPattern> GetBuildingActionPatterns() const { return this->ActionPattern; }
 
 	UFUNCTION(BlueprintCallable, Category = "Building Manage")
-	TArray <AActor*> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
+	TArray <TSubclassOf<AUnitBase>> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
 
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	int GetBuildingPriority() const { return this->BuildingStatus_Extra.fBuildingPriority; }
+
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	FVector GetBuildingRallyPoint() const { return this->RallyPoint; }
+
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	AActor* GetBuildingRallyActor() const { return this->RallyActor; }
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -136,7 +176,22 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	void SetBuildingActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern);
 
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	void SetBuildingRallyPoint(FVector NewRallyPoint) { this->RallyPoint = NewRallyPoint; }
+
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	void SetBuildingRallyActor(AActor* NewRallyActor) { this->RallyActor = NewRallyActor; }
+
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	void SetIsProducting(bool NewProducting) { this->isProducting = NewProducting; }
 	// Function
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UFUNCTION(BlueprintCallable)
+	float CalculateDamageBuilding(float Damage, int AttackTimes, E_OffenseType OffenseType);
+
+	UFUNCTION(BlueprintCallable)
+	bool CustomTakeDamageBuilding(float Damage);
+
 };
