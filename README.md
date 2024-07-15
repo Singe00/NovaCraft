@@ -20,9 +20,10 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 
 ## 팀원 구성
 
-|<img src="https://avatars.githubusercontent.com/u/103260185?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/167147483?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/87008914?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/167861990?v=4" width="150" height="150"/>|
+## Team
+|<img src="https://avatars.githubusercontent.com/u/103260185?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/110752012?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/173750469?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/95664246?v=4" width="150" height="150"/>|
 |:-:|:-:|:-:|:-:|
-|조시완<br/>[@Singe00](https://github.com/Singe00)|김남현<br/>[@countlet](https://github.com/countlet)|양명훈<br/>[@mon-world](https://github.com/mon-world)|라종태<br/>[@fwkhdxo](https://github.com/fwkhdxo)|
+|조시완<br/>[@Singe00](https://github.com/Singe00)|[@백재현](https://github.com/bbaekjae)|[@정호용](https://github.com/TR99990)|[@백민성](https://github.com/minmonth)|
 
 
 <br/>
