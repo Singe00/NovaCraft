@@ -60,6 +60,7 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 <br/>
 
 ## 프로젝트 구조
+![NovaCraft_Diagram](https://github.com/Singe00/NovaCraft/assets/103260185/ac830a1a-b793-432f-97ee-14fcb4ac7025)
 
 
 ## 역할 분담
@@ -91,9 +92,14 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 #### 3. 개발 파트 분배 회의✔
 - 회의 날짜/시간 : 2023.07.08(월) / 09:30 ~ 10:30
 - 회의 내용 : 팀 프로젝트 개발 파트를 분배 및 조정
-- 회의 결론 : 회의 예정
-- 자세한 내용은 repository에 첨부된 『[개발 파트 분배]()』 파일 참조
+- 회의 결론 : 회의록 참고
+- 자세한 내용은 repository에 첨부된 『[개발 파트 분배](https://www.canva.com/design/DAGKpFelIzg/ClH2v5dzNfUCWBaH9dpu3A/view?utm_content=DAGKpFelIzg&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
 
+#### 4. 개발 시퀀스 설계 회의✔
+- 회의 날짜/시간 : 2023.07.11(목) / 17:30 ~ 18:00
+- 회의 내용 : 프로젝트 개발 사항 구현 계획 및 설계
+- 회의 결론 : 각 파트 별 시퀀스 정리 및 필요한 이벤트 요청
+- 자세한 내용은 repository에 첨부된 『[개발 시퀀스 설계 회의](https://www.canva.com/design/DAGKpGPWGtg/SzXDJxRqB458DHdE_MLMFg/view?utm_content=DAGKpGPWGtg&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
 
 
 ## 이슈
