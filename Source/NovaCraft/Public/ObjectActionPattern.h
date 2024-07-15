@@ -15,6 +15,7 @@ public:
 		: fPatternIndex(0)
 		, fPatternName("Action")
 		, fPatternImage(nullptr)
+		, fIsActive(false)
 	{};
 
 public:
@@ -33,4 +34,8 @@ public:
 	// Pattern Image (입력 키값)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FKey fInputKeyValue;
+
+	// Is Active? (액티브 스킬인지)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool fIsActive;
 };
