@@ -23,7 +23,7 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 ## Team
 |<img src="https://avatars.githubusercontent.com/u/103260185?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/110752012?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/173750469?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/95664246?v=4" width="150" height="150"/>|
 |:-:|:-:|:-:|:-:|
-|조시완<br/>[@Singe00](https://github.com/Singe00)|[@백재현](https://github.com/bbaekjae)|[@정호용](https://github.com/TR99990)|[@백민성](https://github.com/minmonth)|
+|조시완<br/>[@Singe00](https://github.com/Singe00)|백재현<br/>[@bbaekjae](https://github.com/bbaekjae)|정호용<br/>[@TR99990](https://github.com/TR99990)|백민성<br/>[@minmonth](https://github.com/minmonth)|
 
 
 <br/>
