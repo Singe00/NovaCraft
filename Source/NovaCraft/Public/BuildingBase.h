@@ -187,6 +187,4 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool CustomTakeDamageBuilding(float Damage);
 
-	UFUNCTION(BlueprintCallable)
-	void SpawnUnit(int SpawnIndex);
 };
