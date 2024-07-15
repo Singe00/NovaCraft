@@ -22,6 +22,7 @@ ANovaCraftPlayerController::ANovaCraftPlayerController()
 	FollowTime = 0.f;
 
 	UnitSquadArray.SetNum(10);
+	UnitSquadObjectDivide.SetNum(10);
 }
 
 void ANovaCraftPlayerController::BeginPlay()
@@ -132,13 +133,22 @@ void ANovaCraftPlayerController::SetUnitSquad(TArray<AActor*> NewSquad, int Squa
 	{
 		this->UnitSquadArray[SquadIndex].SetUnitSquad(NewSquad);
 
-		for (AActor* Unit : UnitSquadArray[SquadIndex].GetUnitSquad())
+		for (AActor* Object : UnitSquadArray[SquadIndex].GetUnitSquad())
 		{
-			AUnitBase* MyUnit = Cast<AUnitBase>(Unit);
+			AUnitBase* MyUnit = Cast<AUnitBase>(Object);
 			
 			if (MyUnit)
 			{
 				MyUnit->OnUnitDead.AddDynamic(this, &ANovaCraftPlayerController::RemoveUnitFromSquad);
+			}
+			else
+			{
+				ABuildingBase* MyBuilding = Cast<ABuildingBase>(Object);
+
+				if (MyBuilding)
+				{
+					MyBuilding->OnBuildingDead.AddDynamic(this, &ANovaCraftPlayerController::RemoveBuildingFromSquad);
+				}
 			}
 		}
 	}
@@ -152,6 +162,16 @@ void ANovaCraftPlayerController::RemoveUnitFromSquad(AUnitBase* DeadUnit)
 	for (FUnitSquad& Squad : UnitSquadArray)
 	{
 		Squad.RemoveUnit(Unit);
+	}
+}
+
+void ANovaCraftPlayerController::RemoveBuildingFromSquad(ABuildingBase* DeadBuilding)
+{
+	AActor* Building = Cast<AActor>(DeadBuilding);
+
+	for (FUnitSquad& Squad : UnitSquadArray)
+	{
+		Squad.RemoveUnit(Building);
 	}
 }
 

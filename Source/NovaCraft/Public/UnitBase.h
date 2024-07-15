@@ -86,10 +86,10 @@ public: // All Common Status Under Here
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	FLinearColor TeamColor;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value")
 	bool isDead = false;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value")
 	bool isSelected = false;
 
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
