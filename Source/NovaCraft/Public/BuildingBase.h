@@ -74,7 +74,7 @@ public:
 
 
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
-	TArray<AActor*> CanSpawnObjects;
+	TArray<TSubclassOf<AUnitBase>> CanSpawnObjects;
 
 	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
@@ -87,6 +87,11 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	bool isDead = false;
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
+	bool isProducting = false;
+
 
 protected:
 	// Defence Status
@@ -138,7 +143,7 @@ public:
 	TArray<FObjectActionPattern> GetBuildingActionPatterns() const { return this->ActionPattern; }
 
 	UFUNCTION(BlueprintCallable, Category = "Building Manage")
-	TArray <AActor*> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
+	TArray <TSubclassOf<AUnitBase>> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
 
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	int GetBuildingPriority() const { return this->BuildingStatus_Extra.fBuildingPriority; }
@@ -177,6 +182,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	void SetBuildingRallyActor(AActor* NewRallyActor) { this->RallyActor = NewRallyActor; }
 
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	void SetIsProducting(bool NewProducting) { this->isProducting = NewProducting; }
 	// Function
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
