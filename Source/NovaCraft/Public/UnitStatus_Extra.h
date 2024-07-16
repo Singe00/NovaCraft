@@ -39,4 +39,7 @@ public:
 	// Unit Priority (유닛 우선순위)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int fUnitPriority;
+
+	// Building Type (건물 타입)
+
 };
