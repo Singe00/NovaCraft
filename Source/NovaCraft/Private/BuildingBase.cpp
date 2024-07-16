@@ -5,6 +5,7 @@
 #include "Components/DecalComponent.h"
 #include "UnitBase.h"
 #include "Components/WidgetComponent.h"
+#include "Components/BoxComponent.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -35,6 +36,10 @@ ABuildingBase::ABuildingBase()
 		HpBarWidget->SetDrawSize(FVector2D(100, 10));
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	}
+
+	OverlapCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("OverlapCollision"));
+	OverlapCollision->SetupAttachment(BuildingBaseMesh);
+	OverlapCollision->GetBodyInstance()->SetSmoothEdgeCollisionsEnabled(true);
 }
 
 // Called when the game starts or when spawned

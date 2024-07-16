@@ -61,6 +61,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 	class UWidgetComponent* HpBarWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UBoxComponent* OverlapCollision;
 	// All Common Status Under Here
 
 	// Manage Value
@@ -76,7 +79,7 @@ public:
 
 
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
-	TArray<TSubclassOf<AUnitBase>> CanSpawnObjects;
+	TArray<TSubclassOf<AActor>> CanSpawnObjects;
 
 	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
@@ -145,7 +148,7 @@ public:
 	TArray<FObjectActionPattern> GetBuildingActionPatterns() const { return this->ActionPattern; }
 
 	UFUNCTION(BlueprintCallable, Category = "Building Manage")
-	TArray <TSubclassOf<AUnitBase>> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
+	TArray <TSubclassOf<AActor>> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
 
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	int GetBuildingPriority() const { return this->BuildingStatus_Extra.fBuildingPriority; }
