@@ -31,7 +31,7 @@ ABuildingBase::ABuildingBase()
 
 	if (UW.Succeeded())
 	{
-		HpBarWidget->SetupAttachment(RootComponent);
+		HpBarWidget->SetupAttachment(BuildingBaseMesh);
 		HpBarWidget->SetWidgetClass(UW.Class);
 		HpBarWidget->SetDrawSize(FVector2D(100, 10));
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
