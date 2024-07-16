@@ -59,6 +59,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UDecalComponent* SelectedDecal;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
+	class UWidgetComponent* HpBarWidget;
 	// All Common Status Under Here
 
 	// Manage Value
@@ -153,6 +155,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	AActor* GetBuildingRallyActor() const { return this->RallyActor; }
+
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	E_BuildingType GetBuildingType() const { return this->BuildingStatus_Extra.fBuildingType; }
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)

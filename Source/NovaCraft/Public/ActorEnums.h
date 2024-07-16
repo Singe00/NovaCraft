@@ -64,6 +64,18 @@ enum class E_AISense : uint8
 	Damage UMETA(DisplayName = "Damage"),
 };
 
+
+UENUM(BlueprintType)
+enum class E_BuildingType : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Main UMETA(DisplayName = "Main"),
+	Unit UMETA(DisplayName = "Unit"),
+	Upgrade UMETA(DisplayName = "Upgrade"),
+	Population UMETA(DisplayName = "Population"),
+
+};
+
 UCLASS()
 class NOVACRAFT_API AActorEnums : public AActor
 {

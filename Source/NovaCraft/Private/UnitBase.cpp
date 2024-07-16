@@ -4,6 +4,7 @@
 #include "UnitBase.h"
 #include "Components/DecalComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/WidgetComponent.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -18,6 +19,18 @@ AUnitBase::AUnitBase()
 	SelectedDecal->SetVisibility(false);
 	SelectedDecal->SetRelativeRotation(FRotator(90, 0, 0));
 	SelectedDecal->SetRelativeScale3D(FVector(0.25));
+
+	static ConstructorHelpers::FClassFinder<UUserWidget>UW(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_HpBar'_C"));
+
+	HpBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HpBarWidget"));
+
+	if (UW.Succeeded())
+	{
+		HpBarWidget->SetupAttachment(RootComponent);
+		HpBarWidget->SetWidgetClass(UW.Class);
+		HpBarWidget->SetDrawSize(FVector2D(100, 10));
+		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
+	}
 
 }
 
@@ -140,9 +153,9 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 	{
 		this->isDead = true;
 
-		GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+		GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
+		HpBarWidget->DestroyComponent();
 
 		OnUnitDead.Broadcast(this);
 
