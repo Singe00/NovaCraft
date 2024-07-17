@@ -164,9 +164,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	E_BuildingType GetBuildingType() const { return this->BuildingStatus_Extra.fBuildingType; }
 
+	UFUNCTION(BlueprintCallable)
+	UStaticMesh* GetBuildingBaseMeshObject() const { return this->BuildingBaseMesh->GetStaticMesh(); }
 
 	UFUNCTION(BlueprintCallable)
 	E_BuildingMoveType GetBuildingMoveTpye() const { return this->BuildingStatus_Defense.fBuildingMoveType; }
+
+
 
 	// Setter
 public:
