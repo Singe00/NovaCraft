@@ -93,6 +93,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	bool isDead = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
+	bool isSelected = false;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	bool isProducting = false;
@@ -161,6 +163,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	E_BuildingType GetBuildingType() const { return this->BuildingStatus_Extra.fBuildingType; }
+
+
+	UFUNCTION(BlueprintCallable)
+	E_BuildingMoveType GetBuildingMoveTpye() const { return this->BuildingStatus_Defense.fBuildingMoveType; }
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
