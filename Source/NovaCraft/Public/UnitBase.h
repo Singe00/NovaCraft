@@ -224,4 +224,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool CustomTakeDamage(float Damage);
+
+	UFUNCTION(BlueprintCallable)
+	UAnimMontage* GetRandomMontage(TArray<class UAnimMontage*> Montages);
 };

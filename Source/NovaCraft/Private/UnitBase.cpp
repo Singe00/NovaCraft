@@ -5,6 +5,8 @@
 #include "Components/DecalComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/WidgetComponent.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -32,6 +34,9 @@ AUnitBase::AUnitBase()
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	}
 
+	auto movement = GetCharacterMovement();
+
+	movement->MaxWalkSpeed = this->UnitStatus_Utility.fMoveSpeed;
 }
 
 // Called when the game starts or when spawned
@@ -168,6 +173,18 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 	}
 
 	return true;
+}
+
+UAnimMontage* AUnitBase::GetRandomMontage(TArray<class UAnimMontage*> Montages)
+{
+
+	if (Montages.Num() == 0)
+	{
+		return nullptr;
+	}
+
+	int32 RandomIndex = FMath::RandRange(0, Montages.Num() - 1);
+	return Montages[RandomIndex];
 }
 
 
