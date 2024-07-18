@@ -192,7 +192,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	UTexture2D* GetUnit2DImage() const { return this->UnitStatus_Extra.fUnit2DImage; }
 
-// Setter
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetCurrentHp() const { return this->UnitStatus_Defense.fCurrentHealth; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetMaxHp() const { return this->UnitStatus_Defense.fMaxHealth; }
+	
+	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
 	void InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern);
