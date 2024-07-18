@@ -18,6 +18,7 @@ public:
 		, fBuildingDefense(1.0f)
 		, fDefenseType(E_DefenseType::Building)
 		, fDefenseImage(nullptr)
+		, fBuildingMoveType(E_BuildingMoveType::Ground)
 	{};
 
 public:
@@ -44,4 +45,7 @@ public:
 	// Defense Image
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* fDefenseImage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	E_BuildingMoveType fBuildingMoveType;
 };

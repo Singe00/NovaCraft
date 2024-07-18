@@ -4,6 +4,8 @@
 #include "BuildingBase.h"
 #include "Components/DecalComponent.h"
 #include "UnitBase.h"
+#include "Components/WidgetComponent.h"
+#include "Components/BoxComponent.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -22,6 +24,22 @@ ABuildingBase::ABuildingBase()
 	SelectedDecal->SetVisibility(false);
 	SelectedDecal->SetRelativeRotation(FRotator(90, 0, 0));
 	SelectedDecal->SetRelativeScale3D(FVector(0.25));
+
+	static ConstructorHelpers::FClassFinder<UUserWidget>UW(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_HpBar'_C"));
+
+	HpBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HpBarWidget"));
+
+	if (UW.Succeeded())
+	{
+		HpBarWidget->SetupAttachment(BuildingBaseMesh);
+		HpBarWidget->SetWidgetClass(UW.Class);
+		HpBarWidget->SetDrawSize(FVector2D(100, 10));
+		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
+	}
+
+	OverlapCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("OverlapCollision"));
+	OverlapCollision->SetupAttachment(BuildingBaseMesh);
+	OverlapCollision->GetBodyInstance()->SetSmoothEdgeCollisionsEnabled(true);
 }
 
 // Called when the game starts or when spawned
@@ -117,7 +135,7 @@ bool ABuildingBase::CustomTakeDamageBuilding(float Damage)
 
 
 		OnBuildingDead.Broadcast(this);
-
+		HpBarWidget->DestroyComponent();
 
 		return false;
 	}

@@ -59,6 +59,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UDecalComponent* SelectedDecal;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
+	class UWidgetComponent* HpBarWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UBoxComponent* OverlapCollision;
 	// All Common Status Under Here
 
 	// Manage Value
@@ -74,7 +79,7 @@ public:
 
 
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
-	TArray<AActor*> CanSpawnObjects;
+	TArray<TSubclassOf<AActor>> CanSpawnObjects;
 
 	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
@@ -87,6 +92,13 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	bool isDead = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
+	bool isSelected = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
+	bool isProducting = false;
+
 
 protected:
 	// Defence Status
@@ -138,7 +150,7 @@ public:
 	TArray<FObjectActionPattern> GetBuildingActionPatterns() const { return this->ActionPattern; }
 
 	UFUNCTION(BlueprintCallable, Category = "Building Manage")
-	TArray <AActor*> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
+	TArray <TSubclassOf<AActor>> GetCanSpawnObjects() const { return this->CanSpawnObjects; }
 
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	int GetBuildingPriority() const { return this->BuildingStatus_Extra.fBuildingPriority; }
@@ -148,6 +160,18 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	AActor* GetBuildingRallyActor() const { return this->RallyActor; }
+
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	E_BuildingType GetBuildingType() const { return this->BuildingStatus_Extra.fBuildingType; }
+
+	UFUNCTION(BlueprintCallable)
+	UStaticMesh* GetBuildingBaseMeshObject() const { return this->BuildingBaseMesh->GetStaticMesh(); }
+
+	UFUNCTION(BlueprintCallable)
+	E_BuildingMoveType GetBuildingMoveTpye() const { return this->BuildingStatus_Defense.fBuildingMoveType; }
+
+
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -177,6 +201,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	void SetBuildingRallyActor(AActor* NewRallyActor) { this->RallyActor = NewRallyActor; }
 
+	UFUNCTION(BlueprintCallable, Category = "Building Status")
+	void SetIsProducting(bool NewProducting) { this->isProducting = NewProducting; }
 	// Function
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;

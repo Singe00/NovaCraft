@@ -49,8 +49,15 @@ enum class E_RaceType : uint8
 	RaceC UMETA(DisplayName = "RaceC"),
 };
 
-UENUM(BlueprintType)
+UENUM(BlueprintType) //Delete
 enum class E_UnitType : uint8
+{
+	Ground UMETA(DisplayName = "Ground"),
+	Air UMETA(DisplayName = "Air"),
+};
+
+UENUM(BlueprintType)
+enum class E_ObjectMoveType : uint8
 {
 	Ground UMETA(DisplayName = "Ground"),
 	Air UMETA(DisplayName = "Air"),
@@ -62,6 +69,34 @@ enum class E_AISense : uint8
 	None UMETA(DisplayName = "None"),
 	Sight UMETA(DisplayName = "Sight"),
 	Damage UMETA(DisplayName = "Damage"),
+};
+
+UENUM(BlueprintType)
+enum class E_BuildingMoveType : uint8
+{
+	Ground UMETA(DisplayName = "Ground"),
+	Air UMETA(DisplayName = "Air"),
+
+};
+
+
+UENUM(BlueprintType)
+enum class E_BuildingType : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Main UMETA(DisplayName = "Main"),
+	Unit UMETA(DisplayName = "Unit"),
+	Upgrade UMETA(DisplayName = "Upgrade"),
+	Population UMETA(DisplayName = "Population"),
+
+};
+
+UENUM(BlueprintType)
+enum class E_ObjectType : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Unit UMETA(DisplayName = "Unit"),
+	Building UMETA(DisplayName = "Building"),
 };
 
 UCLASS()
