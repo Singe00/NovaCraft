@@ -104,12 +104,21 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 - 회의 결론 : 각 파트 별 시퀀스 정리 및 필요한 이벤트 요청
 - 자세한 내용은 repository에 첨부된 『[개발 시퀀스 설계 회의](https://www.canva.com/design/DAGKpGPWGtg/SzXDJxRqB458DHdE_MLMFg/view?utm_content=DAGKpGPWGtg&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
 
+#### 5. 세계관 및 유닛 디자인 회의✔
+- 회의 날짜/시간 : 2023.07.19(금) / 14:00 ~ 17:00
+- 회의 내용 : 게임 세계관 및 유닛 상세 기획 회의
+- 회의 결론 : 종족 컨셉 결정 및 유닛 상세 기획, 디자인, 패턴 회의 완료
+- 자세한 내용은 repository에 첨부된 『[기획 및 유닛 상세 디자 회의](https://www.canva.com/design/DAGLZB1rNGY/VTtA8wVs6jg6cQdEmuA-3Q/view?utm_content=DAGLZB1rNGY&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
 
 ## 이슈
 - 2024.06.25(화)<br/>
   언리얼 프로젝트, Github, Git 연동 완료<br/>
 
+
 ## 에셋
+
 ### 모델링
+- 『[CSC 로봇 에셋](https://www.unrealengine.com/id/login/api/login?client_id=43e2dea89b054198a703f6199bee6d5b&redirect_uri=https%3A%2F%2Fwww.unrealengine.com%2Fmarketplace%2Fen-US%2Fproduct%2Fcombat-systems-constructor%3FsessionInvalidated%3Dtrue&prompt=pass_through)』 파일 참조
 ### 이미지
 ### 사운드
+### 기타
