@@ -192,6 +192,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	UTexture2D* GetUnit2DImage() const { return this->UnitStatus_Extra.fUnit2DImage; }
 
+
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	float GetCurrentHp() const { return this->UnitStatus_Defense.fCurrentHealth; }
 
