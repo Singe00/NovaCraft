@@ -13,8 +13,10 @@ Saved
 *.xcodeproj
 *.xcworkspace
 
-Content/ProMainMenu
+
 Content/CSC
+Content/ParagonWraith
+Content/VigilanteContent
 Content/Assets/*
 Content/StarterContent
 !Content/Assets/Font
