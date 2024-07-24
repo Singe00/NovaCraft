@@ -11,13 +11,18 @@ public:
 	GENERATED_USTRUCT_BODY()
 
 	FMaps()
-		: fMapRefName("LV_MapRefName")
+		: fDataRowName(TEXT("1"))
+		, fMapRefName("LV_MapRefName")
 		, fMapName("MapDesignName")
 		, fMaxMember(4)
 		, fMapImage(nullptr)
 	{};
 
 public:
+	// Datatalbe RowName
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName fDataRowName;
+
 	// Map Ref Name
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString fMapRefName;
