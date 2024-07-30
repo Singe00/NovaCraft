@@ -98,6 +98,12 @@ public: // All Common Status Under Here
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	TArray<FObjectActionPattern> ActionPattern;
 
+	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	bool AirUnitMovement = false;
+
+	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	FVector AirUnitMoveTargetLocation = FVector::ZeroVector;
+
 protected:
 	// Defence Status
 	UPROPERTY(VisibleAnywhere, Category = "Unit Manage|Unit Status|Defense Status")
@@ -197,7 +203,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	float GetMaxHp() const { return this->UnitStatus_Defense.fMaxHealth; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetMoveSpeed() const { return this->UnitStatus_Utility.fMoveSpeed; }
 	
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -221,6 +231,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	void SetUnitActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern);
 
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	void SetAirUnitMoveLocation(bool MoveState, FVector TargetLocation);
+
+
 	// Function
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -233,4 +248,18 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UAnimMontage* GetRandomMontage(TArray<class UAnimMontage*> Montages);
+
+	UFUNCTION(BlueprintCallable)
+	void FlyUnitMoveToLocation(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable)
+	void FlyUnitPatrol(float DeltaTime);
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void FlyUnitMovementFinish();
+
+	UFUNCTION(BlueprintCallable)
+	void FlyUnitInit();
+
 };
