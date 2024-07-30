@@ -197,6 +197,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	float GetMaxHp() const { return this->UnitStatus_Defense.fMaxHealth; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetMoveSpeed() const { return this->UnitStatus_Utility.fMoveSpeed; }
 	
 	// Setter
 public:
@@ -233,4 +236,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UAnimMontage* GetRandomMontage(TArray<class UAnimMontage*> Montages);
+
 };
