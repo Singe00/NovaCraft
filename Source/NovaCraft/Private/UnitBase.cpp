@@ -37,6 +37,8 @@ AUnitBase::AUnitBase()
 	auto movement = GetCharacterMovement();
 
 	movement->MaxWalkSpeed = this->UnitStatus_Utility.fMoveSpeed;
+
+
 }
 
 // Called when the game starts or when spawned
@@ -127,6 +129,12 @@ void AUnitBase::SetUnitActionPatterns(TArray<FObjectActionPattern> NewObjectActi
 	this->ActionPattern = NewObjectActionPattern;
 }
 
+void AUnitBase::SetAirUnitMoveLocation(bool MoveState, FVector TargetLocation)
+{
+	AirUnitMovement = MoveState;
+	AirUnitMoveTargetLocation = TargetLocation;
+}
+
 void AUnitBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -185,6 +193,58 @@ UAnimMontage* AUnitBase::GetRandomMontage(TArray<class UAnimMontage*> Montages)
 
 	int32 RandomIndex = FMath::RandRange(0, Montages.Num() - 1);
 	return Montages[RandomIndex];
+}
+
+void AUnitBase::FlyUnitMoveToLocation(float DeltaTime)
+{
+	if (AirUnitMovement)
+	{
+		FVector CurrentLocation = this->GetActorLocation();
+
+		FVector Direction = (AirUnitMoveTargetLocation - CurrentLocation).GetSafeNormal2D();
+
+		FVector MovementVector = GetMoveSpeed() * Direction * DeltaTime;
+
+		FVector NewLocation = CurrentLocation + MovementVector;
+		NewLocation.Z = CurrentLocation.Z;
+
+		// Set the new location of the unit
+		this->SetActorLocation(NewLocation);
+
+		if (FVector::Dist2D(CurrentLocation, AirUnitMoveTargetLocation) <= 50.0f)
+		{
+			// Stop movement
+			AirUnitMovement = false;
+			FlyUnitMovementFinish();
+		}
+	}
+
+}
+
+void AUnitBase::FlyUnitPatrol(float DeltaTime)
+{
+}
+
+void AUnitBase::FlyUnitInit()
+{
+	if (this->UnitStatus_Defense.fUnitType == E_UnitType::Air)
+	{
+		auto movement = GetCharacterMovement();
+
+		movement->GravityScale = 0.0f;
+
+		GetMesh()->SetEnableGravity(false);
+		GetCapsuleComponent()->SetEnableGravity(false);
+
+		FVector CurrentLocation = GetActorLocation();
+
+		this->SetActorLocation(FVector(CurrentLocation.X, CurrentLocation.Y, 250));
+	}
+}
+
+void AUnitBase::FlyUnitMovementFinish_Implementation()
+{
+
 }
 
 

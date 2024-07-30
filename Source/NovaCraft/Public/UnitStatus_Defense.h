@@ -43,8 +43,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	E_DefenseType fDefenseType;
 
-	// Upgrade Increase Rate (업그레이드 시 증가량)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// Upgrade Increase Rate (업그레이드 시 증가량)
 	float fDefenseUpgradeIncreaseRate;
 
 	// Defense Image (방어구 이미지)
@@ -52,5 +52,6 @@ public:
 	UTexture2D* fDefenseImage;
 
 	// MoveType (이동
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	E_UnitType fUnitType;
 };
