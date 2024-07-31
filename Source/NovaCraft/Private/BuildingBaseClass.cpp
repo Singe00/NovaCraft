@@ -34,9 +34,6 @@ ABuildingBaseClass::ABuildingBaseClass()
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	}
 
-	OverlapCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("OverlapCollision"));
-	OverlapCollision->SetupAttachment(GetMesh());
-	OverlapCollision->GetBodyInstance()->SetSmoothEdgeCollisionsEnabled(true);
 }
 
 // Called when the game starts or when spawned
@@ -132,6 +129,7 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 {
 	BuildingStatus_Defense.fBuildingCurrentHealth -= Damage;
 
+	BuildingHpBarUpdate.Broadcast(BuildingStatus_Defense.fBuildingCurrentHealth, BuildingStatus_Defense.fBuildingMaxHealth);
 
 	if (BuildingStatus_Defense.fBuildingCurrentHealth <= 0)
 	{

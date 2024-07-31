@@ -12,9 +12,6 @@
 #include "ObjectActionPattern.h"
 #include "BuildingBase.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBuildingHpBarUpdate, float, CurrentHp, float, MaxHp);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDead, ABuildingBase*, BuildingDestroy);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDamaged, ABuildingBase*, DamagedBuilding);
 
 UCLASS()
 class NOVACRAFT_API ABuildingBase : public AActor
@@ -42,14 +39,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(BlueprintAssignable)
-	FBuildingHpBarUpdate BuildingHpBarUpdate;
 
-	UPROPERTY(BlueprintAssignable)
-	FOnBuildingDamaged OnBuildingDamaged;
-
-	UPROPERTY(BlueprintAssignable)
-	FOnBuildingDead OnBuildingDead;
 
 	//Components
 public:

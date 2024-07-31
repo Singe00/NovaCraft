@@ -12,8 +12,9 @@
 #include "ObjectActionPattern.h"
 #include "BuildingBaseClass.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDead2, ABuildingBaseClass*, BuildingDestroy);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDamaged2, ABuildingBaseClass*, DamagedBuilding);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDead, ABuildingBaseClass*, BuildingDestroy);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDamaged, ABuildingBaseClass*, DamagedBuilding);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBuildingHpBarUpdate, float, CurrentHp, float, MaxHp);
 
 UCLASS()
 class NOVACRAFT_API ABuildingBaseClass : public ACharacter
@@ -48,10 +49,13 @@ public:
 public:
 
 	UPROPERTY(BlueprintAssignable)
-	FOnBuildingDamaged2 OnBuildingDamaged;
+	FBuildingHpBarUpdate BuildingHpBarUpdate;
 
 	UPROPERTY(BlueprintAssignable)
-	FOnBuildingDead2 OnBuildingDead;
+	FOnBuildingDamaged OnBuildingDamaged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnBuildingDead OnBuildingDead;
 
 	//Components
 public:
@@ -62,8 +66,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 	class UWidgetComponent* HpBarWidget;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UBoxComponent* OverlapCollision;
 
 	// All Common Status Under Here
 
