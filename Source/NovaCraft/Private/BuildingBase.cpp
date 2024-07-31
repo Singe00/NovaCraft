@@ -125,24 +125,7 @@ float ABuildingBase::CalculateDamageBuilding(float Damage, int AttackTimes, E_Of
 
 bool ABuildingBase::CustomTakeDamageBuilding(float Damage)
 {
-	BuildingStatus_Defense.fBuildingCurrentHealth -= Damage;
 
-	BuildingHpBarUpdate.Broadcast(BuildingStatus_Defense.fBuildingCurrentHealth, BuildingStatus_Defense.fBuildingMaxHealth);
-
-	if (BuildingStatus_Defense.fBuildingCurrentHealth <= 0)
-	{
-		this->isDead = true;
-
-
-		OnBuildingDead.Broadcast(this);
-		HpBarWidget->DestroyComponent();
-
-		return false;
-	}
-	else
-	{
-		OnBuildingDamaged.Broadcast(this);
-	}
 
 	return true;
 }

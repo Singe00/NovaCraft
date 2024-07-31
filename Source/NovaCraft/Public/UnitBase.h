@@ -10,6 +10,7 @@
 #include "UnitStatus_Extra.h"
 #include "UnitStatus_Spawn.h"
 #include "ObjectActionPattern.h"
+#include "BuildingBaseClass.h"
 #include "UnitBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHpBarUpdate, float, CurrentHp, float, MaxHp);
@@ -57,6 +58,7 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnUnitDamaged OnUnitDamaged;
 
+
 	//Components
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
@@ -65,8 +67,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 	class UWidgetComponent* HpBarWidget;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
-	class USphereComponent* SensingCollision;
 
 public: // Anims
 	// Attack Montage (공격 애니메이션)
@@ -213,6 +213,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	float GetMoveSpeed() const { return this->UnitStatus_Utility.fMoveSpeed; }
 	
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	bool GetSensingObjectEmpty() const { return this->SensingObject.IsEmpty(); }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	AActor* GetRecentSensingObject() const { return this->SensingObject.Last(); }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	TArray<AActor*> GetSensingObjectArray() const { return this->SensingObject; }
 
 	// Setter
 public:
@@ -269,9 +277,21 @@ public:
 	void FlyUnitInit();
 
 
-	UFUNCTION()
-	void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION(BlueprintCallable)
+	void SightSensedObjectProcess(AActor* SensedActor);
+
+	UFUNCTION(BlueprintCallable)
+	void SightSensedOutObjectProcess(AActor* SensedActor);
 
 	UFUNCTION()
-	void OnComponentEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	void RemoveUnitFromSO(AUnitBase* DeadUnit);
+
+	UFUNCTION()
+	void RemoveBuildingFromSO(ABuildingBaseClass* DeadBuilding);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	AActor* GetNearestObject();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void CustomSenseInSight();
 };
