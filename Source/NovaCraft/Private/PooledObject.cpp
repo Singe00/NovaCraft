@@ -3,11 +3,28 @@
 
 #include "PooledObject.h"
 
+
+
 // Sets default values
 APooledObject::APooledObject()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	if (!RootComponent)
+	{
+		RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileSceneComponent"));
+	}
+
+	if (!BoxCollision)
+	{
+		// Use a box as a simple collision representation.
+		BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("SphereComponent"));
+		// Set the box's collision size.
+		BoxCollision->SetBoxExtent(FVector(32.0f, 10.0f, 10.0f));
+		// Set the root component to be the collision component.
+		RootComponent = BoxCollision;
+	}
+
 
 	if (!ProjectileMovementComponent)
 	{
@@ -18,13 +35,18 @@ APooledObject::APooledObject()
 		ProjectileMovementComponent->bRotationFollowsVelocity = true;
 		ProjectileMovementComponent->bShouldBounce = false;
 		ProjectileMovementComponent->ProjectileGravityScale = 0.0f;
+		ProjectileMovementComponent->HomingAccelerationMagnitude = 1000.0f;
+
 	}
+	//BoxCollision->OnComponentHit.AddDynamic(this, &APooledObject::OnHit);
 }
 
 // Called when the game starts or when spawned
 void APooledObject::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
 	
 }
 
@@ -71,8 +93,9 @@ void APooledObject::SetDamage(float damage)
 
 void APooledObject::SetHomingTarget(AActor* target)
 {
-	ProjectileMovementComponent->bIsHomingProjectile = true;
+	
 	ProjectileMovementComponent->HomingTargetComponent = target->GetRootComponent();
+	ProjectileMovementComponent->bIsHomingProjectile = true;
 }
 
 bool APooledObject::IsActive()
@@ -83,6 +106,10 @@ bool APooledObject::IsActive()
 int APooledObject::GetPoolIndex()
 {
 	return PoolIndex;
+}
+
+void APooledObject::onHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
 }
 
 

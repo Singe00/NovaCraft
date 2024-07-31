@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Components/BoxComponent.h"
 #include "PooledObject.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnpooledObjectDespawn, APooledObject*, PoolActor);
@@ -56,7 +57,12 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = Movement)
 		UProjectileMovementComponent* ProjectileMovementComponent;
 	
+	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+		UBoxComponent* BoxCollision;
 
+
+	void onHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	
 protected:
 	bool Active;
 	float LifeSpan = 0.0f;
