@@ -9,6 +9,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "GameFramework/Actor.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -36,13 +37,7 @@ AUnitBase::AUnitBase()
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	}
 
-	auto movement = GetCharacterMovement();
-
-	movement->MaxWalkSpeed = this->UnitStatus_Utility.fMoveSpeed;
-
-
-	SensingCollision = CreateDefaultSubobject<USphereComponent>(TEXT("SensingCollision"));
-	SensingCollision->SetupAttachment(RootComponent);
+	
 
 
 }
@@ -51,11 +46,7 @@ AUnitBase::AUnitBase()
 void AUnitBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	SensingCollision->SetRelativeScale3D(FVector(1, 1, 1) * this->UnitStatus_Utility.fSightRange);
 
-	SensingCollision->OnComponentBeginOverlap.AddDynamic(this, &AUnitBase::OnComponentBeginOverlap);
-	SensingCollision->OnComponentEndOverlap.AddDynamic(this, &AUnitBase::OnComponentEndOverlap);
 }
 
 // Called every frame
@@ -107,6 +98,9 @@ void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Off
 	SetExtraStatus(NewExtraStatus);
 	SetSpawnStatus(NewSpawnStatus);
 	SetUnitActionPatterns(NewObjectActionPattern);
+
+	auto movement = GetCharacterMovement();
+	movement->MaxWalkSpeed = this->UnitStatus_Utility.fMoveSpeed;
 }
 
 void AUnitBase::SetDefenseStatus(FUnitStatus_Defense NewDefenseStatus)
@@ -251,22 +245,65 @@ void AUnitBase::FlyUnitInit()
 		this->SetActorLocation(FVector(CurrentLocation.X, CurrentLocation.Y, 250));
 	}
 }
-
-void AUnitBase::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AUnitBase::SightSensedObjectProcess(AActor* SensedActor)
 {
-	if (OtherActor)
+	if (SensedActor)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Begin Overlap with: %s"), *OtherActor->GetName());
-		UE_LOG(LogTemp, Warning, TEXT("Begin Overlap with: %s"), *OtherComp->GetName());
+		AUnitBase* SenseUnit = Cast<AUnitBase>(SensedActor);
+
+		if (SenseUnit)
+		{
+			if (SenseUnit->TeamNumber != this->TeamNumber)
+			{
+				if ((SenseUnit->GetUnitType() == E_UnitType::Ground && this->GetUnitCanGroundAttack()) || (SenseUnit->GetUnitType() == E_UnitType::Air && this->GetUnitCanAirAttack()))
+				{
+					SensingObject.AddUnique(SensedActor);
+					SenseUnit->OnUnitDead.AddDynamic(this, &AUnitBase::RemoveUnitFromSO);
+
+					CustomSenseInSight();
+				}
+			}
+		}
+		else
+		{
+			ABuildingBaseClass* SenseBuilding = Cast<ABuildingBaseClass>(SensedActor);
+
+			if (SenseBuilding)
+			{
+				if (SenseBuilding->TeamNumber != this->TeamNumber)
+				{
+					SensingObject.AddUnique(SensedActor);
+					SenseBuilding->OnBuildingDead.AddDynamic(this, &AUnitBase::RemoveBuildingFromSO);
+
+					CustomSenseInSight();
+				}
+			}
+		}
 	}
 }
 
-void AUnitBase::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AUnitBase::SightSensedOutObjectProcess(AActor* SensedActor)
 {
 
-	if (OtherActor)
+	if (SensedActor)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("End Overlap with: %s"), *OtherComp->GetName());
+		SensingObject.Remove(SensedActor);
+
+		AUnitBase* SenseUnit = Cast<AUnitBase>(SensedActor);
+
+		if (SenseUnit)
+		{
+			SenseUnit->OnUnitDead.RemoveDynamic(this, &AUnitBase::RemoveUnitFromSO);
+		}
+		else
+		{
+			ABuildingBaseClass* SenseBuilding = Cast<ABuildingBaseClass>(SensedActor);
+
+			if (SenseBuilding)
+			{
+				SenseBuilding->OnBuildingDead.RemoveDynamic(this, &AUnitBase::RemoveBuildingFromSO);
+			}
+		}
 	}
 }
 
@@ -276,5 +313,58 @@ void AUnitBase::FlyUnitMovementFinish_Implementation()
 	
 }
 
+void AUnitBase::RemoveUnitFromSO(AUnitBase* DeadUnit)
+{
+	AActor* Unit = Cast<AActor>(DeadUnit);
+	
+	if (SensingObject.Contains(Unit))
+	{
+		SensingObject.Remove(Unit);
+	}
+}
 
+void AUnitBase::RemoveBuildingFromSO(ABuildingBaseClass* DeadBuilding)
+{
+	AActor* Building = Cast<AActor>(DeadBuilding);
 
+	if (SensingObject.Contains(Building))
+	{
+		SensingObject.Remove(Building);
+	}
+}
+
+AActor* AUnitBase::GetNearestObject()
+{
+	if (SensingObject.IsEmpty())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Empty"));
+		return nullptr;
+	}
+
+	AActor* NearestObject = nullptr;
+	float NearestDist = FLT_MAX;
+
+	FVector StandardLocation = this->GetActorLocation();
+
+	for (AActor* Object : SensingObject)
+	{
+		if (Object)
+		{
+			FVector ObjectLocation = Object->GetActorLocation();
+			float BetweenDist = FVector::DistSquared(StandardLocation, ObjectLocation);
+
+			if (BetweenDist < NearestDist)
+			{
+				NearestDist = BetweenDist;
+				NearestObject = Object;
+			}
+		}
+	}
+
+	return NearestObject;
+
+}
+
+void AUnitBase::CustomSenseInSight_Implementation()
+{
+}

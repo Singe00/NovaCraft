@@ -129,6 +129,7 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 {
 	BuildingStatus_Defense.fBuildingCurrentHealth -= Damage;
 
+	BuildingHpBarUpdate.Broadcast(BuildingStatus_Defense.fBuildingCurrentHealth, BuildingStatus_Defense.fBuildingMaxHealth);
 
 	if (BuildingStatus_Defense.fBuildingCurrentHealth <= 0)
 	{
