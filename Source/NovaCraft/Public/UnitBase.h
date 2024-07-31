@@ -65,6 +65,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 	class UWidgetComponent* HpBarWidget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
+	class USphereComponent* SensingCollision;
+
 public: // Anims
 	// Attack Montage (공격 애니메이션)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
@@ -103,6 +106,9 @@ public: // All Common Status Under Here
 
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	FVector AirUnitMoveTargetLocation = FVector::ZeroVector;
+
+	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	TArray<AActor*> SensingObject;
 
 protected:
 	// Defence Status
@@ -262,4 +268,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void FlyUnitInit();
 
+
+	UFUNCTION()
+	void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnComponentEndOverlap(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 };
