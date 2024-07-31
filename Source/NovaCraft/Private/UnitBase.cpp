@@ -4,9 +4,11 @@
 #include "UnitBase.h"
 #include "Components/DecalComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -39,6 +41,10 @@ AUnitBase::AUnitBase()
 	movement->MaxWalkSpeed = this->UnitStatus_Utility.fMoveSpeed;
 
 
+	SensingCollision = CreateDefaultSubobject<USphereComponent>(TEXT("SensingCollision"));
+	SensingCollision->SetupAttachment(RootComponent);
+
+
 }
 
 // Called when the game starts or when spawned
@@ -46,6 +52,10 @@ void AUnitBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	SensingCollision->SetRelativeScale3D(FVector(1, 1, 1) * this->UnitStatus_Utility.fSightRange);
+
+	SensingCollision->OnComponentBeginOverlap.AddDynamic(this, &AUnitBase::OnComponentBeginOverlap);
+	SensingCollision->OnComponentEndOverlap.AddDynamic(this, &AUnitBase::OnComponentEndOverlap);
 }
 
 // Called every frame
@@ -242,9 +252,28 @@ void AUnitBase::FlyUnitInit()
 	}
 }
 
-void AUnitBase::FlyUnitMovementFinish_Implementation()
+void AUnitBase::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Begin Overlap with: %s"), *OtherActor->GetName());
+		UE_LOG(LogTemp, Warning, TEXT("Begin Overlap with: %s"), *OtherComp->GetName());
+	}
+}
+
+void AUnitBase::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 
+	if (OtherActor)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("End Overlap with: %s"), *OtherComp->GetName());
+	}
+}
+
+
+void AUnitBase::FlyUnitMovementFinish_Implementation()
+{
+	
 }
 
 
