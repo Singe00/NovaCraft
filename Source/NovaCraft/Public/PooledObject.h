@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "PooledObject.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnpooledObjectDespawn, APooledObject*, PoolActor);
@@ -40,6 +41,8 @@ public:
 		void SetTargetActor(AActor* actor);
 	UFUNCTION(BlueprintCallable, Category = "Pooled Object")
 		void SetDamage(float damage);
+	UFUNCTION(BlueprintCallable, Category = "Pooled Object")
+		void SetHomingTarget(AActor* target);
 
 	bool IsActive();
 	int GetPoolIndex();
@@ -49,6 +52,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		float ProjectileDamage;
 	
+	// Projectile movement component.
+	UPROPERTY(VisibleAnywhere, Category = Movement)
+		UProjectileMovementComponent* ProjectileMovementComponent;
 	
 
 protected:

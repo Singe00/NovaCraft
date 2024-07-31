@@ -9,6 +9,16 @@ APooledObject::APooledObject()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	if (!ProjectileMovementComponent)
+	{
+		// Use this component to drive this projectile's movement.
+		ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
+		ProjectileMovementComponent->InitialSpeed = 0.0f;
+		ProjectileMovementComponent->MaxSpeed = 0.0f;
+		ProjectileMovementComponent->bRotationFollowsVelocity = true;
+		ProjectileMovementComponent->bShouldBounce = false;
+		ProjectileMovementComponent->ProjectileGravityScale = 0.0f;
+	}
 }
 
 // Called when the game starts or when spawned
@@ -57,6 +67,12 @@ void APooledObject::SetTargetActor(AActor* actor)
 void APooledObject::SetDamage(float damage)
 {
 	ProjectileDamage = damage;
+}
+
+void APooledObject::SetHomingTarget(AActor* target)
+{
+	ProjectileMovementComponent->bIsHomingProjectile = true;
+	ProjectileMovementComponent->HomingTargetComponent = target->GetRootComponent();
 }
 
 bool APooledObject::IsActive()
