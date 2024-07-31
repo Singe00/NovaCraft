@@ -34,6 +34,9 @@ ABuildingBaseClass::ABuildingBaseClass()
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	}
 
+	OverlapCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("OverlapCollision"));
+	OverlapCollision->SetupAttachment(GetMesh());
+	OverlapCollision->GetBodyInstance()->SetSmoothEdgeCollisionsEnabled(true);
 }
 
 // Called when the game starts or when spawned
