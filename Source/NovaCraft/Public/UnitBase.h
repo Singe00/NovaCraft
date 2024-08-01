@@ -69,15 +69,15 @@ public:
 
 
 public: // Anims
-	// Attack Montage (°ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç)
+	// Attack Montage (ê³µê²© ì• ë‹ˆë©”ì´ì…˜)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
 	TArray<class UAnimMontage*> AttackMontages;
 
-	// Attack Montage (»ç¸Á ¾Ö´Ï¸ŞÀÌ¼Ç)
+	// Attack Montage (ì‚¬ë§ ì• ë‹ˆë©”ì´ì…˜)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
 	TArray<class UAnimMontage*> DeadMontages;
 
-	// Attack Montage (½ºÅ³ ¾Ö´Ï¸ŞÀÌ¼Ç)
+	// Attack Montage (ìŠ¤í‚¬ ì• ë‹ˆë©”ì´ì…˜)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
 	TArray<class UAnimMontage*> SkillMontages;
 
@@ -106,9 +106,6 @@ public: // All Common Status Under Here
 
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	FVector AirUnitMoveTargetLocation = FVector::ZeroVector;
-
-	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
-	TArray<AActor*> SensingObject;
 
 protected:
 	// Defence Status
@@ -276,7 +273,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void FlyUnitInit();
 
-
 	UFUNCTION(BlueprintCallable)
 	void SightSensedObjectProcess(AActor* SensedActor);
 
@@ -294,4 +290,5 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void CustomSenseInSight();
+
 };
