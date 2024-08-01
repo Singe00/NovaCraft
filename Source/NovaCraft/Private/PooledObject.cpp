@@ -23,6 +23,7 @@ APooledObject::APooledObject()
 		BoxCollision->SetBoxExtent(FVector(32.0f, 10.0f, 10.0f));
 		// Set the root component to be the collision component.
 		RootComponent = BoxCollision;
+		/*BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &APooledObject::OnBeginOverlap);*/
 	}
 
 
@@ -30,15 +31,15 @@ APooledObject::APooledObject()
 	{
 		// Use this component to drive this projectile's movement.
 		ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
-		ProjectileMovementComponent->InitialSpeed = 0.0f;
+		ProjectileMovementComponent->InitialSpeed = 100.0f;
 		ProjectileMovementComponent->MaxSpeed = 0.0f;
 		ProjectileMovementComponent->bRotationFollowsVelocity = true;
 		ProjectileMovementComponent->bShouldBounce = false;
 		ProjectileMovementComponent->ProjectileGravityScale = 0.0f;
-		ProjectileMovementComponent->HomingAccelerationMagnitude = 1000.0f;
+		ProjectileMovementComponent->HomingAccelerationMagnitude = 500.0f;
 
 	}
-	//BoxCollision->OnComponentHit.AddDynamic(this, &APooledObject::OnHit);
+	
 }
 
 // Called when the game starts or when spawned
@@ -67,8 +68,9 @@ void APooledObject::Deactivate()
 void APooledObject::SetActive(bool IsActive)
 {
 	Active = IsActive;
+	//isOverlap = false;
 	SetActorHiddenInGame(!IsActive);
-	GetWorldTimerManager().SetTimer(LifeSpanTimer, this, &APooledObject::Deactivate, LifeSpan, false);
+	GetWorldTimerManager().SetTimer(LifeSpanTimer, this, &APooledObject::Deactivate, LifeSpan, false, 1.0f);
 }
 
 void APooledObject::SetLifeSpan(float LifeTime)
@@ -86,10 +88,6 @@ void APooledObject::SetTargetActor(AActor* actor)
 	TargetActor = actor;
 }
 
-void APooledObject::SetDamage(float damage)
-{
-	ProjectileDamage = damage;
-}
 
 void APooledObject::SetHomingTarget(AActor* target)
 {
@@ -108,9 +106,15 @@ int APooledObject::GetPoolIndex()
 	return PoolIndex;
 }
 
-void APooledObject::onHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+/*void APooledObject::OnBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-}
+	if (OtherActor == TargetActor) 
+	{
+		//this->isOverlap = true;
+		//ProjectileMovementComponent->bIsHomingProjectile = false;
+		UE_LOG(LogTemp, Warning, TEXT("Hello Everybody!"));
+	}
+}*/
 
 
 

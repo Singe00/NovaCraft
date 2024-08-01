@@ -40,8 +40,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Pooled Object")
 		void SetTargetActor(AActor* actor);
-	UFUNCTION(BlueprintCallable, Category = "Pooled Object")
-		void SetDamage(float damage);
+	
 	UFUNCTION(BlueprintCallable, Category = "Pooled Object")
 		void SetHomingTarget(AActor* target);
 
@@ -61,12 +60,15 @@ public:
 		UBoxComponent* BoxCollision;
 
 
-	void onHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	/*void OnBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
+	bool isOverlap;*/
+
 protected:
 	bool Active;
 	float LifeSpan = 0.0f;
 	int PoolIndex;
+	
 	
 
 	FTimerHandle LifeSpanTimer;

@@ -62,12 +62,14 @@ APooledObject* UObjectPooling::SpawnPooledObject()
 			return PoolableActor;
 		}
 	}
+
 	if (SpawnedPoolIndexes.Num() > 0) 
 	{
 		int PooledObjectIndex = SpawnedPoolIndexes[0];
 		SpawnedPoolIndexes.Remove(PooledObjectIndex);
 		APooledObject* PoolableActor = ObjectPool[PooledObjectIndex];
 
+		
 		if (PoolableActor != nullptr)
 		{
 			PoolableActor->SetActive(false);
