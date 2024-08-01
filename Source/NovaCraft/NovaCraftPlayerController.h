@@ -6,7 +6,7 @@
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
 #include "Public/UnitBase.h"
-#include "Public/BuildingBase.h"
+#include "Public/BuildingBaseClass.h"
 #include "NovaCraftPlayerController.generated.h"
 
 /** Forward declaration to improve compiling times */
@@ -109,7 +109,7 @@ public:
 	void RemoveUnitFromSquad(AUnitBase* DeadUnit);
 
 	UFUNCTION(BlueprintCallable)
-	void RemoveBuildingFromSquad(ABuildingBase* DeadBuilding);
+	void RemoveBuildingFromSquad(ABuildingBaseClass* DeadBuilding);
 
 	UFUNCTION(BlueprintCallable)
 	void SetUnitSquadObjectDivideByIndex(int NewSquadIndex, bool NewBool) { this->UnitSquadObjectDivide[NewSquadIndex] = NewBool; }
