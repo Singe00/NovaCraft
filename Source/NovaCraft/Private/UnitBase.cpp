@@ -4,7 +4,6 @@
 #include "UnitBase.h"
 #include "Components/DecalComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -37,7 +36,6 @@ AUnitBase::AUnitBase()
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	}
 
-	
 
 
 }
@@ -245,6 +243,7 @@ void AUnitBase::FlyUnitInit()
 		this->SetActorLocation(FVector(CurrentLocation.X, CurrentLocation.Y, 250));
 	}
 }
+
 void AUnitBase::SightSensedObjectProcess(AActor* SensedActor)
 {
 	if (SensedActor)
@@ -308,9 +307,10 @@ void AUnitBase::SightSensedOutObjectProcess(AActor* SensedActor)
 }
 
 
+
 void AUnitBase::FlyUnitMovementFinish_Implementation()
 {
-	
+
 }
 
 void AUnitBase::RemoveUnitFromSO(AUnitBase* DeadUnit)

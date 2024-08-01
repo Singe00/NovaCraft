@@ -66,6 +66,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 	class UWidgetComponent* HpBarWidget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UBoxComponent* OverlapCollision;
 
 	// All Common Status Under Here
 
