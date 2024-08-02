@@ -219,6 +219,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	TArray<AActor*> GetSensingObjectArray() const { return this->SensingObject; }
 
+	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	TArray<AActor*> SensingObject;
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
