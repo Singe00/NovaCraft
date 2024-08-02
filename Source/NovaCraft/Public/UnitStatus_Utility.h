@@ -12,7 +12,7 @@ public:
 
 	FUnitStatus_Utility()
 		: fMoveSpeed(300.0f)
-		, fSightRange(5.0f)
+		, fSightRange(50.0f)
 	{};
 
 public:

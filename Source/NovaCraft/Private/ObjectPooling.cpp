@@ -47,7 +47,7 @@ void UObjectPooling::BeginPlay()
 
 APooledObject* UObjectPooling::SpawnPooledObject()
 {
-	//objectpool 배열을 for문으로 돌리면서 풀링가능한액터가 비어있지않고 비활성화된상태라면
+	//objectpool 배열을 for문으로 돌리면서 풀링가능한액터가 비어있지않고 활성화된상태가 아니라면
 	//풀링가능한 액터를 텔레포트시키고 생명주기를 세팅하고 활성화시킴 그런다음 스폰된풀인덱스배열에 지정되었던 인덱스로 추가
 	for (APooledObject* PoolableActor : ObjectPool)
 	{
@@ -62,12 +62,14 @@ APooledObject* UObjectPooling::SpawnPooledObject()
 			return PoolableActor;
 		}
 	}
+
 	if (SpawnedPoolIndexes.Num() > 0) 
 	{
 		int PooledObjectIndex = SpawnedPoolIndexes[0];
 		SpawnedPoolIndexes.Remove(PooledObjectIndex);
 		APooledObject* PoolableActor = ObjectPool[PooledObjectIndex];
 
+		
 		if (PoolableActor != nullptr)
 		{
 			PoolableActor->SetActive(false);
