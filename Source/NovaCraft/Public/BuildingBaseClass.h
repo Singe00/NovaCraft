@@ -185,6 +185,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UTexture2D* GetBuilding2DImage() const { return this->BuildingStatus_Extra.fBuilding2DImage; }
+
+	UFUNCTION(BlueprintCallable)
+	bool GetProductingIsFull() const;
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
