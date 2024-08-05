@@ -151,3 +151,11 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 
 	return true;
 }
+
+void ABuildingBaseClass::AddProductingUnit(int SpawnIndex)
+{
+	if (ProductingArray.Num() < 5)
+	{
+		ProductingArray.Add(SpawnIndex);
+	}
+}
