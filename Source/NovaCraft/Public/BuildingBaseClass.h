@@ -83,7 +83,7 @@ public:
 	FLinearColor TeamColor;
 
 
-	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
+	UPROPERTY(EditAnywhere, Replicated, Category = "Building Manage|Manage Value")
 	TArray<TSubclassOf<AActor>> CanSpawnObjects;
 
 	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
