@@ -104,6 +104,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	bool isProducting = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Manage Value")
+	TArray<int> ProductingArray;
+
+	
 
 protected:
 	// Defence Status
@@ -223,4 +227,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool CustomTakeDamageBuilding(float Damage);
+
+
+	//Producting
+	UFUNCTION(BlueprintCallable)
+	void AddProductingUnit(int SpawnIndex);
 };

@@ -6,6 +6,8 @@
 #include "UnitBase.h"
 #include "Components/WidgetComponent.h"
 #include "Components/BoxComponent.h"
+#include "TimerManager.h"
+#include "Engine/World.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -150,4 +152,12 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 	}
 
 	return true;
+}
+
+void ABuildingBaseClass::AddProductingUnit(int SpawnIndex)
+{
+	if (ProductingArray.Num() < 5)
+	{
+		ProductingArray.Add(SpawnIndex);
+	}
 }
