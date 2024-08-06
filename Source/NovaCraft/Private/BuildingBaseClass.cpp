@@ -67,6 +67,19 @@ void ABuildingBaseClass::GetBuildSpawnGridValue(int& RowValue, int& ColValue) co
 	ColValue = BuildingStatus_Spawn.fBuildingSpawnGridCol;
 }
 
+bool ABuildingBaseClass::GetProductingIsFull() const
+{
+	if (ProductingArray.Num() < 5)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+	
+}
+
 void ABuildingBaseClass::InitStatus(FBuildingStatus_Defense NewDefenseStatus, FBuildingStatus_Offense NewOffenseStatus, FBuildingStatus_Utility NewUtilityStatus, FBuildingStatus_Extra NewExtraStatus, FBuildingStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);
@@ -150,4 +163,12 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 	}
 
 	return true;
+}
+
+void ABuildingBaseClass::AddProductingUnit(int SpawnIndex)
+{
+	if (ProductingArray.Num() < 5)
+	{
+		ProductingArray.Add(SpawnIndex);
+	}
 }

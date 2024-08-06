@@ -104,6 +104,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	bool isProducting = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Manage Value")
+	TArray<int> ProductingArray;
 
 protected:
 	// Defence Status
@@ -183,6 +185,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UTexture2D* GetBuilding2DImage() const { return this->BuildingStatus_Extra.fBuilding2DImage; }
+
+	UFUNCTION(BlueprintCallable)
+	bool GetProductingIsFull() const;
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -223,4 +229,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool CustomTakeDamageBuilding(float Damage);
+
+	UFUNCTION(BlueprintCallable)
+	void AddProductingUnit(int SpawnIndex);
 };
