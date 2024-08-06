@@ -67,6 +67,19 @@ void ABuildingBaseClass::GetBuildSpawnGridValue(int& RowValue, int& ColValue) co
 	ColValue = BuildingStatus_Spawn.fBuildingSpawnGridCol;
 }
 
+bool ABuildingBaseClass::GetProductingIsFull() const
+{
+	if (ProductingArray.Num() < 5)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+	
+}
+
 void ABuildingBaseClass::InitStatus(FBuildingStatus_Defense NewDefenseStatus, FBuildingStatus_Offense NewOffenseStatus, FBuildingStatus_Utility NewUtilityStatus, FBuildingStatus_Extra NewExtraStatus, FBuildingStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);
@@ -113,6 +126,9 @@ void ABuildingBaseClass::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 
 	DOREPLIFETIME(ABuildingBaseClass, TeamNumber);
 	DOREPLIFETIME(ABuildingBaseClass, TeamColor);
+	DOREPLIFETIME(ABuildingBaseClass, CanSpawnObjects);
+	DOREPLIFETIME(ABuildingBaseClass, RallyPoint);
+	DOREPLIFETIME(ABuildingBaseClass, RallyActor);
 }
 
 float ABuildingBaseClass::CalculateDamageBuilding(float Damage, int AttackTimes, E_OffenseType OffenseType)
@@ -132,6 +148,7 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 {
 	BuildingStatus_Defense.fBuildingCurrentHealth -= Damage;
 
+	BuildingHpBarUpdate.Broadcast(BuildingStatus_Defense.fBuildingCurrentHealth, BuildingStatus_Defense.fBuildingMaxHealth);
 
 	if (BuildingStatus_Defense.fBuildingCurrentHealth <= 0)
 	{
@@ -149,4 +166,12 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 	}
 
 	return true;
+}
+
+void ABuildingBaseClass::AddProductingUnit(int SpawnIndex)
+{
+	if (ProductingArray.Num() < 5)
+	{
+		ProductingArray.Add(SpawnIndex);
+	}
 }

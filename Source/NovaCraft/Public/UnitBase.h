@@ -10,6 +10,7 @@
 #include "UnitStatus_Extra.h"
 #include "UnitStatus_Spawn.h"
 #include "ObjectActionPattern.h"
+#include "BuildingBaseClass.h"
 #include "UnitBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHpBarUpdate, float, CurrentHp, float, MaxHp);
@@ -57,6 +58,7 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnUnitDamaged OnUnitDamaged;
 
+
 	//Components
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
@@ -65,16 +67,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated)
 	class UWidgetComponent* HpBarWidget;
 
+
 public: // Anims
-	// Attack Montage (∞¯∞› æ÷¥œ∏ﬁ¿Ãº«)
+	// Attack Montage (Í≥µÍ≤© Ïï†ÎãàÎ©îÏù¥ÏÖò)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
 	TArray<class UAnimMontage*> AttackMontages;
 
-	// Attack Montage (ªÁ∏¡ æ÷¥œ∏ﬁ¿Ãº«)
+	// Attack Montage (ÏÇ¨Îßù Ïï†ÎãàÎ©îÏù¥ÏÖò)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
 	TArray<class UAnimMontage*> DeadMontages;
 
-	// Attack Montage (Ω∫≈≥ æ÷¥œ∏ﬁ¿Ãº«)
+	// Attack Montage (Ïä§ÌÇ¨ Ïï†ÎãàÎ©îÏù¥ÏÖò)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
 	TArray<class UAnimMontage*> SkillMontages;
 
@@ -97,6 +100,12 @@ public: // All Common Status Under Here
 
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	TArray<FObjectActionPattern> ActionPattern;
+
+	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	bool AirUnitMovement = false;
+
+	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	FVector AirUnitMoveTargetLocation = FVector::ZeroVector;
 
 protected:
 	// Defence Status
@@ -197,7 +206,22 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	float GetMaxHp() const { return this->UnitStatus_Defense.fMaxHealth; }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	float GetMoveSpeed() const { return this->UnitStatus_Utility.fMoveSpeed; }
 	
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	bool GetSensingObjectEmpty() const { return this->SensingObject.IsEmpty(); }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	AActor* GetRecentSensingObject() const { return this->SensingObject.Last(); }
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	TArray<AActor*> GetSensingObjectArray() const { return this->SensingObject; }
+
+	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	TArray<AActor*> SensingObject;
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -221,6 +245,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	void SetUnitActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern);
 
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	void SetAirUnitMoveLocation(bool MoveState, FVector TargetLocation);
+
+
 	// Function
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -233,4 +262,36 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UAnimMontage* GetRandomMontage(TArray<class UAnimMontage*> Montages);
+
+	UFUNCTION(BlueprintCallable)
+	void FlyUnitMoveToLocation(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable)
+	void FlyUnitPatrol(float DeltaTime);
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void FlyUnitMovementFinish();
+
+	UFUNCTION(BlueprintCallable)
+	void FlyUnitInit();
+
+	UFUNCTION(BlueprintCallable)
+	void SightSensedObjectProcess(AActor* SensedActor);
+
+	UFUNCTION(BlueprintCallable)
+	void SightSensedOutObjectProcess(AActor* SensedActor);
+
+	UFUNCTION()
+	void RemoveUnitFromSO(AUnitBase* DeadUnit);
+
+	UFUNCTION()
+	void RemoveBuildingFromSO(ABuildingBaseClass* DeadBuilding);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	AActor* GetNearestObject();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void CustomSenseInSight();
+
 };

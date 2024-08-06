@@ -12,8 +12,9 @@
 #include "ObjectActionPattern.h"
 #include "BuildingBaseClass.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDead2, ABuildingBaseClass*, BuildingDestroy);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDamaged2, ABuildingBaseClass*, DamagedBuilding);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDead, ABuildingBaseClass*, BuildingDestroy);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDamaged, ABuildingBaseClass*, DamagedBuilding);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBuildingHpBarUpdate, float, CurrentHp, float, MaxHp);
 
 UCLASS()
 class NOVACRAFT_API ABuildingBaseClass : public ACharacter
@@ -48,10 +49,13 @@ public:
 public:
 
 	UPROPERTY(BlueprintAssignable)
-	FOnBuildingDamaged2 OnBuildingDamaged;
+	FBuildingHpBarUpdate BuildingHpBarUpdate;
 
 	UPROPERTY(BlueprintAssignable)
-	FOnBuildingDead2 OnBuildingDead;
+	FOnBuildingDamaged OnBuildingDamaged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnBuildingDead OnBuildingDead;
 
 	//Components
 public:
@@ -79,13 +83,13 @@ public:
 	FLinearColor TeamColor;
 
 
-	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	TArray<TSubclassOf<AActor>> CanSpawnObjects;
 
-	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
+	UPROPERTY(VisibleAnywhere, Replicated, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
 
-	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
+	UPROPERTY(VisibleAnywhere, Replicated, Category = "Building Manage|Manage Value")
 	AActor* RallyActor;
 
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
@@ -100,6 +104,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	bool isProducting = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Manage Value")
+	TArray<int> ProductingArray;
 
 protected:
 	// Defence Status
@@ -179,6 +185,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UTexture2D* GetBuilding2DImage() const { return this->BuildingStatus_Extra.fBuilding2DImage; }
+
+	UFUNCTION(BlueprintCallable)
+	bool GetProductingIsFull() const;
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -219,4 +229,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool CustomTakeDamageBuilding(float Damage);
+
+	UFUNCTION(BlueprintCallable)
+	void AddProductingUnit(int SpawnIndex);
 };

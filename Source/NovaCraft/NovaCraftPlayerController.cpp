@@ -143,7 +143,7 @@ void ANovaCraftPlayerController::SetUnitSquad(TArray<AActor*> NewSquad, int Squa
 			}
 			else
 			{
-				ABuildingBase* MyBuilding = Cast<ABuildingBase>(Object);
+				ABuildingBaseClass* MyBuilding = Cast<ABuildingBaseClass>(Object);
 
 				if (MyBuilding)
 				{
@@ -165,7 +165,7 @@ void ANovaCraftPlayerController::RemoveUnitFromSquad(AUnitBase* DeadUnit)
 	}
 }
 
-void ANovaCraftPlayerController::RemoveBuildingFromSquad(ABuildingBase* DeadBuilding)
+void ANovaCraftPlayerController::RemoveBuildingFromSquad(ABuildingBaseClass* DeadBuilding)
 {
 	AActor* Building = Cast<AActor>(DeadBuilding);
 
