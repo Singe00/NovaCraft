@@ -23,7 +23,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Player Manage|Manage Value|Resource")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Player Manage|Manage Value|Resource")
 	int PlayerGold;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Resource")

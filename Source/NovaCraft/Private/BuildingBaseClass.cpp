@@ -127,6 +127,8 @@ void ABuildingBaseClass::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 	DOREPLIFETIME(ABuildingBaseClass, TeamNumber);
 	DOREPLIFETIME(ABuildingBaseClass, TeamColor);
 	DOREPLIFETIME(ABuildingBaseClass, CanSpawnObjects);
+	DOREPLIFETIME(ABuildingBaseClass, RallyPoint);
+	DOREPLIFETIME(ABuildingBaseClass, RallyActor);
 }
 
 float ABuildingBaseClass::CalculateDamageBuilding(float Damage, int AttackTimes, E_OffenseType OffenseType)
