@@ -4,7 +4,7 @@
 #include "PS_Ingame_NovaCraft.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
-
+#include "Net/UnrealNetwork.h"
 
 
 
@@ -25,6 +25,8 @@ void APS_Ingame_NovaCraft::GainResourceTimerFunc()
 {
 	GainGoldResource();
 	GainGasResource();
+
+	//UE_LOG(LogTemp, Warning, TEXT("%d / %d / %d / %d"), PlayerGold, PlayerGas, PlayerCurrentPopulation, PlayerMaxPopulation);
 }
 
 bool APS_Ingame_NovaCraft::CheckEnoughResource(int RqGold, int RqGas, int RqPop)
@@ -55,12 +57,12 @@ bool APS_Ingame_NovaCraft::CheckEnoughResource(int RqGold, int RqGas, int RqPop)
 void APS_Ingame_NovaCraft::GainGoldResource()
 {
 
-	PlayerGold += 20 + GoldCampCount * 10;
+	PlayerGold += 50 + GoldCampCount * 10;
 }
 
 void APS_Ingame_NovaCraft::GainGasResource()
 {
-	PlayerGas += 5+ GasCampCount * 20;
+	PlayerGas += 50+ GasCampCount * 20;
 }
 
 void APS_Ingame_NovaCraft::PaybackResource(int RqGold, int RqGas, int RqPop)
@@ -70,12 +72,24 @@ void APS_Ingame_NovaCraft::PaybackResource(int RqGold, int RqGas, int RqPop)
 	PlayerCurrentPopulation -= RqPop;
 }
 
-void APS_Ingame_NovaCraft::IncreasePopulationWhenUnitDie()
+void APS_Ingame_NovaCraft::IncreasePopulationWhenBuildingProduct()
 {
 	PlayerCurrentPopulation += 10;
 }
 
-void APS_Ingame_NovaCraft::DecreasePopulationWhenUnitDie()
+void APS_Ingame_NovaCraft::DecreasePopulationWhenBuildingDestroy()
 {
 	PlayerCurrentPopulation -= 10;
+}
+
+void APS_Ingame_NovaCraft::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerGold);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerGas);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerMaxPopulation);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerCurrentPopulation);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, GoldCampCount);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, GasCampCount);
 }
