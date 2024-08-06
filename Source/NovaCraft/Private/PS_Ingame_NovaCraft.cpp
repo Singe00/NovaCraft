@@ -86,4 +86,10 @@ void APS_Ingame_NovaCraft::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerGold);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerGas);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerMaxPopulation);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerCurrentPopulation);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, GoldCampCount);
+	//DOREPLIFETIME(APS_Ingame_NovaCraft, GasCampCount);
 }
