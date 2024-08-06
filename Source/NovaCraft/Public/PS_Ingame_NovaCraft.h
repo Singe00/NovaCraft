@@ -58,10 +58,10 @@ public:
 	void PaybackResource(int RqGold, int RqGas, int RqPop);
 
 	UFUNCTION(BlueprintCallable)
-	void DecreasePopulationWhenUnitDie();
+	void IncreasePopulationWhenBuildingProduct();
 
 	UFUNCTION(BlueprintCallable)
-	void IncreasePopulationWhenUnitDie();
+	void DecreasePopulationWhenBuildingDestroy();
 
 	UFUNCTION(BlueprintCallable)
 	void AddGoldCampCount() { this->GoldCampCount++; };
@@ -75,8 +75,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SubGasCampCount() { this->GasCampCount--; };
 
+	UFUNCTION(BlueprintCallable)
+	void DecreasePopulationWhenUnitDead(int UnitPop) { this->PlayerCurrentPopulation -= UnitPop; }
+
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Timer")
 	FTimerHandle GainResourceTimer;
 
+
+	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
 };

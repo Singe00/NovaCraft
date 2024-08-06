@@ -83,13 +83,13 @@ public:
 	FLinearColor TeamColor;
 
 
-	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	TArray<TSubclassOf<AActor>> CanSpawnObjects;
 
-	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
+	UPROPERTY(VisibleAnywhere, Replicated, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
 
-	UPROPERTY(VisibleAnywhere, Category = "Building Manage|Manage Value")
+	UPROPERTY(VisibleAnywhere, Replicated, Category = "Building Manage|Manage Value")
 	AActor* RallyActor;
 
 	UPROPERTY(EditAnywhere, Category = "Building Manage|Manage Value")
