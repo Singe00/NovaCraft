@@ -85,4 +85,14 @@ public:
 
 
 	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
+
+
+//Fog
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category ="MaterialInstance")
+	UMaterialInstanceDynamic *MaterialInstance01;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MaterialInstance")
+	UMaterialInstanceDynamic *MaterialInstance02;
+
 };
