@@ -168,9 +168,8 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 	{
 		this->isDead = true;
 
-		GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		HpBarWidget->DestroyComponent();
+
+		HpBarWidget->SetVisibility(false);
 
 		OnUnitDead.Broadcast(this);
 
@@ -246,7 +245,7 @@ void AUnitBase::FlyUnitInit()
 
 void AUnitBase::SightSensedObjectProcess(AActor* SensedActor)
 {
-	if (SensedActor)
+	if (SensedActor && !SensingObject.Contains(SensedActor))
 	{
 		AUnitBase* SenseUnit = Cast<AUnitBase>(SensedActor);
 
@@ -258,6 +257,7 @@ void AUnitBase::SightSensedObjectProcess(AActor* SensedActor)
 				{
 					SensingObject.AddUnique(SensedActor);
 					SenseUnit->OnUnitDead.AddDynamic(this, &AUnitBase::RemoveUnitFromSO);
+
 
 					CustomSenseInSight();
 				}
@@ -273,6 +273,7 @@ void AUnitBase::SightSensedObjectProcess(AActor* SensedActor)
 				{
 					SensingObject.AddUnique(SensedActor);
 					SenseBuilding->OnBuildingDead.AddDynamic(this, &AUnitBase::RemoveBuildingFromSO);
+
 
 					CustomSenseInSight();
 				}
@@ -337,7 +338,6 @@ AActor* AUnitBase::GetNearestObject()
 {
 	if (SensingObject.IsEmpty())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Empty"));
 		return nullptr;
 	}
 

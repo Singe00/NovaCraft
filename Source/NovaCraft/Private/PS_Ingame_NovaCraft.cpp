@@ -5,6 +5,7 @@
 #include "Engine/World.h"
 #include "TimerManager.h"
 #include "Net/UnrealNetwork.h"
+#include "Kismet/KismetMaterialLibrary.h"
 
 
 
@@ -19,6 +20,9 @@ APS_Ingame_NovaCraft::APS_Ingame_NovaCraft()
 void APS_Ingame_NovaCraft::BeginPlay()
 {
 	GetWorldTimerManager().SetTimer(GainResourceTimer, this, &APS_Ingame_NovaCraft::GainResourceTimerFunc, 2.0f, true);
+	//fog
+	
+
 }
 
 void APS_Ingame_NovaCraft::GainResourceTimerFunc()
