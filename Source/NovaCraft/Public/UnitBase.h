@@ -108,7 +108,7 @@ public: // All Common Status Under Here
 	FVector AirUnitMoveTargetLocation = FVector::ZeroVector;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Manage Value")
-	TArray<class UMaterialInstanceDynamic*> UnitMaterials;
+	TArray<class UMaterialInstance*> UnitMaterials;
 
 protected:
 	// Defence Status
