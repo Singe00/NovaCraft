@@ -118,7 +118,36 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 ## 에셋
 
 ### 모델링
+#### 구매
 - 『[CSC 로봇 에셋](https://www.unrealengine.com/id/login/api/login?client_id=43e2dea89b054198a703f6199bee6d5b&redirect_uri=https%3A%2F%2Fwww.unrealengine.com%2Fmarketplace%2Fen-US%2Fproduct%2Fcombat-systems-constructor%3FsessionInvalidated%3Dtrue&prompt=pass_through)』구매
+- 『[Sci-FI Troopers Collection](https://www.unrealengine.com/id/login/api/login?client_id=43e2dea89b054198a703f6199bee6d5b&redirect_uri=https%3A%2F%2Fwww.unrealengine.com%2Fmarketplace%2Fko%2Fproduct%2Fsci-fi-troopers-collection%3Fnamespace%3Due%26offers%3D9601dac9f256456796716b70bf84725b%26orderId%3DA2407260115355633%26purchaseToken%3D4823c63c1ff644b9ba802b8c3dd3e6de%26highlightColor%3D0074E4%26sessionInvalidated%3Dtrue&prompt=pass_through)』구매
+- 『[SCI FI CREATURES PACK VOL 1](https://www.unrealengine.com/marketplace/ko/product/sci-fi-creatures-pack-vol)』구매
+- 『[SCI-FI SNIPER RIFLE - RAILGUN](https://www.unrealengine.com/marketplace/ko/product/sci-fi-sniper-rifle-railgun)』구매
+- 『[Sci-fi Arsenal Vol 2.0](https://www.unrealengine.com/marketplace/ko/product/sci-fi-arsenal-vol-2)』구매
+- 『[Sci-Fi Machine Gun](https://www.unrealengine.com/marketplace/ko/product/sci-fi-machine-gun)』구매
+- 『[SciFi Rocket Launcher AK9 Playable](https://www.unrealengine.com/marketplace/ko/product/scifi-rocket-launcher-ak9?sessionInvalidated=true)』구매
+- 『[]()』구매
+- 『[]()』구매
+
+
+
+
+#### 무료
+- 『[Paragon Wraith](https://www.unrealengine.com/id/login/api/login?client_id=43e2dea89b054198a703f6199bee6d5b&redirect_uri=https%3A%2F%2Fwww.unrealengine.com%2Fmarketplace%2Fen-US%2Fproduct%2Fcombat-systems-constructor%3FsessionInvalidated%3Dtrue&prompt=pass_through)』사용
+
 ### 이미지
+#### 무료
+- 『[Flaticon](https://www.flaticon.com/)』
+- 『[CheckBox Free Image](https://www.flaticon.com/authors/google-material-design/monochrome?author_id=55&type=standard)』사용
+
+
 ### 사운드
+#### 구매
+#### 무료
+
 ### 기타
+#### 구매
+- 『[Pro Main Menu V3](https://www.unrealengine.com/marketplace/ko/product/pro-main-menu-pack)』
+- 『[Grid-Based Builder](https://www.unrealengine.com/marketplace/ko/product/grid-based-builder)』구매
+
+#### 무료
