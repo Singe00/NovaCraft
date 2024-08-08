@@ -99,6 +99,15 @@ enum class E_ObjectType : uint8
 	Building UMETA(DisplayName = "Building"),
 };
 
+UENUM(BlueprintType)
+enum class E_CampState : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Neutrality UMETA(DisplayName = "Neutrality"),
+	Competition UMETA(DisplayName = "Unit"),
+	Domination UMETA(DisplayName = "Building"),
+};
+
 UCLASS()
 class NOVACRAFT_API AActorEnums : public AActor
 {
