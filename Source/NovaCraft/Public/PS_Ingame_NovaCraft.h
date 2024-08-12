@@ -23,30 +23,34 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Player Manage|Manage Value|Resource")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
 	int PlayerGold;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Resource")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
 	int PlayerGas;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Resource")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
 	int PlayerMaxPopulation;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Resource")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
 	int PlayerCurrentPopulation;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Camp")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Camp")
 	int GoldCampCount = 0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Camp")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Camp")
 	int GasCampCount = 0;
 
+
 public:
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(Client, Reliable)
 	void GainResourceTimerFunc();
 
 	UFUNCTION(BlueprintCallable,BlueprintPure)
 	bool CheckEnoughResource(int RqGold, int RqGas, int RqPop);
+
+	UFUNCTION(BlueprintCallable)
+	void SpendResource(int RqGold, int RqGas, int RqPop);
 
 	UFUNCTION(BlueprintCallable)
 	void GainGoldResource();
@@ -64,13 +68,13 @@ public:
 	void DecreasePopulationWhenBuildingDestroy();
 
 	UFUNCTION(BlueprintCallable)
-	void AddGoldCampCount() { this->GoldCampCount++; };
+	void AddGoldCampCount();
 
 	UFUNCTION(BlueprintCallable)
 	void AddGasCampCount() { this->GasCampCount++; };
 
 	UFUNCTION(BlueprintCallable)
-	void SubGoldCampCount() { this->GoldCampCount--; };
+	void SubGoldCampCount();
 
 	UFUNCTION(BlueprintCallable)
 	void SubGasCampCount() { this->GasCampCount--; };
@@ -78,6 +82,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DecreasePopulationWhenUnitDead(int UnitPop) { this->PlayerCurrentPopulation -= UnitPop; }
 
+
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void UpdateResourceWidget();
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Timer")

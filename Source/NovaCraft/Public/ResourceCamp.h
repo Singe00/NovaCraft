@@ -38,12 +38,19 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
 	class USphereComponent* DominationCollision;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
+	class UWidgetComponent* GaegeBar;
+
 	UPROPERTY(VisibleAnywhere, Category = "Manage|Value")
 	UMaterialInstanceDynamic* DynamicMaterial;
 
 private:
 	UPROPERTY(VisibleAnywhere, Replicated, Category = "Manage|Value")
 	E_CampState CampState = E_CampState::Neutrality;
+
+	UPROPERTY(VisibleAnywhere, Category = "Manage|Value")
+	int PreDominationTeamNumber = -1;
 
 	UPROPERTY(VisibleAnywhere, Category = "Manage|Value")
 	int DominationTeamNumber = -1;
@@ -61,7 +68,7 @@ private:
 	int totalCount = 0;
 
 
-	UPROPERTY(VisibleAnywhere, Category = "Manage|Value")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Manage|Value", meta = (AllowPrivateAccess = true));
 	FTimerHandle DominitionChargeTimer;
 
 
@@ -94,11 +101,19 @@ public:
 	UFUNCTION()
 	int CheckTeamCount();
 
+
 	UFUNCTION()
 	void CampProcess(E_CampState NewCampState);
 
+
+	UFUNCTION()
+	void ChargingProcess();
+
 	UFUNCTION()
 	void ChargingComplete();
+
+	UFUNCTION()
+	void NeutralityProcess();
 
 	UFUNCTION()
 	void CompetitionProcess();
@@ -109,9 +124,15 @@ public:
 	UFUNCTION()
 	void RestorationProcess();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void RestorationCamp();
 
 	UFUNCTION()
 	void DominationProcess();
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DominationComplete();
 
 	// Getter
 public:
@@ -123,6 +144,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	E_CampState GetCampState() const { return this->CampState; }
 
+	UFUNCTION(BlueprintCallable)
+	int GetDominationTeamNumber() const { return this->DominationTeamNumber; }
+
+	UFUNCTION(BlueprintCallable)
+	int GetPreDominationTeamNumber() const { return this->PreDominationTeamNumber; }
 
 	// Setter
 public:
