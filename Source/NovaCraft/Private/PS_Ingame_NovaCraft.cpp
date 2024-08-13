@@ -39,10 +39,24 @@ void APS_Ingame_NovaCraft::GainResourceTimerFunc_Implementation()
 	UpdateResourceWidget();
 }
 
-bool APS_Ingame_NovaCraft::CheckEnoughResource(int RqGold, int RqGas, int RqPop)
+bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnUnit(int RqGold, int RqGas, int RqPop)
 {
 	if ((PlayerGold >= RqGold) && (PlayerGas >= RqGas) && ((PlayerCurrentPopulation + RqPop) <= PlayerMaxPopulation))
 	{
+
+		PlayerGold -= RqGold;
+
+
+		if (RqGas > 0)
+		{
+			PlayerGas -= RqGas;
+		}
+
+		PlayerCurrentPopulation += RqPop;
+
+		UpdateResourceWidget();
+
+
 		return true;
 
 	}
@@ -53,10 +67,26 @@ bool APS_Ingame_NovaCraft::CheckEnoughResource(int RqGold, int RqGas, int RqPop)
 
 }
 
-void APS_Ingame_NovaCraft::SpendResource(int RqGold, int RqGas, int RqPop)
+bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnBuilding(int RqGold, int RqGas)
 {
+	UE_LOG(LogTemp, Warning, TEXT("%d %d"),RqGold,RqGas);
 
+	if ((PlayerGold >= RqGold) && (PlayerGas >= RqGas))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("True!!"));
 
+		return true;
+
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("False!!"));
+		return false;
+	}
+}
+
+void APS_Ingame_NovaCraft::SpendResourceSpawnBuilding(int RqGold, int RqGas)
+{
 
 	PlayerGold -= RqGold;
 
@@ -66,11 +96,11 @@ void APS_Ingame_NovaCraft::SpendResource(int RqGold, int RqGas, int RqPop)
 		PlayerGas -= RqGas;
 	}
 
-	PlayerCurrentPopulation += RqPop;
 
 	UpdateResourceWidget();
-
 }
+
+
 
 void APS_Ingame_NovaCraft::GainGoldResource()
 {

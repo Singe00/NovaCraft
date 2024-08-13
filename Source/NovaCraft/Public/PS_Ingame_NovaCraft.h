@@ -47,10 +47,13 @@ public:
 	void GainResourceTimerFunc();
 
 	UFUNCTION(BlueprintCallable,BlueprintPure)
-	bool CheckEnoughResource(int RqGold, int RqGas, int RqPop);
+	bool CheckEnoughResourceSpawnUnit(int RqGold, int RqGas, int RqPop);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool CheckEnoughResourceSpawnBuilding(int RqGold, int RqGas);
 
 	UFUNCTION(BlueprintCallable)
-	void SpendResource(int RqGold, int RqGas, int RqPop);
+	void SpendResourceSpawnBuilding(int RqGold, int RqGas);
 
 	UFUNCTION(BlueprintCallable)
 	void GainGoldResource();
