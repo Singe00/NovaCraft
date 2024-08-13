@@ -107,6 +107,9 @@ public: // All Common Status Under Here
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	FVector AirUnitMoveTargetLocation = FVector::ZeroVector;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Manage Value")
+	TArray<class UMaterialInstance*> UnitMaterials;
+
 protected:
 	// Defence Status
 	UPROPERTY(VisibleAnywhere, Category = "Unit Manage|Unit Status|Defense Status")
