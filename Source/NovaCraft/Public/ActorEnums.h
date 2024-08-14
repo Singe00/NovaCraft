@@ -104,8 +104,10 @@ enum class E_CampState : uint8
 {
 	None UMETA(DisplayName = "None"),
 	Neutrality UMETA(DisplayName = "Neutrality"),
-	Competition UMETA(DisplayName = "Unit"),
-	Domination UMETA(DisplayName = "Building"),
+	Competition UMETA(DisplayName = "Competition"),
+	Charging UMETA(DisplayName = "Charging"),
+	Restoration UMETA(DisplayName = "Restoration"),
+	Domination UMETA(DisplayName = "Domination"),
 };
 
 UCLASS()
