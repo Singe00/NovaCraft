@@ -69,18 +69,15 @@ bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnUnit(int RqGold, int RqGas, i
 
 bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnBuilding(int RqGold, int RqGas)
 {
-	UE_LOG(LogTemp, Warning, TEXT("%d %d"),RqGold,RqGas);
 
 	if ((PlayerGold >= RqGold) && (PlayerGas >= RqGas))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("True!!"));
 
 		return true;
 
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("False!!"));
 		return false;
 	}
 }
@@ -123,12 +120,31 @@ void APS_Ingame_NovaCraft::PaybackResource(int RqGold, int RqGas, int RqPop)
 
 void APS_Ingame_NovaCraft::IncreasePopulationWhenBuildingProduct()
 {
-	PlayerCurrentPopulation += 10;
+	UE_LOG(LogTemp, Warning, TEXT("Increase"));
+
+	PlayerMaxPopulation += 10;
+
+	if (PlayerMaxPopulation > 100)
+	{
+		PlayerMaxPopulation = 100;
+	}
+
+
+	UpdateResourceWidget();
 }
 
 void APS_Ingame_NovaCraft::DecreasePopulationWhenBuildingDestroy()
 {
-	PlayerCurrentPopulation -= 10;
+	UE_LOG(LogTemp, Warning, TEXT("Decrease"));
+
+	PlayerMaxPopulation -= 10;
+
+	if (PlayerMaxPopulation < 10)
+	{
+		PlayerMaxPopulation = 10;
+	}
+
+	UpdateResourceWidget();
 }
 
 void APS_Ingame_NovaCraft::SubGoldCampCount()
