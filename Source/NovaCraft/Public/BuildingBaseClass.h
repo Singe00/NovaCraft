@@ -86,6 +86,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	TArray<TSubclassOf<AActor>> CanSpawnObjects;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
+	TArray<FName> CanSpawnObjectsIndex;
+
 	UPROPERTY(VisibleAnywhere, Replicated, Category = "Building Manage|Manage Value")
 	FVector RallyPoint;
 
