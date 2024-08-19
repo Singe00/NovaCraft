@@ -192,6 +192,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool GetProductingIsFull() const;
 
+	UFUNCTION(BlueprintCallable)
+	bool IfWillDie(float damage);
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -223,6 +226,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	void SetIsProducting(bool NewProducting) { this->isProducting = NewProducting; }
+
 	// Function
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -235,4 +239,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void AddProductingUnit(int SpawnIndex);
+
 };

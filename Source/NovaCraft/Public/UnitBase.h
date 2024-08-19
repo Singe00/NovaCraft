@@ -225,6 +225,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	TArray<AActor*> SensingObject;
 
+	UFUNCTION(BlueprintCallable)
+	bool IfWillDie(float damage);
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
