@@ -6,6 +6,7 @@
 #include "UnitBase.h"
 #include "Components/WidgetComponent.h"
 #include "Components/BoxComponent.h"
+#include "PS_Ingame_NovaCraft.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -78,6 +79,20 @@ bool ABuildingBaseClass::GetProductingIsFull() const
 		return false;
 	}
 	
+}
+
+bool ABuildingBaseClass::IfWillDie(float damage)
+{
+	float temp = BuildingStatus_Defense.fBuildingCurrentHealth - damage;
+
+	if (temp <= 0)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+
 }
 
 void ABuildingBaseClass::InitStatus(FBuildingStatus_Defense NewDefenseStatus, FBuildingStatus_Offense NewOffenseStatus, FBuildingStatus_Utility NewUtilityStatus, FBuildingStatus_Extra NewExtraStatus, FBuildingStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
@@ -158,6 +173,17 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 		HpBarWidget->SetVisibility(false);
 
 		OnBuildingDead.Broadcast(this);
+		
+
+		// PlayerState 가져오기
+		APS_Ingame_NovaCraft* PS_Ingame_NovaCraft = Cast<APS_Ingame_NovaCraft>(GetPlayerState());
+
+		// PlayerState가 유효한 경우 함수 호출
+		if (PS_Ingame_NovaCraft)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("decrease"));
+			PS_Ingame_NovaCraft->DecreasePopulationWhenBuildingDestroy();
+		}
 		
 
 		return false;

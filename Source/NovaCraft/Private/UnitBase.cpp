@@ -88,6 +88,20 @@ void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_Offe
 }
 
 
+bool AUnitBase::IfWillDie(float damage)
+{
+	float temp = UnitStatus_Defense.fCurrentHealth - damage;
+
+	if (temp <= 0)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}
+
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);

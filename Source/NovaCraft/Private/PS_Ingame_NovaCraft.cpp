@@ -120,7 +120,6 @@ void APS_Ingame_NovaCraft::PaybackResource(int RqGold, int RqGas, int RqPop)
 
 void APS_Ingame_NovaCraft::IncreasePopulationWhenBuildingProduct()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Increase"));
 
 	PlayerMaxPopulation += 10;
 
@@ -135,7 +134,6 @@ void APS_Ingame_NovaCraft::IncreasePopulationWhenBuildingProduct()
 
 void APS_Ingame_NovaCraft::DecreasePopulationWhenBuildingDestroy()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Decrease"));
 
 	PlayerMaxPopulation -= 10;
 
