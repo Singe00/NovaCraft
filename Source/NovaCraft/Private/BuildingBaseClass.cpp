@@ -83,6 +83,7 @@ bool ABuildingBaseClass::GetProductingIsFull() const
 
 bool ABuildingBaseClass::IfWillDie(float damage)
 {
+
 	float temp = BuildingStatus_Defense.fBuildingCurrentHealth - damage;
 
 	if (temp <= 0)
@@ -173,18 +174,7 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 		HpBarWidget->SetVisibility(false);
 
 		OnBuildingDead.Broadcast(this);
-		
-
-		// PlayerState 가져오기
-		APS_Ingame_NovaCraft* PS_Ingame_NovaCraft = Cast<APS_Ingame_NovaCraft>(GetPlayerState());
-
-		// PlayerState가 유효한 경우 함수 호출
-		if (PS_Ingame_NovaCraft)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("decrease"));
-			PS_Ingame_NovaCraft->DecreasePopulationWhenBuildingDestroy();
-		}
-		
+	
 
 		return false;
 	}
