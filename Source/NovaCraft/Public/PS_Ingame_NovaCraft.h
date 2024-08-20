@@ -90,16 +90,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DecreasePopulationWhenUnitDead(int UnitPop) { this->PlayerCurrentPopulation -= UnitPop; }
 
-	UFUNCTION(BlueprintCallable)
-	void IncreasePlayerBuildingCount();
-
-	UFUNCTION(BlueprintCallable)
-	void DecreasePlayerBuildingCount();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateResourceWidget();
 
+	UFUNCTION(Server,Reliable,WithValidation)
+	void Server_SetPlayerEliminated();
 
+	UFUNCTION()
+	void SetPlayerEliminated();
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Timer")
