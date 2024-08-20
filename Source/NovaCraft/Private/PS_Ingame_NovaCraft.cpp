@@ -120,9 +120,8 @@ void APS_Ingame_NovaCraft::PaybackResource(int RqGold, int RqGas, int RqPop)
 
 void APS_Ingame_NovaCraft::IncreasePopulationWhenBuildingProduct()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Increase"));
 
-	PlayerMaxPopulation += 10;
+	PlayerMaxPopulation += 5;
 
 	if (PlayerMaxPopulation > 100)
 	{
@@ -135,13 +134,12 @@ void APS_Ingame_NovaCraft::IncreasePopulationWhenBuildingProduct()
 
 void APS_Ingame_NovaCraft::DecreasePopulationWhenBuildingDestroy()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Decrease"));
 
-	PlayerMaxPopulation -= 10;
+	PlayerMaxPopulation -= 5;
 
-	if (PlayerMaxPopulation < 10)
+	if (PlayerMaxPopulation < 5)
 	{
-		PlayerMaxPopulation = 10;
+		PlayerMaxPopulation = 5;
 	}
 
 	UpdateResourceWidget();
@@ -150,6 +148,21 @@ void APS_Ingame_NovaCraft::DecreasePopulationWhenBuildingDestroy()
 void APS_Ingame_NovaCraft::SubGoldCampCount()
 {
 	this->GoldCampCount--;
+}
+
+void APS_Ingame_NovaCraft::Server_SetPlayerEliminated_Implementation()
+{
+	SetPlayerEliminated();
+}
+
+bool APS_Ingame_NovaCraft::Server_SetPlayerEliminated_Validate()
+{
+	return true;
+}
+
+void APS_Ingame_NovaCraft::SetPlayerEliminated()
+{
+	IsPlayerEliminated = true;
 }
 
 
@@ -173,4 +186,6 @@ void APS_Ingame_NovaCraft::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 	DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerCurrentPopulation);
 	DOREPLIFETIME(APS_Ingame_NovaCraft, GoldCampCount);
 	DOREPLIFETIME(APS_Ingame_NovaCraft, GasCampCount);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerBuildingCount);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, IsPlayerEliminated);
 }

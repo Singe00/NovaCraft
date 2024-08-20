@@ -41,6 +41,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Camp")
 	int GasCampCount = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
+	int PlayerBuildingCount = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
+	bool IsPlayerEliminated = false;
 
 public:
 	UFUNCTION(Client, Reliable)
@@ -86,10 +91,14 @@ public:
 	void DecreasePopulationWhenUnitDead(int UnitPop) { this->PlayerCurrentPopulation -= UnitPop; }
 
 
-
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateResourceWidget();
+
+	UFUNCTION(Server,Reliable,WithValidation)
+	void Server_SetPlayerEliminated();
+
+	UFUNCTION()
+	void SetPlayerEliminated();
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Timer")
