@@ -150,34 +150,19 @@ void APS_Ingame_NovaCraft::SubGoldCampCount()
 	this->GoldCampCount--;
 }
 
-void APS_Ingame_NovaCraft::IncreasePlayerBuildingCount()
+void APS_Ingame_NovaCraft::Server_SetPlayerEliminated_Implementation()
 {
-	if (!this->IsPlayerEliminated)
-	{
-		this->PlayerBuildingCount += 1;
-
-		UE_LOG(LogTemp, Warning, TEXT("BC : %d"), PlayerBuildingCount);
-
-	}
-
+	SetPlayerEliminated();
 }
 
-void APS_Ingame_NovaCraft::DecreasePlayerBuildingCount()
+bool APS_Ingame_NovaCraft::Server_SetPlayerEliminated_Validate()
 {
-	if (!this->IsPlayerEliminated && PlayerBuildingCount > 0)
-	{
-		this->PlayerBuildingCount -= 1;
+	return true;
+}
 
-		UE_LOG(LogTemp, Warning, TEXT("BC : %d"), PlayerBuildingCount);
-
-
-		if (this->PlayerBuildingCount <= 0)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Eliminated"), PlayerBuildingCount);
-			this->IsPlayerEliminated = true;
-		}
-
-	}
+void APS_Ingame_NovaCraft::SetPlayerEliminated()
+{
+	IsPlayerEliminated = true;
 }
 
 
