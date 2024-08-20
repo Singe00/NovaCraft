@@ -81,9 +81,21 @@ public: // Anims
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
 	TArray<class UAnimMontage*> SkillMontages;
 
+	// Attack Sound  (공격 사운드)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Sounds")
+	TArray<class USoundWave*> AttackSounds;
+
+	// Death Sound  (사망 사운드)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Sounds")
+	TArray<class USoundWave*> DeathSounds;
+
+	// Move Sound  (이동 사운드)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Sounds")
+	TArray<class USoundWave*> MoveSounds;
+
 	// Manage Value
 public: // All Common Status Under Here
-	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Manage Value")
 	FName DataTableRowName;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
@@ -268,6 +280,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UAnimMontage* GetRandomMontage(TArray<class UAnimMontage*> Montages);
+
+	UFUNCTION(BlueprintCallable)
+	USoundWave* GetRandomSound(TArray<class USoundWave*> Sounds);
 
 	UFUNCTION(BlueprintCallable)
 	void FlyUnitMoveToLocation(float DeltaTime);

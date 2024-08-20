@@ -210,6 +210,17 @@ UAnimMontage* AUnitBase::GetRandomMontage(TArray<class UAnimMontage*> Montages)
 	return Montages[RandomIndex];
 }
 
+USoundWave* AUnitBase::GetRandomSound(TArray<class USoundWave*> Sounds)
+{
+	if (Sounds.Num() == 0)
+	{
+		return nullptr;
+	}
+
+	int32 RandomIndex = FMath::RandRange(0, Sounds.Num() - 1);
+	return Sounds[RandomIndex];
+}
+
 void AUnitBase::FlyUnitMoveToLocation(float DeltaTime)
 {
 	if (AirUnitMovement)
