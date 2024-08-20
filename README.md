@@ -145,7 +145,9 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 ### 사운드
 #### 구매
 #### 무료
+- 『[Wind](https://pixabay.com/ko/sound-effects/wind-47344/)』사용
 
+  
 ### 기타
 #### 구매
 - 『[Pro Main Menu V3](https://www.unrealengine.com/marketplace/ko/product/pro-main-menu-pack)』
