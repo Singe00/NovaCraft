@@ -12,8 +12,8 @@
 
 APS_Ingame_NovaCraft::APS_Ingame_NovaCraft()
 {
-	PlayerGold = 100;
-	PlayerGas = 0;
+	PlayerGold = 1000;
+	PlayerGas = 1000;
 	PlayerMaxPopulation = 10;
 	PlayerCurrentPopulation = 0;
 }
@@ -52,8 +52,8 @@ bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnUnit(int RqGold, int RqGas, i
 			PlayerGas -= RqGas;
 		}
 
-		PlayerCurrentPopulation += RqPop;
-
+		//PlayerCurrentPopulation += RqPop;
+		SpendResourceSpawnUnit(RqPop);
 		UpdateResourceWidget();
 
 
@@ -94,7 +94,18 @@ void APS_Ingame_NovaCraft::SpendResourceSpawnBuilding(int RqGold, int RqGas)
 	}
 
 
+
+
 	UpdateResourceWidget();
+}
+
+void APS_Ingame_NovaCraft::SpendResourceSpawnUnit_Implementation(int RqPop)
+{
+	if (HasAuthority())
+	{
+		PlayerCurrentPopulation += RqPop;
+	}
+	
 }
 
 
@@ -148,6 +159,15 @@ void APS_Ingame_NovaCraft::DecreasePopulationWhenBuildingDestroy()
 void APS_Ingame_NovaCraft::SubGoldCampCount()
 {
 	this->GoldCampCount--;
+}
+
+void APS_Ingame_NovaCraft::DecreasePopulationWhenUnitDead(int UnitPop)
+{
+
+	this->PlayerCurrentPopulation -= UnitPop;
+	UpdateResourceWidget();
+	
+
 }
 
 void APS_Ingame_NovaCraft::Server_SetPlayerEliminated_Implementation()
