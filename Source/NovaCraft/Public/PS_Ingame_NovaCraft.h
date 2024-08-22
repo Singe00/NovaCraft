@@ -60,6 +60,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SpendResourceSpawnBuilding(int RqGold, int RqGas);
 
+	UFUNCTION(Server,Reliable)
+	void SpendResourceSpawnUnit(int RqPop);
+
 	UFUNCTION(BlueprintCallable)
 	void GainGoldResource();
 
@@ -88,7 +91,7 @@ public:
 	void SubGasCampCount() { this->GasCampCount--; };
 
 	UFUNCTION(BlueprintCallable)
-	void DecreasePopulationWhenUnitDead(int UnitPop) { this->PlayerCurrentPopulation -= UnitPop; }
+	void DecreasePopulationWhenUnitDead(int UnitPop);
 
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
