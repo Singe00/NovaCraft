@@ -60,6 +60,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SpendResourceSpawnBuilding(int RqGold, int RqGas);
 
+	UFUNCTION(Server,Reliable)
+	void SpendResourceSpawnUnit(int RqPop);
+
 	UFUNCTION(BlueprintCallable)
 	void GainGoldResource();
 

@@ -10,6 +10,10 @@ public class NovaCraftTarget : TargetRules
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_4;
-		ExtraModuleNames.Add("NovaCraft");
+
+        bUsesSteam = true;
+
+        ExtraModuleNames.Add("NovaCraft");
+		
     }
 }

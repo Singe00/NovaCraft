@@ -8,7 +8,7 @@ public class NovaCraft : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "NavigationSystem", "AIModule", "Niagara", "UMG" ,"EnhancedInput","OnlineSubsystem","OnlineSubsystemSteam" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "NavigationSystem", "AIModule", "Niagara", "UMG" ,"EnhancedInput","OnlineSubsystem", "OnlineSubsystemSteam" });
 
 	}
 }

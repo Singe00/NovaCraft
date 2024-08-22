@@ -52,8 +52,8 @@ bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnUnit(int RqGold, int RqGas, i
 			PlayerGas -= RqGas;
 		}
 
-		PlayerCurrentPopulation += RqPop;
-
+		//PlayerCurrentPopulation += RqPop;
+		SpendResourceSpawnUnit(RqPop);
 		UpdateResourceWidget();
 
 
@@ -94,7 +94,18 @@ void APS_Ingame_NovaCraft::SpendResourceSpawnBuilding(int RqGold, int RqGas)
 	}
 
 
+
+
 	UpdateResourceWidget();
+}
+
+void APS_Ingame_NovaCraft::SpendResourceSpawnUnit_Implementation(int RqPop)
+{
+	if (HasAuthority())
+	{
+		PlayerCurrentPopulation += RqPop;
+	}
+	
 }
 
 
