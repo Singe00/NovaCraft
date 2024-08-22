@@ -9,6 +9,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Actor.h"
+#include "../NovaCraftPlayerController.h"
+#include "PS_Ingame_NovaCraft.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -87,6 +89,20 @@ void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_Offe
 	OutOffenseType = UnitStatus_Offense.fAirOffenseType;
 }
 
+
+bool AUnitBase::IfWillDie(float damage)
+{
+	float temp = UnitStatus_Defense.fCurrentHealth - damage;
+
+	if (temp <= 0)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}
 
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
@@ -172,7 +188,6 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 		HpBarWidget->SetVisibility(false);
 
 		OnUnitDead.Broadcast(this);
-
 
 		return false;
 	}

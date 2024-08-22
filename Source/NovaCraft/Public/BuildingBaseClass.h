@@ -82,6 +82,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value", meta = (ExposeOnSpawn = "true"))
 	FLinearColor TeamColor;
 
+	// Attack Montage (사망 애니메이션)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Anim Montages")
+	TArray<class UAnimMontage*> DeadMontages;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Building Manage|Manage Value")
 	TArray<TSubclassOf<AActor>> CanSpawnObjects;
@@ -109,6 +112,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Manage Value")
 	TArray<int> ProductingArray;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Manage Value")
+	TArray<class UMaterialInstance*> BuildingMaterials;
 
 protected:
 	// Defence Status
@@ -192,6 +198,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool GetProductingIsFull() const;
 
+	UFUNCTION(BlueprintCallable)
+	bool IfWillDie(float damage);
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -223,6 +232,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Building Status")
 	void SetIsProducting(bool NewProducting) { this->isProducting = NewProducting; }
+
 	// Function
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -235,4 +245,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void AddProductingUnit(int SpawnIndex);
+
+	UFUNCTION(BlueprintCallable)
+	UAnimMontage* GetRandomMontage(TArray<class UAnimMontage*> Montages);
 };

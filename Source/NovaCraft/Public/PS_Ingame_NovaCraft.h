@@ -41,6 +41,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Camp")
 	int GasCampCount = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
+	int PlayerBuildingCount = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
+	bool IsPlayerEliminated = false;
 
 public:
 	UFUNCTION(Client, Reliable)
@@ -54,6 +59,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SpendResourceSpawnBuilding(int RqGold, int RqGas);
+
+	UFUNCTION(Server,Reliable)
+	void SpendResourceSpawnUnit(int RqPop);
 
 	UFUNCTION(BlueprintCallable)
 	void GainGoldResource();
@@ -83,13 +91,17 @@ public:
 	void SubGasCampCount() { this->GasCampCount--; };
 
 	UFUNCTION(BlueprintCallable)
-	void DecreasePopulationWhenUnitDead(int UnitPop) { this->PlayerCurrentPopulation -= UnitPop; }
-
-
+	void DecreasePopulationWhenUnitDead(int UnitPop);
 
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateResourceWidget();
+
+	UFUNCTION(Server,Reliable,WithValidation)
+	void Server_SetPlayerEliminated();
+
+	UFUNCTION()
+	void SetPlayerEliminated();
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Manage|Manage Value|Timer")
