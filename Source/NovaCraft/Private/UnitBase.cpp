@@ -9,6 +9,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Actor.h"
+#include "../NovaCraftPlayerController.h"
+#include "PS_Ingame_NovaCraft.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values
@@ -186,7 +188,6 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 		HpBarWidget->SetVisibility(false);
 
 		OnUnitDead.Broadcast(this);
-
 
 		return false;
 	}

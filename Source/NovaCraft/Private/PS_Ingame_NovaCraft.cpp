@@ -12,8 +12,8 @@
 
 APS_Ingame_NovaCraft::APS_Ingame_NovaCraft()
 {
-	PlayerGold = 100;
-	PlayerGas = 0;
+	PlayerGold = 1000;
+	PlayerGas = 1000;
 	PlayerMaxPopulation = 10;
 	PlayerCurrentPopulation = 0;
 }
@@ -148,6 +148,15 @@ void APS_Ingame_NovaCraft::DecreasePopulationWhenBuildingDestroy()
 void APS_Ingame_NovaCraft::SubGoldCampCount()
 {
 	this->GoldCampCount--;
+}
+
+void APS_Ingame_NovaCraft::DecreasePopulationWhenUnitDead(int UnitPop)
+{
+
+	this->PlayerCurrentPopulation -= UnitPop;
+	UpdateResourceWidget();
+	
+
 }
 
 void APS_Ingame_NovaCraft::Server_SetPlayerEliminated_Implementation()

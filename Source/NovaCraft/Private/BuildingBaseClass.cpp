@@ -193,3 +193,15 @@ void ABuildingBaseClass::AddProductingUnit(int SpawnIndex)
 		ProductingArray.Add(SpawnIndex);
 	}
 }
+
+UAnimMontage* ABuildingBaseClass::GetRandomMontage(TArray<class UAnimMontage*> Montages)
+{
+
+	if (Montages.Num() == 0)
+	{
+		return nullptr;
+	}
+
+	int32 RandomIndex = FMath::RandRange(0, Montages.Num() - 1);
+	return Montages[RandomIndex];
+}

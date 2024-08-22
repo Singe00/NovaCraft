@@ -88,7 +88,7 @@ public:
 	void SubGasCampCount() { this->GasCampCount--; };
 
 	UFUNCTION(BlueprintCallable)
-	void DecreasePopulationWhenUnitDead(int UnitPop) { this->PlayerCurrentPopulation -= UnitPop; }
+	void DecreasePopulationWhenUnitDead(int UnitPop);
 
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
