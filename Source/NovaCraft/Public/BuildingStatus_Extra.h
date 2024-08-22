@@ -19,6 +19,7 @@ public:
 		, fBuilding2DImage(nullptr)
 		, fBuildingPriority(1)
 		, fBuildingType(E_BuildingType::None)
+		, fBuildingTempMesh(nullptr)
 	{};
 
 public:
@@ -45,4 +46,8 @@ public:
 	// Building Type (건물 타입)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	E_BuildingType fBuildingType;
+
+	// Building Temp Mese (건물 임시 메시)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* fBuildingTempMesh;
 };
