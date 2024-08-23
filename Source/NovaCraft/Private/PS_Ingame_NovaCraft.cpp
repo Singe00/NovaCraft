@@ -122,11 +122,15 @@ void APS_Ingame_NovaCraft::GainGasResource()
 	PlayerGas += 50+ GasCampCount * 20;
 }
 
-void APS_Ingame_NovaCraft::PaybackResource(int RqGold, int RqGas, int RqPop)
+void APS_Ingame_NovaCraft::PaybackResource_Implementation(int RqGold, int RqGas, int RqPop)
 {
-	PlayerGold += RqGold;
-	PlayerGas += RqGas;
-	PlayerCurrentPopulation -= RqPop;
+	if (HasAuthority())
+	{
+		PlayerGold += RqGold;
+		PlayerGas += RqGas;
+		PlayerCurrentPopulation -= RqPop;
+	}
+	UpdateResourceWidget();
 }
 
 void APS_Ingame_NovaCraft::IncreasePopulationWhenBuildingProduct()
