@@ -10,6 +10,7 @@
 #include "BuildingStatus_Extra.h"
 #include "BuildingStatus_Spawn.h"
 #include "ObjectActionPattern.h"
+#include "mutex"
 #include "BuildingBaseClass.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingDead, ABuildingBaseClass*, BuildingDestroy);
@@ -115,6 +116,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Manage Value")
 	TArray<class UMaterialInstance*> BuildingMaterials;
+
+
+	std::mutex BuildingDeadMutex;
+
 
 protected:
 	// Defence Status

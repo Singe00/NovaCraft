@@ -9,6 +9,7 @@
 #include "UnitStatus_Utility.h"
 #include "UnitStatus_Extra.h"
 #include "UnitStatus_Spawn.h"
+#include "mutex"
 #include "ObjectActionPattern.h"
 #include "BuildingBaseClass.h"
 #include "UnitBase.generated.h"
@@ -110,6 +111,9 @@ public: // All Common Status Under Here
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated, Category = "Unit Manage|Manage Value")
 	bool isSelected = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Unit Manage|Manage Value")
+	bool isAttackDelay = true;
+
 	UPROPERTY(EditAnywhere, Category = "Unit Manage|Manage Value")
 	TArray<FObjectActionPattern> ActionPattern;
 
@@ -121,6 +125,8 @@ public: // All Common Status Under Here
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Manage Value")
 	TArray<class UMaterialInstance*> UnitMaterials;
+
+	std::mutex UnitDeadMutex;
 
 protected:
 	// Defence Status
@@ -267,6 +273,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Status")
 	void SetAirUnitMoveLocation(bool MoveState, FVector TargetLocation);
 
+
+	UFUNCTION(BlueprintCallable, Category = "Unit Status")
+	void SetUnitCanAttackDelay(bool AttackState) { this->isAttackDelay = AttackState; }
 
 	// Function
 public:
