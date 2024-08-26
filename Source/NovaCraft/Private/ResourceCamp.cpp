@@ -263,7 +263,8 @@ void AResourceCamp::CampProcess(E_CampState NewCampState)
 
 void AResourceCamp::ChargingProcess()
 {
-	GaegeBar->SetVisibility(true);
+	SetWidgetVisible(true);
+	//GaegeBar->SetVisibility(true);
 
 	if (GetWorldTimerManager().IsTimerPaused(DominitionChargeTimer))
 	{
@@ -290,7 +291,8 @@ void AResourceCamp::ChargingComplete()
 void AResourceCamp::NeutralityProcess()
 {
 	GetWorldTimerManager().ClearTimer(DominitionChargeTimer);
-	GaegeBar->SetVisibility(false);
+	SetWidgetVisible(false);
+	//GaegeBar->SetVisibility(false);
 }
 
 void AResourceCamp::CompetitionProcess()
@@ -344,6 +346,11 @@ void AResourceCamp::DominationProcess()
 		DominationComplete();
 
 	}
+}
+
+void AResourceCamp::SetWidgetVisible_Implementation(bool isVisible)
+{
+	GaegeBar->SetVisibility(isVisible);
 }
 
 void AResourceCamp::DominationComplete_Implementation()
