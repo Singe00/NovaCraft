@@ -169,14 +169,20 @@ bool ABuildingBaseClass::CustomTakeDamageBuilding(float Damage)
 
 	if (BuildingStatus_Defense.fBuildingCurrentHealth <= 0)
 	{
-		this->isDead = true;
+		std::lock_guard<std::mutex> lock(BuildingDeadMutex);
 
-		HpBarWidget->SetVisibility(false);
+		if (!isDead)
+		{
+			this->isDead = true;
 
-		OnBuildingDead.Broadcast(this);
-	
+			HpBarWidget->SetVisibility(false);
 
-		return false;
+			OnBuildingDead.Broadcast(this);
+
+
+			return false;
+		}
+
 	}
 	else
 	{

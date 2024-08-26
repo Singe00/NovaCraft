@@ -69,7 +69,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void GainGasResource();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable,Server,Reliable)
 	void PaybackResource(int RqGold, int RqGas, int RqPop);
 
 	UFUNCTION(BlueprintCallable)
