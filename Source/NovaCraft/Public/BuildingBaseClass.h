@@ -117,6 +117,21 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Manage Value")
 	TArray<class UMaterialInstance*> BuildingMaterials;
 
+	// Attack Sound  (공격 사운드)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Sounds")
+	TArray<class USoundWave*> AttackSounds;
+
+	// Death Sound  (사망 사운드)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Sounds")
+	TArray<class USoundWave*> DeathSounds;
+
+	// Move Sound  (이동 사운드)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Sounds")
+	TArray<class USoundWave*> MoveSounds;
+
+	// Select Sound  (선택 사운드)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Manage|Sounds")
+	TArray<class USoundWave*> SelectSounds;
 
 	std::mutex BuildingDeadMutex;
 
@@ -253,4 +268,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UAnimMontage* GetRandomMontage(TArray<class UAnimMontage*> Montages);
+
+	UFUNCTION(BlueprintCallable)
+	USoundWave* GetRandomSound(TArray<class USoundWave*> Sounds);
 };

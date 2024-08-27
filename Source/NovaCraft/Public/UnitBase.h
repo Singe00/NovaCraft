@@ -94,6 +94,10 @@ public: // Anims
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Sounds")
 	TArray<class USoundWave*> MoveSounds;
 
+	// Select Sound  (선택 사운드)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Sounds")
+	TArray<class USoundWave*> SelectSounds;
+
 	// Manage Value
 public: // All Common Status Under Here
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Manage Value")

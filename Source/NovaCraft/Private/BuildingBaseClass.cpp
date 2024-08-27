@@ -211,3 +211,14 @@ UAnimMontage* ABuildingBaseClass::GetRandomMontage(TArray<class UAnimMontage*> M
 	int32 RandomIndex = FMath::RandRange(0, Montages.Num() - 1);
 	return Montages[RandomIndex];
 }
+
+USoundWave* ABuildingBaseClass::GetRandomSound(TArray<class USoundWave*> Sounds)
+{
+	if (Sounds.Num() == 0)
+	{
+		return nullptr;
+	}
+
+	int32 RandomIndex = FMath::RandRange(0, Sounds.Num() - 1);
+	return Sounds[RandomIndex];
+}
