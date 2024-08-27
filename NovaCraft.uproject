@@ -30,11 +30,15 @@
 			]
 		},
 		{
-			"Name": "SteamSockets",
+			"Name": "OnlineSubsystemSteam",
 			"Enabled": true
 		},
 		{
-			"Name": "OnlineSubsystemSteam",
+			"Name": "SteamController",
+			"Enabled": true
+		},
+		{
+			"Name": "SteamSockets",
 			"Enabled": true
 		}
 	],

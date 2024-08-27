@@ -182,14 +182,19 @@ bool AUnitBase::CustomTakeDamage(float Damage)
 
 	if (UnitStatus_Defense.fCurrentHealth <= 0)
 	{
-		this->isDead = true;
+		std::lock_guard<std::mutex> lock(UnitDeadMutex);
+
+		if (!isDead)
+		{
+			this->isDead = true;
 
 
-		HpBarWidget->SetVisibility(false);
+			HpBarWidget->SetVisibility(false);
 
-		OnUnitDead.Broadcast(this);
+			OnUnitDead.Broadcast(this);
 
-		return false;
+			return false;
+		}
 	}
 	else
 	{

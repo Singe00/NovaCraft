@@ -55,8 +55,8 @@ AResourceCamp::AResourceCamp()
 void AResourceCamp::BeginPlay()
 {
 	Super::BeginPlay();
-
-	static FString MI_Path = "/Game/00_Work/WorkPlace/SiWan/Camp/Material/M_Domination_Inst";
+	
+	static FString MI_Path = "/Game/SciFi_ReactorHangar/Materials/M_TNR2/ImpulsePlasma/ImpulsePlasma_mat_Inst";
 	UMaterialInstance* MI_TeamColor = Cast<UMaterialInstance>(StaticLoadObject(UMaterialInterface::StaticClass(), this, *MI_Path));
 
 	if (MI_TeamColor != nullptr)
@@ -65,7 +65,7 @@ void AResourceCamp::BeginPlay()
 
 		if (DynamicMaterial)
 		{
-			CampBodyMesh->SetMaterial(0, DynamicMaterial);
+			CampBodyMesh->SetMaterial(20, DynamicMaterial);
 
 			DynamicMaterial->SetVectorParameterValue(TEXT("TeamColor"), FVector4(0.1f, 0.1f, 0.1f, 1.0f));
 		}
@@ -263,7 +263,8 @@ void AResourceCamp::CampProcess(E_CampState NewCampState)
 
 void AResourceCamp::ChargingProcess()
 {
-	GaegeBar->SetVisibility(true);
+	SetWidgetVisible(true);
+	//GaegeBar->SetVisibility(true);
 
 	if (GetWorldTimerManager().IsTimerPaused(DominitionChargeTimer))
 	{
@@ -290,7 +291,8 @@ void AResourceCamp::ChargingComplete()
 void AResourceCamp::NeutralityProcess()
 {
 	GetWorldTimerManager().ClearTimer(DominitionChargeTimer);
-	GaegeBar->SetVisibility(false);
+	SetWidgetVisible(false);
+	//GaegeBar->SetVisibility(false);
 }
 
 void AResourceCamp::CompetitionProcess()
@@ -344,6 +346,42 @@ void AResourceCamp::DominationProcess()
 		DominationComplete();
 
 	}
+}
+
+FLinearColor AResourceCamp::GetTeamColorForGaege()
+{
+	switch (CampState)
+	{
+	case E_CampState::None:
+		return FColor::Black;
+		break;
+	case E_CampState::Neutrality:
+		return FColor::Black;
+		break;
+	case E_CampState::Competition:
+		return this->PlayerTeamColor[GetDominationTeamIndex()];
+		break;
+	case E_CampState::Charging:
+		return this->PlayerTeamColor[GetDominationTeamIndex()];
+		break;
+	case E_CampState::Restoration:
+		return this->PlayerTeamColor[GetPreDominationTeamNumber()];
+		break;
+	case E_CampState::Domination:
+		return this->PlayerTeamColor[GetDominationTeamIndex()];
+		break;
+	default:
+		return FColor::Black;
+		break;
+	}
+
+}
+
+
+
+void AResourceCamp::SetWidgetVisible_Implementation(bool isVisible)
+{
+	GaegeBar->SetVisibility(isVisible);
 }
 
 void AResourceCamp::DominationComplete_Implementation()

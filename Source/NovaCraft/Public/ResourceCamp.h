@@ -134,6 +134,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DominationComplete();
 
+	UFUNCTION(NetMulticast,Reliable)
+	void SetWidgetVisible(bool isVisible);
+
 	// Getter
 public:
 
@@ -149,6 +152,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int GetPreDominationTeamNumber() const { return this->PreDominationTeamNumber; }
+
+
+	UFUNCTION(BlueprintCallable,BlueprintPure)
+	FLinearColor GetTeamColorForGaege();
+
 
 	// Setter
 public:

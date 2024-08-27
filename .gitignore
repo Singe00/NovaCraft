@@ -13,8 +13,12 @@ Saved
 *.xcodeproj
 *.xcworkspace
 
-Content/Megascans
-Content/MSPreserts
+Content/SciFi_ReactorHangar
+Content/QuickSandWorm
+Content/KingSpawn
+Content/StarterBundle
+Content/Realistic_Starter_VFX_Pack_Vol2
+Content/Stylized_VFX_StPack
 Content/SciFiRocketLauncher_AK9
 Content/Scifi_Arsenal_Vol2
 Content/Sci-Fi_MachineGun
@@ -26,10 +30,8 @@ Content/CSC
 Content/ParagonWraith
 Content/ParagonDekker
 Content/VigilanteContent
-Content/Assets/*
 Content/StarterContent
-!Content/Assets/Font
-!Content/Assets/ReadMe.txt
+
 
 .vs
 Saved/*
