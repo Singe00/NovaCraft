@@ -12,8 +12,8 @@
 
 APS_Ingame_NovaCraft::APS_Ingame_NovaCraft()
 {
-	PlayerGold = 1000;
-	PlayerGas = 1000;
+	PlayerGold = 100;
+	PlayerGas = 25;
 	PlayerMaxPopulation = 10;
 	PlayerCurrentPopulation = 0;
 }
@@ -113,7 +113,8 @@ void APS_Ingame_NovaCraft::SpendResourceSpawnUnit_Implementation(int RqPop)
 void APS_Ingame_NovaCraft::GainGoldResource()
 {
 
-	PlayerGold += 50 + GoldCampCount * 100000;
+	PlayerGold += 50 + GoldCampCount * 25;
+	PlayerGas += GoldCampCount * 25;
 
 }
 
