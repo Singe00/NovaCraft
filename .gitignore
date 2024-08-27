@@ -30,10 +30,8 @@ Content/CSC
 Content/ParagonWraith
 Content/ParagonDekker
 Content/VigilanteContent
-Content/Assets/*
 Content/StarterContent
-!Content/Assets/Font
-!Content/Assets/ReadMe.txt
+
 
 .vs
 Saved/*
