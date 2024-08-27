@@ -153,6 +153,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int GetPreDominationTeamNumber() const { return this->PreDominationTeamNumber; }
 
+
+	UFUNCTION(BlueprintCallable,BlueprintPure)
+	FLinearColor GetTeamColorForGaege();
+
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
