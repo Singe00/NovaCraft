@@ -92,6 +92,7 @@ void AResourceCamp::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 
 void AResourceCamp::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+
 	if (HasAuthority())
 	{
 		AUnitBase* CompetitionUnit = Cast<AUnitBase>(OtherActor);
@@ -284,8 +285,6 @@ void AResourceCamp::ChargingComplete()
 	// Call CampProcess
 	OnCampStateChganged.Broadcast(this->CampState);
 
-
-
 }
 
 void AResourceCamp::NeutralityProcess()
@@ -343,6 +342,7 @@ void AResourceCamp::DominationProcess()
 		SetTeamColor(PlayerTeamColor[GetDominationTeamIndex()]);
 		SetDominationTeamNumber(GetDominationTeamIndex());
 
+
 		DominationComplete();
 
 	}
@@ -365,7 +365,16 @@ FLinearColor AResourceCamp::GetTeamColorForGaege()
 		return this->PlayerTeamColor[GetDominationTeamIndex()];
 		break;
 	case E_CampState::Restoration:
-		return this->PlayerTeamColor[GetPreDominationTeamNumber()];
+
+		if (GetDominationTeamIndex() == 0)
+		{
+			return this->PlayerTeamColor[1];
+		}
+		else {
+			return this->PlayerTeamColor[0];
+		}
+
+		
 		break;
 	case E_CampState::Domination:
 		return this->PlayerTeamColor[GetDominationTeamIndex()];
@@ -374,7 +383,6 @@ FLinearColor AResourceCamp::GetTeamColorForGaege()
 		return FColor::Black;
 		break;
 	}
-
 }
 
 
