@@ -34,7 +34,6 @@ void APS_Ingame_NovaCraft::BeginPlay()
 void APS_Ingame_NovaCraft::GainResourceTimerFunc_Implementation()
 {
 	GainGoldResource();
-	GainGasResource();
 
 	UpdateResourceWidget();
 }
