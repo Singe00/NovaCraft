@@ -33,16 +33,15 @@ AResourceCamp::AResourceCamp()
 
 
 	GaegeBar = CreateDefaultSubobject<UWidgetComponent>(TEXT("GaegeBar"));
-	GaegeBar->SetupAttachment(CampBodyMesh);
-
-	ConstructorHelpers::FClassFinder<UUserWidget>GaegeWidget(TEXT("WidgetBlueprint'/Game/00_Work/WorkPlace/SiWan/Camp/WB_Competition'"));
+	
+	ConstructorHelpers::FClassFinder<UUserWidget>GaegeWidget(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_Gaege'"));
 
 	if (GaegeWidget.Succeeded())
 	{
+		GaegeBar->SetupAttachment(RootComponent);
 		GaegeBar->SetWidgetClass(GaegeWidget.Class);
-		GaegeBar->SetDrawAtDesiredSize(true);
+		GaegeBar->SetDrawSize(FVector2D(200, 20));
 		GaegeBar->SetWidgetSpace(EWidgetSpace::Screen);
-		GaegeBar->SetVisibility(false);
 	}
 	
 
@@ -264,8 +263,6 @@ void AResourceCamp::CampProcess(E_CampState NewCampState)
 
 void AResourceCamp::ChargingProcess()
 {
-	SetWidgetVisible(true);
-	//GaegeBar->SetVisibility(true);
 
 	if (GetWorldTimerManager().IsTimerPaused(DominitionChargeTimer))
 	{
@@ -290,8 +287,6 @@ void AResourceCamp::ChargingComplete()
 void AResourceCamp::NeutralityProcess()
 {
 	GetWorldTimerManager().ClearTimer(DominitionChargeTimer);
-	SetWidgetVisible(false);
-	//GaegeBar->SetVisibility(false);
 }
 
 void AResourceCamp::CompetitionProcess()
@@ -348,6 +343,7 @@ void AResourceCamp::DominationProcess()
 	}
 }
 
+
 FLinearColor AResourceCamp::GetTeamColorForGaege()
 {
 	switch (CampState)
@@ -387,10 +383,6 @@ FLinearColor AResourceCamp::GetTeamColorForGaege()
 
 
 
-void AResourceCamp::SetWidgetVisible_Implementation(bool isVisible)
-{
-	GaegeBar->SetVisibility(isVisible);
-}
 
 void AResourceCamp::DominationComplete_Implementation()
 {
