@@ -113,6 +113,14 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetUnitSquadObjectDivideByIndex(int NewSquadIndex, bool NewBool) { this->UnitSquadObjectDivide[NewSquadIndex] = NewBool; }
+
+
+	UFUNCTION(BlueprintCallable)
+	void HoverBegin(bool Enemy);
+
+
+	UFUNCTION(BlueprintCallable)
+	void HoverEnd();
 };
 
 

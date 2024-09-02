@@ -175,4 +175,17 @@ void ANovaCraftPlayerController::RemoveBuildingFromSquad(ABuildingBaseClass* Dea
 	}
 }
 
+void ANovaCraftPlayerController::HoverBegin(bool Enemy)
+{
+	if (Enemy) {
+		DefaultMouseCursor = EMouseCursor::Hand;
+	}
+}
+
+void ANovaCraftPlayerController::HoverEnd()
+{
+
+	DefaultMouseCursor = EMouseCursor::Default;
+}
+
 
