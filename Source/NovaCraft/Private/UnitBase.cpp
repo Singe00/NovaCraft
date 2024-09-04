@@ -376,12 +376,15 @@ AActor* AUnitBase::GetNearestObject()
 	float NearestDist = FLT_MAX;
 
 	FVector StandardLocation = this->GetActorLocation();
+	StandardLocation.Z = 0.0f;
 
 	for (AActor* Object : SensingObject)
 	{
 		if (Object)
 		{
 			FVector ObjectLocation = Object->GetActorLocation();
+			ObjectLocation.Z = 0.0f;
+
 			float BetweenDist = FVector::DistSquared(StandardLocation, ObjectLocation);
 
 			if (BetweenDist < NearestDist)

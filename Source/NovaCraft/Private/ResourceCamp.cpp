@@ -33,16 +33,15 @@ AResourceCamp::AResourceCamp()
 
 
 	GaegeBar = CreateDefaultSubobject<UWidgetComponent>(TEXT("GaegeBar"));
-	GaegeBar->SetupAttachment(CampBodyMesh);
-
-	ConstructorHelpers::FClassFinder<UUserWidget>GaegeWidget(TEXT("WidgetBlueprint'/Game/00_Work/WorkPlace/SiWan/Camp/WB_Competition'"));
+	
+	ConstructorHelpers::FClassFinder<UUserWidget>GaegeWidget(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_Gaege'"));
 
 	if (GaegeWidget.Succeeded())
 	{
+		GaegeBar->SetupAttachment(RootComponent);
 		GaegeBar->SetWidgetClass(GaegeWidget.Class);
-		GaegeBar->SetDrawAtDesiredSize(true);
+		GaegeBar->SetDrawSize(FVector2D(200, 20));
 		GaegeBar->SetWidgetSpace(EWidgetSpace::Screen);
-		GaegeBar->SetVisibility(false);
 	}
 	
 
@@ -55,8 +54,8 @@ AResourceCamp::AResourceCamp()
 void AResourceCamp::BeginPlay()
 {
 	Super::BeginPlay();
-
-	static FString MI_Path = "/Game/00_Work/WorkPlace/SiWan/Camp/Material/M_Domination_Inst";
+	
+	static FString MI_Path = "/Game/SciFi_ReactorHangar/Materials/M_TNR2/ImpulsePlasma/ImpulsePlasma_mat_Inst";
 	UMaterialInstance* MI_TeamColor = Cast<UMaterialInstance>(StaticLoadObject(UMaterialInterface::StaticClass(), this, *MI_Path));
 
 	if (MI_TeamColor != nullptr)
@@ -65,7 +64,7 @@ void AResourceCamp::BeginPlay()
 
 		if (DynamicMaterial)
 		{
-			CampBodyMesh->SetMaterial(0, DynamicMaterial);
+			CampBodyMesh->SetMaterial(20, DynamicMaterial);
 
 			DynamicMaterial->SetVectorParameterValue(TEXT("TeamColor"), FVector4(0.1f, 0.1f, 0.1f, 1.0f));
 		}
@@ -92,6 +91,7 @@ void AResourceCamp::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 
 void AResourceCamp::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+
 	if (HasAuthority())
 	{
 		AUnitBase* CompetitionUnit = Cast<AUnitBase>(OtherActor);
@@ -263,8 +263,6 @@ void AResourceCamp::CampProcess(E_CampState NewCampState)
 
 void AResourceCamp::ChargingProcess()
 {
-	SetWidgetVisible(true);
-	//GaegeBar->SetVisibility(true);
 
 	if (GetWorldTimerManager().IsTimerPaused(DominitionChargeTimer))
 	{
@@ -284,15 +282,11 @@ void AResourceCamp::ChargingComplete()
 	// Call CampProcess
 	OnCampStateChganged.Broadcast(this->CampState);
 
-
-
 }
 
 void AResourceCamp::NeutralityProcess()
 {
 	GetWorldTimerManager().ClearTimer(DominitionChargeTimer);
-	SetWidgetVisible(false);
-	//GaegeBar->SetVisibility(false);
 }
 
 void AResourceCamp::CompetitionProcess()
@@ -343,15 +337,52 @@ void AResourceCamp::DominationProcess()
 		SetTeamColor(PlayerTeamColor[GetDominationTeamIndex()]);
 		SetDominationTeamNumber(GetDominationTeamIndex());
 
+
 		DominationComplete();
 
 	}
 }
 
-void AResourceCamp::SetWidgetVisible_Implementation(bool isVisible)
+
+FLinearColor AResourceCamp::GetTeamColorForGaege()
 {
-	GaegeBar->SetVisibility(isVisible);
+	switch (CampState)
+	{
+	case E_CampState::None:
+		return FColor::Black;
+		break;
+	case E_CampState::Neutrality:
+		return FColor::Black;
+		break;
+	case E_CampState::Competition:
+		return this->PlayerTeamColor[GetDominationTeamIndex()];
+		break;
+	case E_CampState::Charging:
+		return this->PlayerTeamColor[GetDominationTeamIndex()];
+		break;
+	case E_CampState::Restoration:
+
+		if (GetDominationTeamIndex() == 0)
+		{
+			return this->PlayerTeamColor[1];
+		}
+		else {
+			return this->PlayerTeamColor[0];
+		}
+
+		
+		break;
+	case E_CampState::Domination:
+		return this->PlayerTeamColor[GetDominationTeamIndex()];
+		break;
+	default:
+		return FColor::Black;
+		break;
+	}
 }
+
+
+
 
 void AResourceCamp::DominationComplete_Implementation()
 {
