@@ -69,6 +69,7 @@ public:
 	class UWidgetComponent* HpBarWidget;
 
 
+
 public: // Anims
 	// Attack Montage (공격 애니메이션)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
