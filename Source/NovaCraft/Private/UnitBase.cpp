@@ -25,8 +25,8 @@ AUnitBase::AUnitBase()
 	SelectedDecal->SetVisibility(false);
 	SelectedDecal->SetRelativeRotation(FRotator(90, 0, 0));
 	SelectedDecal->SetRelativeScale3D(FVector(0.25));
-
-	static ConstructorHelpers::FClassFinder<UUserWidget>UW(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_HpBar'_C"));
+	
+	static ConstructorHelpers::FClassFinder<UUserWidget>UW(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_CustomHpBar'_C"));
 
 	HpBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HpBarWidget"));
 
@@ -36,6 +36,7 @@ AUnitBase::AUnitBase()
 		HpBarWidget->SetWidgetClass(UW.Class);
 		HpBarWidget->SetDrawSize(FVector2D(100, 10));
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
+		HpBarWidget->SetDrawAtDesiredSize(true);
 	}
 
 
@@ -376,12 +377,15 @@ AActor* AUnitBase::GetNearestObject()
 	float NearestDist = FLT_MAX;
 
 	FVector StandardLocation = this->GetActorLocation();
+	StandardLocation.Z = 0.0f;
 
 	for (AActor* Object : SensingObject)
 	{
 		if (Object)
 		{
 			FVector ObjectLocation = Object->GetActorLocation();
+			ObjectLocation.Z = 0.0f;
+
 			float BetweenDist = FVector::DistSquared(StandardLocation, ObjectLocation);
 
 			if (BetweenDist < NearestDist)
