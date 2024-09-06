@@ -23,7 +23,7 @@ ABuildingBaseClass::ABuildingBaseClass()
 	SelectedDecal->SetRelativeRotation(FRotator(90, 0, 0));
 	SelectedDecal->SetRelativeScale3D(FVector(0.25));
 
-	static ConstructorHelpers::FClassFinder<UUserWidget>UW(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_HpBar'_C"));
+	static ConstructorHelpers::FClassFinder<UUserWidget>UW(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_CustomHpBar'_C"));
 
 	HpBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HpBarWidget"));
 
@@ -33,6 +33,7 @@ ABuildingBaseClass::ABuildingBaseClass()
 		HpBarWidget->SetWidgetClass(UW.Class);
 		HpBarWidget->SetDrawSize(FVector2D(100, 10));
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
+		HpBarWidget->SetDrawAtDesiredSize(true);
 	}
 
 	OverlapCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("OverlapCollision"));
