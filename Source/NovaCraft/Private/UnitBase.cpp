@@ -78,14 +78,14 @@ void AUnitBase::GetSingleUnitSelectedInformation(
 
 void AUnitBase::GetGroundAttackStatus(float& OutDamage, int& OutAttackTimes, E_OffenseType& OutOffenseType) const
 {
-	OutDamage = UnitStatus_Offense.fGroundAttackDamage;
+	OutDamage = GetUnitStatus_Offense().fGroundAttackDamage;
 	OutAttackTimes = UnitStatus_Offense.fGroundAttackTimes;
 	OutOffenseType = UnitStatus_Offense.fGroundOffenseType;
 }
 
 void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_OffenseType& OutOffenseType) const
 {
-	OutDamage = UnitStatus_Offense.fAirAttackDamage;
+	OutDamage = GetUnitStatus_Offense().fAirAttackDamage;
 	OutAttackTimes = UnitStatus_Offense.fAirAttackTimes;
 	OutOffenseType = UnitStatus_Offense.fAirOffenseType;
 }
