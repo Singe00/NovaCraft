@@ -82,6 +82,21 @@ bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnBuilding(int RqGold, int RqGa
 	}
 }
 
+bool APS_Ingame_NovaCraft::CheckEnoughResourceUnitUpgrade(int RqGold, int RqGas)
+{
+
+	if ((PlayerGold >= RqGold) && (PlayerGas >= RqGas))
+	{
+
+		return true;
+
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void APS_Ingame_NovaCraft::SpendResourceSpawnBuilding_Implementation(int RqGold, int RqGas)
 {
 	if (HasAuthority()) {
@@ -100,6 +115,14 @@ void APS_Ingame_NovaCraft::SpendResourceSpawnUnit_Implementation(int RqGold,int 
 	}
 	UpdateResourceWidget();
 	
+}
+void APS_Ingame_NovaCraft::SpendResourceUnitUpgrade_Implementation(int RqGold, int RqGas)
+{
+	if (HasAuthority()) {
+		GainGoldResource(-RqGold, -RqGas, 0);
+	}
+
+	UpdateResourceWidget();
 }
 
 
