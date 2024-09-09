@@ -57,11 +57,17 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool CheckEnoughResourceSpawnBuilding(int RqGold, int RqGas);
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool CheckEnoughResourceUnitUpgrade(int RqGold, int RqGas);
+
 	UFUNCTION(BlueprintCallable,Server,Reliable)
 	void SpendResourceSpawnBuilding(int RqGold, int RqGas);
 
 	UFUNCTION(BlueprintCallable,Server,Reliable)
 	void SpendResourceSpawnUnit(int RqGold, int RqGas, int RqPop);
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void SpendResourceUnitUpgrade(int RqGold, int RqGas);
 
 	UFUNCTION(BlueprintCallable)
 	void GainGoldResource(int RqGold, int RqGas, int RqPop);
