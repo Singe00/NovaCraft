@@ -240,4 +240,5 @@ void APS_Ingame_NovaCraft::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 	DOREPLIFETIME(APS_Ingame_NovaCraft, GasCampCount);
 	DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerBuildingCount);
 	DOREPLIFETIME(APS_Ingame_NovaCraft, IsPlayerEliminated);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, RaceTech);
 }
