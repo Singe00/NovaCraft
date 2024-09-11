@@ -145,6 +145,11 @@ void AUnitBase::SetSpawnStatus(FUnitStatus_Spawn NewSpawnStatus)
 
 void AUnitBase::SetUnitActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern)
 {
+	if (NewObjectActionPattern.Num() == 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("NewObjectActionPattern is empty."));
+		return;
+	}
 	this->ActionPattern = NewObjectActionPattern;
 }
 
