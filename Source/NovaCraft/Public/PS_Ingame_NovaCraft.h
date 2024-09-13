@@ -47,6 +47,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
 	bool IsPlayerEliminated = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int RaceTech = 0;
+
 public:
 	UFUNCTION()
 	void GainResourceTimerFunc();
