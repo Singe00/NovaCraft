@@ -108,7 +108,10 @@ bool AUnitBase::IfWillDie(float damage)
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);
-	SetOffenseStatus(NewOffenseStatus);
+	if (HasAuthority()) {
+		SetOffenseStatus(NewOffenseStatus);
+	}
+	
 	SetUtilityStatus(NewUtilityStatus);
 	SetExtraStatus(NewExtraStatus);
 	SetSpawnStatus(NewSpawnStatus);
@@ -123,9 +126,12 @@ void AUnitBase::SetDefenseStatus(FUnitStatus_Defense NewDefenseStatus)
 	this->UnitStatus_Defense = NewDefenseStatus;
 }
 
-void AUnitBase::SetOffenseStatus(FUnitStatus_Offense NewOffenseStatus)
+void AUnitBase::SetOffenseStatus_Implementation(FUnitStatus_Offense NewOffenseStatus)
 {
-	this->UnitStatus_Offense = NewOffenseStatus;
+	if (HasAuthority()) {
+		this->UnitStatus_Offense = NewOffenseStatus;
+	}
+	
 }
 
 void AUnitBase::SetUtilityStatus(FUnitStatus_Utility NewUtilityStatus)
@@ -165,6 +171,7 @@ void AUnitBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetim
 
 	DOREPLIFETIME(AUnitBase, TeamNumber);
 	DOREPLIFETIME(AUnitBase, TeamColor);
+	DOREPLIFETIME(AUnitBase, UnitStatus_Offense);
 }
 
 float AUnitBase::CalculateDamage(float Damage, int AttackTimes, E_OffenseType OffenseType)
