@@ -221,6 +221,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool IfWillDie(float damage);
 
+	UFUNCTION(BlueprintCallable)
+	int GetBuildingTechLevel() const { return BuildingStatus_Spawn.fBuildingSpawnTechLevel; }
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)

@@ -251,6 +251,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool IfWillDie(float damage);
 
+	UFUNCTION(BlueprintCallable)
+	int GetTechLevel() const { return UnitStatus_Spawn.fSpawnTechLevel; }
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)

@@ -15,6 +15,7 @@ public:
 		, fRequireSpawnGold(50)
 		, fRequireSpawnGas(50)
 		, fRequirePopulation(1)
+		, fSpawnTechLevel(0)
 	{};
 
 public:
@@ -33,4 +34,8 @@ public:
 	// Spawn Resource 3 (생산 시 요구 자원3 - 인구)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int fRequirePopulation;
+
+	// Spawn Resource 3 (생산 시 요구 자원4 - 테크)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int fSpawnTechLevel;
 };
