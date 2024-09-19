@@ -109,6 +109,30 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 - 회의 결론 : 종족 컨셉 결정 및 유닛 상세 기획, 디자인, 패턴 회의 완료
 - 자세한 내용은 repository에 첨부된 『[기획 및 유닛 상세 디자인 회의](https://www.canva.com/design/DAGLZB1rNGY/VTtA8wVs6jg6cQdEmuA-3Q/view?utm_content=DAGLZB1rNGY&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
 
+#### 6. 건물 상세 디자인 회의 및 피드백✔
+- 회의 날짜/시간 : 2023.08.02(금) / 09:00 ~ 11:00
+- 회의 내용 : 건물 상세 디자인 및 개발 코드 리뷰 피드백
+- 회의 결론 : 건물 소환 방법, 종류 및 추가 미구현 사항 추합
+- 자세한 내용은 repository에 첨부된 『[건물 상세 디자인 회의 및 피드백](https://www.canva.com/design/DAGMqGRCEnQ/w0Viho3S-Ryf5wvmtIGbJA/view?utm_content=DAGMqGRCEnQ&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
+
+#### 7. ✔
+- 회의 날짜/시간 : 2023.08.14(수) / 09:00 ~ 11:30
+- 회의 내용 : 개발 진행 상황 보고 및 계획 수립
+- 회의 결론 : 중간 발표 전 최소 개발 완료 사항 확정
+- 자세한 내용은 repository에 첨부된 『[중간 발표 전 개발 회의](https://www.canva.com/design/DAGOQBBta1M/4hs_cRmlEOOaoxbB6uo7Hg/view?utm_content=DAGOQBBta1M&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
+
+#### 8. ✔
+- 회의 날짜/시간 : 2023.08.26(월) / 14:00 ~ 17:00
+- 회의 내용 : 중간 발표 후 개발 계획 수립
+- 회의 결론 : 각 파트 별 세부 미관 작업 집중
+- 자세한 내용은 repository에 첨부된 『[중간 발표 후 개발 작업 회의](https://www.canva.com/design/DAGPkN1Thyo/aUvmBJ9B_iaGgm84Vo0Dkw/view?utm_content=DAGPkN1Thyo&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
+
+#### 9. ✔
+- 회의 날짜/시간 : 2023.09.06(금) / 15:00 ~ 18:00
+- 회의 내용 : 현재 개발 이슈 및 연휴 개발 계획 수립
+- 회의 결론 : 23일까지 기능 개발 종료 후 개발 내용 검토 및 최적화
+- 자세한 내용은 repository에 첨부된 『[개발 진행 상황 보고 및 연휴 개발 계획 수립 회의](https://www.canva.com/design/DAGP9m9tYqE/ZC5XtbX49I5NnypUZJpkpA/view?utm_content=DAGP9m9tYqE&utm_campaign=designshare&utm_medium=link&utm_source=editor)』 파일 참조
+
 ## 이슈
 - 2024.06.25(화)<br/>
   언리얼 프로젝트, Github, Git 연동 완료<br/>
