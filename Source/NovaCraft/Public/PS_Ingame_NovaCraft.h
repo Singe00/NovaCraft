@@ -48,7 +48,19 @@ public:
 	bool IsPlayerEliminated = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
-	int RaceTech = 0;
+	int Tech0OffenceLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int Tech0DefenceLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int Tech1OffenceLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int Tech1DefenceLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int BuildingDefenceLevel = 0;
 
 public:
 	UFUNCTION()
