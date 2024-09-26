@@ -240,5 +240,9 @@ void APS_Ingame_NovaCraft::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 	DOREPLIFETIME(APS_Ingame_NovaCraft, GasCampCount);
 	DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerBuildingCount);
 	DOREPLIFETIME(APS_Ingame_NovaCraft, IsPlayerEliminated);
-	DOREPLIFETIME(APS_Ingame_NovaCraft, RaceTech);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, Tech0OffenceLevel);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, Tech0DefenceLevel);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, Tech1OffenceLevel);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, Tech1DefenceLevel);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, BuildingDefenceLevel);
 }
