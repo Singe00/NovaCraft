@@ -4,7 +4,7 @@
 #include "JumpSkill.h"
 #include "GameFramework/Character.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "DrawDebugHelpers.h" // 디버그용 헤더 추가
+#include "DrawDebugHelpers.h" 
 #include "Engine/World.h"
 
 // Sets default values for this component's properties
@@ -48,9 +48,9 @@ bool UJumpSkill::JumpSkill(AActor* Actor, bool bIsEnemy)
     FVector WStartLocation = Actor->GetActorLocation();
     FVector WForwardDirection = Actor->GetActorForwardVector();
 
-    // 전방으로 라인 트레이스 (벽과의 거리 측정)
-    FVector WallTraceStart = WStartLocation + WForwardDirection * 100.0f; // 캐릭터 앞에서 시작
-    FVector WallTraceEnd = WallTraceStart + WForwardDirection * 300.0f; // 300 유닛 앞까지 트레이스
+    
+    FVector WallTraceStart = WStartLocation + WForwardDirection * 100.0f; 
+    FVector WallTraceEnd = WallTraceStart + WForwardDirection * 300.0f; 
 
     FHitResult WallHitResult;
     FCollisionQueryParams WallParams;
@@ -66,7 +66,7 @@ bool UJumpSkill::JumpSkill(AActor* Actor, bool bIsEnemy)
         WallParams
     );
 
-    float DistanceToWall = bWallHit ? (WallHitResult.ImpactPoint - WStartLocation).Size() : 300.0f; // 벽까지의 거리
+    float DistanceToWall = bWallHit ? (WallHitResult.ImpactPoint - WStartLocation).Size() : 300.0f; 
 
     float JumpHeightMultiplier = 1.0f;
     float JumpAngle = 45.0f;
@@ -74,14 +74,14 @@ bool UJumpSkill::JumpSkill(AActor* Actor, bool bIsEnemy)
    
 
     if (DistanceToWall < 300.0f){
-        float MaxDistance = 300.0f; // 최대 이동 거리
+        float MaxDistance = 300.0f;
         float MoveDistance = FMath::Clamp(MaxDistance - DistanceToWall, 0.0f, MaxDistance);
 
         FVector AdjustedLocation = WStartLocation - WForwardDirection * MoveDistance;
 
 
-    // 자연스럽게 이동하도록 LaunchCharacter를 사용
-    FVector LaunchVelocity = (AdjustedLocation - WStartLocation).GetSafeNormal() * 600.0f+ MoveDistance; // 속도 조정 가능
+    
+    FVector LaunchVelocity = (AdjustedLocation - WStartLocation).GetSafeNormal() * 600.0f+ MoveDistance; 
     ACharacter* Character = Cast<ACharacter>(Actor);
     if (Character)
         {
@@ -98,33 +98,33 @@ bool UJumpSkill::JumpSkill(AActor* Actor, bool bIsEnemy)
         JumpAngle = 60.0f;
         }
 
-    // 라인 트레이스 시작 지점과 방향 설정
+    
     FVector StartLocation = Actor->GetActorLocation();
     FVector ForwardDirection = Actor->GetActorForwardVector();
-    FVector EndLocation = StartLocation + ForwardDirection * 500.0f; // 정면으로 5000 유닛으로 범위 증가
+    FVector EndLocation = StartLocation + ForwardDirection * 500.0f; 
 
-    // 라인 트레이스 설정
+
     FHitResult HitResult;
     FCollisionQueryParams Params;
     Params.AddIgnoredActor(Actor);
 
-    // 라인 트레이스를 위에서 아래로 쏘기 위해서 약간 위로 오프셋
+   
     StartLocation = EndLocation;
     StartLocation.Z += 500.0f;
     EndLocation.Z -= 1000.0f;
-    // 디버깅용으로 라인 트레이스를 시각화
+    
     //DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, false, 5.0f, 0, 5.0f);
 
-    // 라인 트레이스 수행
+    
     bool bHit = GetWorld()->LineTraceSingleByChannel(
         HitResult,
         StartLocation,
         EndLocation,
-        ECC_WorldStatic, // 충돌 채널 설정 (가시성 채널 사용)
+        ECC_WorldStatic, 
         Params
     );
 
-    // 라인 트레이스가 성공한 경우에만 점프 스킬 적용
+   
     if (bHit && HitResult.bBlockingHit)
     {
         UE_LOG(LogTemp, Log, TEXT("Hit detected at location: %s"), *HitResult.ImpactPoint.ToString());
@@ -140,7 +140,7 @@ bool UJumpSkill::JumpSkill(AActor* Actor, bool bIsEnemy)
 
             // 목표 지점까지의 수평 거리와 높이 차이 계산
             float HorizontalDistance = (TargetLocation - Actor->GetActorLocation()).Size2D();
-            float HeightDifference = Actor->GetActorLocation().Z - HitLocation.Z; // 높이 차이
+            float HeightDifference = Actor->GetActorLocation().Z - HitLocation.Z;
 
             // 중력과 목표 거리 및 초기 속도를 고려하여 속도 계산
             float Gravity = GetWorld()->GetDefaultGravityZ();
@@ -150,7 +150,7 @@ bool UJumpSkill::JumpSkill(AActor* Actor, bool bIsEnemy)
             FVector LaunchVelocity = ForwardDirection * LaunchSpeed;
 
             // Z 성분의 속도 계산
-            LaunchVelocity.Z = LaunchSpeed * FMath::Sin(FMath::DegreesToRadians(45.0f)) ; // 45도 각도 기준으로 Z 성분 계산
+            LaunchVelocity.Z = LaunchSpeed * FMath::Sin(FMath::DegreesToRadians(45.0f)) ; 
 
             // 캐릭터에 대해 포물선 운동을 적용
             ACharacter* Character = Cast<ACharacter>(Actor);
