@@ -89,8 +89,7 @@ bool UJumpSkill::JumpSkill(AActor* Actor, bool bIsEnemy)
             
         }
         return false;
-        JumpHeightMultiplier = 80.0f;
-        JumpAngle = 60.0f;
+       
         }
     else if (DistanceToWall < 500.0f)
         {
