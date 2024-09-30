@@ -33,16 +33,15 @@ AResourceCamp::AResourceCamp()
 
 
 	GaegeBar = CreateDefaultSubobject<UWidgetComponent>(TEXT("GaegeBar"));
-	GaegeBar->SetupAttachment(CampBodyMesh);
-
-	ConstructorHelpers::FClassFinder<UUserWidget>GaegeWidget(TEXT("WidgetBlueprint'/Game/00_Work/WorkPlace/SiWan/Camp/WB_Competition'"));
+	
+	ConstructorHelpers::FClassFinder<UUserWidget>GaegeWidget(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_Gaege'"));
 
 	if (GaegeWidget.Succeeded())
 	{
+		GaegeBar->SetupAttachment(RootComponent);
 		GaegeBar->SetWidgetClass(GaegeWidget.Class);
-		GaegeBar->SetDrawAtDesiredSize(true);
+		GaegeBar->SetDrawSize(FVector2D(200, 20));
 		GaegeBar->SetWidgetSpace(EWidgetSpace::Screen);
-		GaegeBar->SetVisibility(false);
 	}
 	
 
@@ -92,6 +91,7 @@ void AResourceCamp::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 
 void AResourceCamp::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+
 	if (HasAuthority())
 	{
 		AUnitBase* CompetitionUnit = Cast<AUnitBase>(OtherActor);
@@ -263,8 +263,6 @@ void AResourceCamp::CampProcess(E_CampState NewCampState)
 
 void AResourceCamp::ChargingProcess()
 {
-	SetWidgetVisible(true);
-	//GaegeBar->SetVisibility(true);
 
 	if (GetWorldTimerManager().IsTimerPaused(DominitionChargeTimer))
 	{
@@ -284,15 +282,11 @@ void AResourceCamp::ChargingComplete()
 	// Call CampProcess
 	OnCampStateChganged.Broadcast(this->CampState);
 
-
-
 }
 
 void AResourceCamp::NeutralityProcess()
 {
 	GetWorldTimerManager().ClearTimer(DominitionChargeTimer);
-	SetWidgetVisible(false);
-	//GaegeBar->SetVisibility(false);
 }
 
 void AResourceCamp::CompetitionProcess()
@@ -343,10 +337,12 @@ void AResourceCamp::DominationProcess()
 		SetTeamColor(PlayerTeamColor[GetDominationTeamIndex()]);
 		SetDominationTeamNumber(GetDominationTeamIndex());
 
+
 		DominationComplete();
 
 	}
 }
+
 
 FLinearColor AResourceCamp::GetTeamColorForGaege()
 {
@@ -365,7 +361,16 @@ FLinearColor AResourceCamp::GetTeamColorForGaege()
 		return this->PlayerTeamColor[GetDominationTeamIndex()];
 		break;
 	case E_CampState::Restoration:
-		return this->PlayerTeamColor[GetPreDominationTeamNumber()];
+
+		if (GetDominationTeamIndex() == 0)
+		{
+			return this->PlayerTeamColor[1];
+		}
+		else {
+			return this->PlayerTeamColor[0];
+		}
+
+		
 		break;
 	case E_CampState::Domination:
 		return this->PlayerTeamColor[GetDominationTeamIndex()];
@@ -374,15 +379,10 @@ FLinearColor AResourceCamp::GetTeamColorForGaege()
 		return FColor::Black;
 		break;
 	}
-
 }
 
 
 
-void AResourceCamp::SetWidgetVisible_Implementation(bool isVisible)
-{
-	GaegeBar->SetVisibility(isVisible);
-}
 
 void AResourceCamp::DominationComplete_Implementation()
 {

@@ -134,8 +134,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DominationComplete();
 
-	UFUNCTION(NetMulticast,Reliable)
-	void SetWidgetVisible(bool isVisible);
+
 
 	// Getter
 public:

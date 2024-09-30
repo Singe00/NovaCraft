@@ -16,6 +16,7 @@ public:
 		, fBuildingRequireSpawnGas(50)
 		, fBuildingSpawnGridRow(2)
 		, fBuildingSpawnGridCol(2)
+		, fBuildingSpawnTechLevel(0)
 	{};
 
 public:
@@ -38,5 +39,9 @@ public:
 	// Spawn Grid Col(생산 Grid 행값)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int fBuildingSpawnGridCol;
+
+	// Spawn Resource 3 (생산 시 요구 자원4 - 테크)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int fBuildingSpawnTechLevel;
 
 };

@@ -12,17 +12,17 @@
 
 APS_Ingame_NovaCraft::APS_Ingame_NovaCraft()
 {
-	PlayerGold = 1000;
-	PlayerGas = 1000;
+	PlayerGold = 100;
+	PlayerGas = 25;
 	PlayerMaxPopulation = 10;
 	PlayerCurrentPopulation = 0;
 }
 
 void APS_Ingame_NovaCraft::BeginPlay()
 {
-	if (HasAuthority())
+	if (HasAuthority()&& !GetWorld()->GetTimerManager().IsTimerActive(GainResourceTimer))
 	{
-		GetWorldTimerManager().SetTimer(GainResourceTimer, this, &APS_Ingame_NovaCraft::GainResourceTimerFunc, 2.0f, true);
+		GetWorldTimerManager().SetTimer(GainResourceTimer, this, &APS_Ingame_NovaCraft::GainResourceTimerFunc, 1.0f, true);
 	}
 	
 
@@ -31,31 +31,31 @@ void APS_Ingame_NovaCraft::BeginPlay()
 
 }
 
-void APS_Ingame_NovaCraft::GainResourceTimerFunc_Implementation()
+void APS_Ingame_NovaCraft::GainResourceTimerFunc()
 {
-	GainGoldResource();
-	GainGasResource();
-
-	UpdateResourceWidget();
+	
+	GainGoldResource(50 + GoldCampCount * 25, GoldCampCount * 25,0);
+	UpdateResourceClient(PlayerGold,PlayerGas);
 }
 
 bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnUnit(int RqGold, int RqGas, int RqPop)
 {
 	if ((PlayerGold >= RqGold) && (PlayerGas >= RqGas) && ((PlayerCurrentPopulation + RqPop) <= PlayerMaxPopulation))
 	{
+		
+		//GainGoldResource(-RqGold, -RqGas, RqPop);
+			/*PlayerGold -= RqGold;
 
-		PlayerGold -= RqGold;
 
+			if (RqGas > 0)
+			{
+				PlayerGas -= RqGas;
+			}*/
 
-		if (RqGas > 0)
-		{
-			PlayerGas -= RqGas;
-		}
-
-		//PlayerCurrentPopulation += RqPop;
-		SpendResourceSpawnUnit(RqPop);
-		UpdateResourceWidget();
-
+			//PlayerCurrentPopulation += RqPop;
+			//SpendResourceSpawnUnit(RqPop);
+		//UpdateResourceWidget();
+		
 
 		return true;
 
@@ -82,38 +82,58 @@ bool APS_Ingame_NovaCraft::CheckEnoughResourceSpawnBuilding(int RqGold, int RqGa
 	}
 }
 
-void APS_Ingame_NovaCraft::SpendResourceSpawnBuilding(int RqGold, int RqGas)
+bool APS_Ingame_NovaCraft::CheckEnoughResourceUnitUpgrade(int RqGold, int RqGas)
 {
 
-	PlayerGold -= RqGold;
-
-
-	if (RqGas > 0)
+	if ((PlayerGold >= RqGold) && (PlayerGas >= RqGas))
 	{
-		PlayerGas -= RqGas;
+
+		return true;
+
 	}
+	else
+	{
+		return false;
+	}
+}
 
+void APS_Ingame_NovaCraft::SpendResourceSpawnBuilding_Implementation(int RqGold, int RqGas)
+{
+	if (HasAuthority()) {
+		GainGoldResource(-RqGold, -RqGas, 0);
+	}
+	
+	UpdateResourceWidget();
+}
 
-
+void APS_Ingame_NovaCraft::SpendResourceSpawnUnit_Implementation(int RqGold,int RqGas, int RqPop)
+{
+	if (HasAuthority())
+	{
+		GainGoldResource(-RqGold,-RqGas,RqPop);
+		//PlayerCurrentPopulation += RqPop;
+	}
+	UpdateResourceWidget();
+	
+}
+void APS_Ingame_NovaCraft::SpendResourceUnitUpgrade_Implementation(int RqGold, int RqGas)
+{
+	if (HasAuthority()) {
+		GainGoldResource(-RqGold, -RqGas, 0);
+	}
 
 	UpdateResourceWidget();
 }
 
-void APS_Ingame_NovaCraft::SpendResourceSpawnUnit_Implementation(int RqPop)
+
+
+void APS_Ingame_NovaCraft::GainGoldResource(int RqGold,int RqGas,int RqPop)
 {
-	if (HasAuthority())
-	{
-		PlayerCurrentPopulation += RqPop;
-	}
+
+	PlayerGold += RqGold;
+	PlayerGas += RqGas;
+	PlayerCurrentPopulation += RqPop;
 	
-}
-
-
-
-void APS_Ingame_NovaCraft::GainGoldResource()
-{
-
-	PlayerGold += 50 + GoldCampCount * 100000;
 
 }
 
@@ -126,9 +146,8 @@ void APS_Ingame_NovaCraft::PaybackResource_Implementation(int RqGold, int RqGas,
 {
 	if (HasAuthority())
 	{
-		PlayerGold += RqGold;
-		PlayerGas += RqGas;
-		PlayerCurrentPopulation -= RqPop;
+		GainGoldResource(RqGold,RqGas,-RqPop);
+		
 	}
 	UpdateResourceWidget();
 }
@@ -184,6 +203,15 @@ bool APS_Ingame_NovaCraft::Server_SetPlayerEliminated_Validate()
 	return true;
 }
 
+void APS_Ingame_NovaCraft::UpdateResourceClient_Implementation(int RqGold, int RqGas)
+{
+	PlayerGold = RqGold;
+	PlayerGas = RqGas;
+	
+
+	UpdateResourceWidget();
+}
+
 void APS_Ingame_NovaCraft::SetPlayerEliminated()
 {
 	IsPlayerEliminated = true;
@@ -212,4 +240,9 @@ void APS_Ingame_NovaCraft::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 	DOREPLIFETIME(APS_Ingame_NovaCraft, GasCampCount);
 	DOREPLIFETIME(APS_Ingame_NovaCraft, PlayerBuildingCount);
 	DOREPLIFETIME(APS_Ingame_NovaCraft, IsPlayerEliminated);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, Tech0OffenceLevel);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, Tech0DefenceLevel);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, Tech1OffenceLevel);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, Tech1DefenceLevel);
+	DOREPLIFETIME(APS_Ingame_NovaCraft, BuildingDefenceLevel);
 }

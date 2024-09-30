@@ -25,8 +25,8 @@ AUnitBase::AUnitBase()
 	SelectedDecal->SetVisibility(false);
 	SelectedDecal->SetRelativeRotation(FRotator(90, 0, 0));
 	SelectedDecal->SetRelativeScale3D(FVector(0.25));
-
-	static ConstructorHelpers::FClassFinder<UUserWidget>UW(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_HpBar'_C"));
+	
+	static ConstructorHelpers::FClassFinder<UUserWidget>UW(TEXT("WidgetBlueprint'/Game/00_Work/Common/Widget/CommonObject/WB_CustomHpBar'_C"));
 
 	HpBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HpBarWidget"));
 
@@ -36,6 +36,7 @@ AUnitBase::AUnitBase()
 		HpBarWidget->SetWidgetClass(UW.Class);
 		HpBarWidget->SetDrawSize(FVector2D(100, 10));
 		HpBarWidget->SetWidgetSpace(EWidgetSpace::Screen);
+		HpBarWidget->SetDrawAtDesiredSize(true);
 	}
 
 
@@ -77,14 +78,14 @@ void AUnitBase::GetSingleUnitSelectedInformation(
 
 void AUnitBase::GetGroundAttackStatus(float& OutDamage, int& OutAttackTimes, E_OffenseType& OutOffenseType) const
 {
-	OutDamage = UnitStatus_Offense.fGroundAttackDamage;
+	OutDamage = GetUnitStatus_Offense().fGroundAttackDamage;
 	OutAttackTimes = UnitStatus_Offense.fGroundAttackTimes;
 	OutOffenseType = UnitStatus_Offense.fGroundOffenseType;
 }
 
 void AUnitBase::GetAirAttackStatus(float& OutDamage, int& OutAttackTimes, E_OffenseType& OutOffenseType) const
 {
-	OutDamage = UnitStatus_Offense.fAirAttackDamage;
+	OutDamage = GetUnitStatus_Offense().fAirAttackDamage;
 	OutAttackTimes = UnitStatus_Offense.fAirAttackTimes;
 	OutOffenseType = UnitStatus_Offense.fAirOffenseType;
 }
@@ -107,7 +108,10 @@ bool AUnitBase::IfWillDie(float damage)
 void AUnitBase::InitStatus(FUnitStatus_Defense NewDefenseStatus, FUnitStatus_Offense NewOffenseStatus, FUnitStatus_Utility NewUtilityStatus, FUnitStatus_Extra NewExtraStatus, FUnitStatus_Spawn NewSpawnStatus, TArray<FObjectActionPattern> NewObjectActionPattern)
 {
 	SetDefenseStatus(NewDefenseStatus);
-	SetOffenseStatus(NewOffenseStatus);
+	if (HasAuthority()) {
+		SetOffenseStatus(NewOffenseStatus);
+	}
+	
 	SetUtilityStatus(NewUtilityStatus);
 	SetExtraStatus(NewExtraStatus);
 	SetSpawnStatus(NewSpawnStatus);
@@ -122,9 +126,12 @@ void AUnitBase::SetDefenseStatus(FUnitStatus_Defense NewDefenseStatus)
 	this->UnitStatus_Defense = NewDefenseStatus;
 }
 
-void AUnitBase::SetOffenseStatus(FUnitStatus_Offense NewOffenseStatus)
+void AUnitBase::SetOffenseStatus_Implementation(FUnitStatus_Offense NewOffenseStatus)
 {
-	this->UnitStatus_Offense = NewOffenseStatus;
+	if (HasAuthority()) {
+		this->UnitStatus_Offense = NewOffenseStatus;
+	}
+	
 }
 
 void AUnitBase::SetUtilityStatus(FUnitStatus_Utility NewUtilityStatus)
@@ -144,6 +151,11 @@ void AUnitBase::SetSpawnStatus(FUnitStatus_Spawn NewSpawnStatus)
 
 void AUnitBase::SetUnitActionPatterns(TArray<FObjectActionPattern> NewObjectActionPattern)
 {
+	if (NewObjectActionPattern.Num() == 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("NewObjectActionPattern is empty."));
+		return;
+	}
 	this->ActionPattern = NewObjectActionPattern;
 }
 
@@ -159,6 +171,7 @@ void AUnitBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetim
 
 	DOREPLIFETIME(AUnitBase, TeamNumber);
 	DOREPLIFETIME(AUnitBase, TeamColor);
+	DOREPLIFETIME(AUnitBase, UnitStatus_Offense);
 }
 
 float AUnitBase::CalculateDamage(float Damage, int AttackTimes, E_OffenseType OffenseType)
@@ -376,12 +389,15 @@ AActor* AUnitBase::GetNearestObject()
 	float NearestDist = FLT_MAX;
 
 	FVector StandardLocation = this->GetActorLocation();
+	StandardLocation.Z = 0.0f;
 
 	for (AActor* Object : SensingObject)
 	{
 		if (Object)
 		{
 			FVector ObjectLocation = Object->GetActorLocation();
+			ObjectLocation.Z = 0.0f;
+
 			float BetweenDist = FVector::DistSquared(StandardLocation, ObjectLocation);
 
 			if (BetweenDist < NearestDist)

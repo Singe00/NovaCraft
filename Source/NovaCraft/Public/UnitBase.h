@@ -69,6 +69,7 @@ public:
 	class UWidgetComponent* HpBarWidget;
 
 
+
 public: // Anims
 	// Attack Montage (공격 애니메이션)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Unit Manage|Anim Montages")
@@ -138,7 +139,7 @@ protected:
 	FUnitStatus_Defense UnitStatus_Defense;
 
 	// Offense Status
-	UPROPERTY(VisibleAnywhere, Category = "Unit Manage|Unit Status|Offense Status")
+	UPROPERTY(VisibleAnywhere, Replicated, Category = "Unit Manage|Unit Status|Offense Status")
 	FUnitStatus_Offense UnitStatus_Offense;
 
 	//Utility Status
@@ -250,6 +251,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool IfWillDie(float damage);
 
+	UFUNCTION(BlueprintCallable)
+	int GetTechLevel() const { return UnitStatus_Spawn.fSpawnTechLevel; }
+
 	// Setter
 public:
 	UFUNCTION(BlueprintCallable)
@@ -258,7 +262,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetDefenseStatus(FUnitStatus_Defense NewDefenseStatus);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void SetOffenseStatus(FUnitStatus_Offense NewOffenseStatus);
 
 	UFUNCTION(BlueprintCallable)

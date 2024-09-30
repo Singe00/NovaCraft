@@ -175,4 +175,22 @@ void ANovaCraftPlayerController::RemoveBuildingFromSquad(ABuildingBaseClass* Dea
 	}
 }
 
+void ANovaCraftPlayerController::HoverBegin(bool Enemy)
+{
+	if (Enemy) {
+		 // 적일 때 커서를 손 모양으로 변경
+		CurrentMouseCursor = EMouseCursor::Hand;
+	}
+	else {
+		  // 적이 아닐 때 조준 커서로 변경
+		CurrentMouseCursor = EMouseCursor::Crosshairs;
+	}
+}
+
+void ANovaCraftPlayerController::HoverEnd()
+{
+	  // 마우스가 떠날 때 기본 커서로 변경
+	CurrentMouseCursor = EMouseCursor::Default;
+}
+
 

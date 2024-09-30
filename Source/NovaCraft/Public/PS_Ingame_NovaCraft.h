@@ -47,8 +47,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Resource")
 	bool IsPlayerEliminated = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int Tech0OffenceLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int Tech0DefenceLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int Tech1OffenceLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int Tech1DefenceLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Replicated, Category = "Player Manage|Manage Value|Tech")
+	int BuildingDefenceLevel = 0;
+
 public:
-	UFUNCTION(Client, Reliable)
+	UFUNCTION()
 	void GainResourceTimerFunc();
 
 	UFUNCTION(BlueprintCallable,BlueprintPure)
@@ -57,14 +72,20 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool CheckEnoughResourceSpawnBuilding(int RqGold, int RqGas);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool CheckEnoughResourceUnitUpgrade(int RqGold, int RqGas);
+
+	UFUNCTION(BlueprintCallable,Server,Reliable)
 	void SpendResourceSpawnBuilding(int RqGold, int RqGas);
 
-	UFUNCTION(Server,Reliable)
-	void SpendResourceSpawnUnit(int RqPop);
+	UFUNCTION(BlueprintCallable,Server,Reliable)
+	void SpendResourceSpawnUnit(int RqGold, int RqGas, int RqPop);
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void SpendResourceUnitUpgrade(int RqGold, int RqGas);
 
 	UFUNCTION(BlueprintCallable)
-	void GainGoldResource();
+	void GainGoldResource(int RqGold, int RqGas, int RqPop);
 
 	UFUNCTION(BlueprintCallable)
 	void GainGasResource();
@@ -96,6 +117,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateResourceWidget();
+
+	UFUNCTION(Client, Reliable)
+	void UpdateResourceClient(int RqGold,int RqGas);
+	void UpdateResourceClient_Implementation(int RqGold, int RqGas);
 
 	UFUNCTION(Server,Reliable,WithValidation)
 	void Server_SetPlayerEliminated();
