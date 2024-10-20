@@ -1,9 +1,9 @@
 # Project NovaCraft
 <br/>
-메인 이미지
+![image](https://github.com/user-attachments/assets/fc223ac4-aa09-41b7-bcff-6bc448628008)
 
-배포
-링크
+
+[NovaCraft 플레이영상](https://tv.kakao.com/v/449866071)
 
 ## 프로젝트 소개
 GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
