@@ -27,7 +27,7 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 |조시완<br/>[@Singe00](https://github.com/Singe00)|백재현<br/>[@bbaekjae](https://github.com/bbaekjae)|정호용<br/>[@TR99990](https://github.com/TR99990)|백민성<br/>[@minmonth](https://github.com/minmonth)|
 
 ### 역할 분담
-- 조시완 : 팀장, Git 관리, Client Develope (베이스 클래스 설계 및 구축, 플레이어 컨트롤 시스템 개발)
+- 조시완 : 팀장, 개발 총괄 및 Git 관리, Client Develope (베이스 클래스 설계 및 구축, 플레이어 컨트롤 시스템 개발)
 - 백재현 : 부팀장, Client Develope (단축키 컨트롤 시스템 연동 및 개발)
 - 백민성 : Client Develope (인게임 시스템 개발 - Grid 시스템, 전장의 안개)
 - 정호용 : Client Develope (건물 빌딩 시스템, 유닛 생성 및 업그레이드 시스템 개발)
