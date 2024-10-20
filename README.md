@@ -1,7 +1,6 @@
 # Project NovaCraft
 <br/>
-![image](https://github.com/user-attachments/assets/fc223ac4-aa09-41b7-bcff-6bc448628008)
-
+![MainImage](https://github.com/user-attachments/assets/6cf0845c-f5b2-4270-b8e6-8cfff7e39bf5)
 
 [NovaCraft 플레이영상](https://tv.kakao.com/v/449866071)
 
@@ -152,8 +151,6 @@ GCC 사관학교 팀프로젝트로 진행되는 프로젝트입니다.
 - 『[Sci-fi Arsenal Vol 2.0](https://www.unrealengine.com/marketplace/ko/product/sci-fi-arsenal-vol-2)』구매
 - 『[Sci-Fi Machine Gun](https://www.unrealengine.com/marketplace/ko/product/sci-fi-machine-gun)』구매
 - 『[SciFi Rocket Launcher AK9 Playable](https://www.unrealengine.com/marketplace/ko/product/scifi-rocket-launcher-ak9?sessionInvalidated=true)』구매
-- 『[]()』구매
-- 『[]()』구매
 
 #### 무료
 - 『[Paragon Wraith](https://www.unrealengine.com/id/login/api/login?client_id=43e2dea89b054198a703f6199bee6d5b&redirect_uri=https%3A%2F%2Fwww.unrealengine.com%2Fmarketplace%2Fen-US%2Fproduct%2Fcombat-systems-constructor%3FsessionInvalidated%3Dtrue&prompt=pass_through)』사용
