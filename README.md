@@ -1,6 +1,8 @@
 # Project NovaCraft
 <br/>
-![MainImage](https://github.com/user-attachments/assets/6cf0845c-f5b2-4270-b8e6-8cfff7e39bf5)
+
+![image](https://github.com/user-attachments/assets/5a85d289-9a95-4a22-b9d2-0aa694d46033)
+
 
 [NovaCraft 플레이영상](https://tv.kakao.com/v/449866071)
 
